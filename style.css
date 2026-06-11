@@ -1,0 +1,203 @@
+/* =========================================
+   RAVIE.IN - MASTER STYLESHEET
+   ========================================= */
+
+/* Core Reset & Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Brand Colors */
+    --bg-deep: #000208; /* Absolute deep void */
+    --brand-accent: #00E5FF; /* High-visibility Cyan */
+    --text-primary: #ffffff;
+    --text-muted: #6b7280;
+    
+    /* High-Voltage Glow Variables */
+    --glow-core: rgba(255, 255, 255, 0.95);     /* White-hot center */
+    --glow-halo: rgba(0, 229, 255, 0.85);       /* Cyan outer glow */
+    
+    /* Dynamic Tracking Variables (Driven by JavaScript) */
+    --x: 50%;
+    --y: 50%;
+    --cursor-glow: #001a55; /* The aggressive deep blue that follows the cursor */
+}
+
+/* =========================================
+   ENVIRONMENT & BACKGROUND
+   ========================================= */
+
+body {
+    background-color: var(--bg-deep);
+    
+    /* Interactive Mesh: 
+       Layer 1: Tracks the cursor directly.
+       Layer 2: Moves inversely to the cursor to create parallax depth.
+       Layer 3: A static core. */
+    background-image: 
+        radial-gradient(circle at var(--x) var(--y), var(--cursor-glow) 0%, transparent 45%),
+        radial-gradient(circle at calc(100% - var(--x)) calc(100% - var(--y)), #000d26 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #01030a 0%, transparent 60%);
+    
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    overflow: hidden; 
+    position: relative;
+}
+
+/* Premium Digital Noise Texture - Persistent & Aggressive */
+.noise-overlay {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04; 
+    
+    /* Grayscale SVG filter prevents color banding in the void */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    
+    /* Screen blend mode ensures the grain illuminates the black pixels */
+    mix-blend-mode: screen; 
+    
+    /* Aggressive cinematic film grain jitter */
+    animation: filmGrain 0.15s steps(2) infinite;
+}
+
+/* =========================================
+   TOP NAVIGATION
+   ========================================= */
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 2.5rem 4rem;
+    display: flex;
+    justify-content: flex-start; /* Anchors the logo to the left */
+    align-items: center;
+    z-index: 100;
+}
+
+.master-logo {
+    height: 36px;
+    width: auto;
+    border-radius: 4px; 
+    position: relative;
+    z-index: 101; 
+}
+
+/* Perfect Absolute Centering for the Tabs */
+.desktop-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 3.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* Navigation Hover: High-visibility Cyan */
+.desktop-menu span {
+    cursor: pointer;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.desktop-menu span:hover {
+    color: var(--brand-accent);
+    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
+}
+
+/* =========================================
+   GATEWAY (MAIN SCREEN) LAYOUT
+   ========================================= */
+
+#app-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.view {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.view.active-view {
+    display: flex;
+    opacity: 1;
+}
+
+.split-container {
+    display: flex;
+    gap: 10rem; 
+    align-items: center;
+}
+
+.split-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.split-icon {
+    height: 65px;
+    width: auto;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    mix-blend-mode: screen; 
+}
+
+.split-text {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    font-weight: 400;
+    transition: all 0.4s ease;
+}
+
+/* =========================================
+   INTERACTION & HOVER MATH
+   ========================================= */
+
+.split-container:hover .split-option {
+    opacity: 0.15; /* Aggressively dims the unselected option */
+}
+
+.split-container .split-option:hover {
+    opacity: 1; 
+}
+
+/* Layered High-Voltage Glow Activation */
+.split-option:hover .split-icon {
+    filter: drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
+    transform: scale(1.08) translateY(-5px);
+}
+
+.split-option:hover .split-text {
+    color: #ffffff;
+    text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes filmGrain {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-1%, 1%); }
+    50% { transform: translate(1%, -1%); }
+    75% { transform: translate(-0.5%, -0.5%); }
+    100% { transform: translate(0.5%, 0.5%); }
+}
