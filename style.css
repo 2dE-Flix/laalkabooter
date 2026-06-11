@@ -201,3 +201,112 @@ body {
     75% { transform: translate(-0.5%, -0.5%); }
     100% { transform: translate(0.5%, 0.5%); }
 }
+/* =========================================
+   MOBILE MENU & HAMBURGER STYLES
+   ========================================= */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 105; /* Keeps it above the dropdown */
+}
+
+.hamburger .bar {
+    width: 26px;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+/* Transforms the hamburger into an 'X' when active */
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--brand-accent);
+}
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--brand-accent);
+}
+
+/* The Dropdown Container */
+.mobile-dropdown {
+    position: absolute;
+    top: -100vh; /* Hidden off-screen by default */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 2, 8, 0.98);
+    backdrop-filter: blur(12px); /* High-end glassmorphism */
+    padding: 7rem 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    z-index: 100;
+    transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+}
+
+.mobile-dropdown.active-menu {
+    top: 0; /* Slides down into view */
+}
+
+.mobile-dropdown span {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.mobile-dropdown span:hover {
+    color: var(--brand-accent);
+    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
+}
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS (MOBILE RE-ARCHITECTURE)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* Compress Navigation Padding */
+    .top-nav {
+        padding: 1.5rem 2rem;
+        justify-content: space-between; /* Pushes logo left, hamburger right */
+    }
+
+    /* Hide Desktop Tabs, Show Hamburger */
+    .desktop-menu {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+
+    /* Transform Main Layout from Horizontal to Vertical Stack */
+    .split-container {
+        flex-direction: column; 
+        gap: 4.5rem; /* Tighter gap for vertical stacking */
+        margin-top: 2rem; /* Offsets from the header */
+    }
+
+    /* Slightly Scale Down Assets for Smaller Screens */
+    .split-icon {
+        height: 55px; 
+    }
+    
+    .split-text {
+        font-size: 0.75rem;
+    }
+    
+    /* Ensure the background math doesn't glitch on touch drag */
+    body {
+        background-size: 300% 300%; 
+    }
+}
+
