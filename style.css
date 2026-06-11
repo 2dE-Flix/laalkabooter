@@ -276,7 +276,7 @@ body {
     /* Compress Navigation Padding */
     .top-nav {
         padding: 1.5rem 2rem;
-        justify-content: space-between; /* Pushes logo left, hamburger right */
+        justify-content: space-between; 
     }
 
     /* Hide Desktop Tabs, Show Hamburger */
@@ -291,11 +291,10 @@ body {
     /* Transform Main Layout from Horizontal to Vertical Stack */
     .split-container {
         flex-direction: column; 
-        gap: 4.5rem; /* Tighter gap for vertical stacking */
-        margin-top: 2rem; /* Offsets from the header */
+        gap: 4.5rem; 
+        margin-top: 2rem; 
     }
 
-    /* Slightly Scale Down Assets for Smaller Screens */
     .split-icon {
         height: 55px; 
     }
@@ -304,9 +303,13 @@ body {
         font-size: 0.75rem;
     }
     
-    /* Ensure the background math doesn't glitch on touch drag */
+    /* MOBILE OVERRIDE: Static, Aggressive Background */
     body {
-        background-size: 300% 300%; 
+        /* Locks the deep blue glow to the top/center where the options sit */
+        background-image: 
+            radial-gradient(circle at 50% 30%, var(--cursor-glow) 0%, transparent 60%),
+            radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%),
+            radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
+        background-size: 100% 100%;
     }
 }
-
