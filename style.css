@@ -450,5 +450,31 @@ body {
             radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%),
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
+    /* Mobile Override for About Timeline */
+    .about-container {
+        padding: 8rem 1.5rem 4rem;
+    }
+    
+    .timeline::before {
+        left: 0; /* Moves the dashed line to the far left on phones */
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .timeline-node {
+        text-align: left;
+    }
+
+    .timeline-node::after {
+        left: -4px; /* Repositions dot to the left line */
+        right: auto;
+    }
+
+    .timeline-content {
+        margin-left: 1.5rem; /* Indents text away from the line */
+        padding: 1.5rem;
     }
 }
