@@ -22,6 +22,16 @@ document.addEventListener("touchmove", (e) => {
     });
 }, { passive: true }); // Passive flag ensures smooth scrolling on mobile
 // ------------------------------------------ //
+// --- MOBILE DROPDOWN LOGIC --- //
+const hamburger = document.getElementById('hamburger-menu');
+const mobileDropdown = document.getElementById('mobile-dropdown');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileDropdown.classList.toggle('active-menu');
+});
+// ----------------------------- //
+
 
 // (Your existing routing logic for btnCreators and btnBrands goes below here)
 document.addEventListener("DOMContentLoaded", () => {
