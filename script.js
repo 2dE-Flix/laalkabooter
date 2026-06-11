@@ -1,27 +1,27 @@
 // --- KINETIC BACKGROUND TRACKING ENGINE --- //
 const body = document.body;
 
-// Desktop Mouse Tracking
+// Desktop Mouse Tracking ONLY
 document.addEventListener("mousemove", (e) => {
-    requestAnimationFrame(() => {
-        const x = (e.clientX / window.innerWidth) * 100;
-        const y = (e.clientY / window.innerHeight) * 100;
-        body.style.setProperty('--x', `${x}%`);
-        body.style.setProperty('--y', `${y}%`);
-    });
+    // Only execute if not on mobile (basic width check)
+    if (window.innerWidth > 768) {
+        requestAnimationFrame(() => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            body.style.setProperty('--x', `${x}%`);
+            body.style.setProperty('--y', `${y}%`);
+        });
+    }
 });
-
-// Mobile/Tablet Touch Tracking
-document.addEventListener("touchmove", (e) => {
-    requestAnimationFrame(() => {
-        const touch = e.touches[0];
-        const x = (touch.clientX / window.innerWidth) * 100;
-        const y = (touch.clientY / window.innerHeight) * 100;
-        body.style.setProperty('--x', `${x}%`);
-        body.style.setProperty('--y', `${y}%`);
-    });
-}, { passive: true }); // Passive flag ensures smooth scrolling on mobile
 // ------------------------------------------ //
+
+// --- MOBILE DROPDOWN LOGIC --- //
+// ... (Keep your hamburger code here) ...
+
+// ... (Keep your btnCreators and btnBrands routing logic below) ...
+
+/
+/ ------------------------------------------ //
 // --- MOBILE DROPDOWN LOGIC --- //
 const hamburger = document.getElementById('hamburger-menu');
 const mobileDropdown = document.getElementById('mobile-dropdown');
