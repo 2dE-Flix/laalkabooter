@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>About | Ravie.in</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         
         <nav class="desktop-menu">
             <span onclick="window.location.href='index.html'">HOME</span>
-            <span class="active-link">ABOUT</span>
+            <span class="active-link" style="color: var(--brand-accent); text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);">ABOUT</span>
             <span onclick="window.location.href='socials.html'">SOCIALS</span>
         </nav>
 
@@ -28,13 +28,13 @@
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
-
-        <div class="mobile-dropdown" id="mobile-dropdown">
-            <span onclick="window.location.href='index.html'">HOME</span>
-            <span class="active-link">ABOUT</span>
-           <span onclick="window.location.href='socials.html'">SOCIALS</span>
-        </div>
     </header>
+
+    <div class="mobile-dropdown" id="mobile-dropdown">
+        <span onclick="window.location.href='index.html'">HOME</span>
+        <span class="active-link" style="color: var(--brand-accent); text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);">ABOUT</span>
+        <span onclick="window.location.href='socials.html'">SOCIALS</span>
+    </div>
 
     <main class="about-container">
         
