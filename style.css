@@ -107,20 +107,26 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr; /* Forces exactly 3 equal columns */
     width: 420px; /* Locks the total width */
-    justify-items: center; /* Centers the text perfectly inside its invisible column */
     align-items: center;
     font-size: 0.75rem;
     letter-spacing: 2px;
     font-weight: 600;
 }
 
-/* Navigation Hover states */
+/* Navigation Base & Alignment */
 .desktop-menu span {
+    width: 100%; /* Forces the span to fill its grid column */
+    text-align: center; /* Centers the text inside that full column */
     cursor: pointer;
     transition: color 0.3s ease, text-shadow 0.3s ease;
-    /* Note: We removed 'flex: 1' because Grid now handles the spacing structure */
 }
 
+/* The Restored Divider Math */
+.desktop-menu span:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.15); /* A subtle, premium line */
+}
+
+/* Hover States */
 .desktop-menu span:hover {
     color: var(--brand-accent);
     text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
