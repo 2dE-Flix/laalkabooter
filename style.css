@@ -99,25 +99,26 @@ body {
     z-index: 101; 
 }
 
-/* Perfect Absolute Centering for the Tabs */
+/* Perfect Absolute Centering via CSS Grid */
 .desktop-menu {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Forces exactly 3 equal columns */
+    width: 420px; /* Locks the total width */
+    justify-items: center; /* Centers the text perfectly inside its invisible column */
     align-items: center;
-    width: 380px; /* Locks the total width of the navigation track */
     font-size: 0.75rem;
     letter-spacing: 2px;
     font-weight: 600;
 }
 
-/* Navigation Hover & Equal Distribution Math */
+/* Navigation Hover states */
 .desktop-menu span {
-    flex: 1; /* Forces HOME, ABOUT, and SOCIALS to take exactly 33.3% of the space each */
-    text-align: center; /* Centers the text inside its perfect third of the grid */
     cursor: pointer;
     transition: color 0.3s ease, text-shadow 0.3s ease;
+    /* Note: We removed 'flex: 1' because Grid now handles the spacing structure */
 }
 
 .desktop-menu span:hover {
@@ -564,4 +565,5 @@ body {
         max-width: 380px; /* Prevents them from getting too wide on tablets */
         padding: 2.5rem 2rem;
     }
-   
+
+    }
