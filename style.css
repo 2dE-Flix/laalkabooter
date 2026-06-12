@@ -288,127 +288,96 @@ body {
    ABOUT US PAGE LAYOUT
    ========================================= */
 
+/* =========================================
+   TIMELINE ARCHITECTURE (DESKTOP)
+   ========================================= */
+
 .about-container {
-    padding: 10rem 2rem 4rem; /* Clears the fixed nav */
-    max-width: 900px;
+    padding: 10rem 2rem 4rem; /* Added heavy top padding to clear the header */
+    max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     position: relative;
-    z-index: 10; /* Keeps text above the tracking background */
+    z-index: 10;
 }
 
-/* Header & Separator */
-.about-header {
-    text-align: center;
-    margin-bottom: 5rem;
-}
-
-.page-title {
-    font-size: 1.5rem;
-    letter-spacing: 12px;
-    font-weight: 300;
-    color: var(--text-primary);
-    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-}
-
-.separator-line {
-    width: 60px;
-    height: 2px;
-    background-color: var(--brand-accent);
-    margin: 2rem auto 0;
-    box-shadow: 0px 0px 10px var(--glow-halo);
-}
-
-/* Vertical Ledger Timeline */
 .timeline {
-    width: 100%;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    margin-top: 4rem;
 }
 
-/* The central dashed line */
+/* The Vertical Ledger Line */
 .timeline::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 100px; /* Aligns line to the left edge of the content */
     bottom: 0;
+    left: 120px; /* Anchors the line 120px from the left edge */
     width: 1px;
-    border-left: 1px dashed rgba(0, 229, 255, 0.3);
+    background: rgba(0, 229, 255, 0.2);
 }
 
 .timeline-item {
     display: flex;
-    gap: 4rem;
     align-items: flex-start;
+    margin-bottom: 5rem;
     position: relative;
-    transition: transform 0.3s ease;
 }
 
-.timeline-item:hover {
-    transform: translateX(10px);
-}
-
-/* The Phase Node */
+/* "PHASE 1" Text */
 .timeline-node {
-    width: 100px;
+    width: 120px; 
     flex-shrink: 0;
+    padding-right: 2.5rem; /* Pushes the text away from the line */
     text-align: right;
-    font-size: 0.75rem;
-    letter-spacing: 3px;
     color: var(--brand-accent);
     font-weight: 600;
-    padding-top: 4px;
-    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.4);
+    letter-spacing: 3px;
+    font-size: 0.85rem;
     position: relative;
+    padding-top: 2rem; /* Aligns text vertically with the card */
 }
 
-/* The Glowing Dot */
+/* The Glowing Cyan Dot */
 .timeline-node::after {
     content: '';
     position: absolute;
-    right: -4.3rem; /* Positions the dot exactly on the dashed line */
-    top: 6px;
-    width: 8px;
-    height: 8px;
-    background-color: var(--brand-accent);
+    top: 2.2rem;
+    right: -5px; /* Centers the dot perfectly on the 1px vertical line */
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    box-shadow: 0px 0px 15px var(--brand-accent);
-    transition: all 0.3s ease;
+    background: var(--brand-accent);
+    box-shadow: 0 0 15px var(--brand-accent);
 }
 
-.timeline-item:hover .timeline-node::after {
-    transform: scale(1.5);
-    background-color: #fff;
-    box-shadow: 0px 0px 20px var(--brand-accent), 0px 0px 10px #fff;
-}
-
-/* Phase Text Content */
+/* The Glass Card */
 .timeline-content {
-    background: rgba(0, 2, 8, 0.5);
+    flex-grow: 1;
+    margin-left: 4rem; /* MASSIVE fix: Forces the card far away from the dot */
+    background: rgba(0, 2, 8, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 2rem;
+    padding: 3rem;
     border-radius: 4px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.timeline-content:hover {
+    border-color: rgba(0, 229, 255, 0.3);
+    transform: translateX(10px); /* Slides slightly right on hover for a premium feel */
 }
 
 .timeline-content h3 {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     letter-spacing: 4px;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
+    margin-bottom: 1.2rem;
 }
 
 .timeline-content p {
-    font-size: 0.85rem;
-    line-height: 1.8;
     color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
-
 .about-footer {
     margin-top: 6rem;
     font-size: 0.75rem;
@@ -531,32 +500,41 @@ body {
             radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%),
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
-    /* Mobile Override for About Timeline */
-    .about-container {
-        padding: 8rem 1.5rem 4rem;
-    }
     
+  /* Mobile Override for the Timeline */
+    
+    .about-container {
+        padding-top: 8rem; /* Forces the ALL ABOUT RAVIE title down away from the logo */
+    }
+
+    /* Move the vertical line to the far left edge */
     .timeline::before {
-        left: 0; /* Moves the dashed line to the far left on phones */
+        left: 15px;
     }
 
     .timeline-item {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: column; /* Stacks the PHASE text on top of the card */
+        margin-bottom: 3rem;
     }
 
     .timeline-node {
+        width: 100%;
         text-align: left;
+        padding-left: 40px; /* Pushes the PHASE text to the right of the vertical line */
+        padding-top: 0;
+        margin-bottom: 1.5rem;
     }
 
+    /* Reposition the glowing dot onto the left-aligned vertical line */
     .timeline-node::after {
-        left: -4px; /* Repositions dot to the left line */
         right: auto;
+        left: 10px; /* Centers dot on the 15px line */
+        top: 2px;
     }
 
     .timeline-content {
-        margin-left: 1.5rem; /* Indents text away from the line */
-        padding: 1.5rem;
+        margin-left: 15px; /* Aligns the left edge of the card with the vertical line */
+        padding: 2rem 1.5rem;
     }
 /* Mobile Override for Socials Page */
     .socials-container {
