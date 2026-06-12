@@ -80,74 +80,58 @@ body {
 /* =========================================
    THE 4-CORNER NAVIGATION (ALL SCREENS)
    ========================================= */
+/* =========================================
+   UNIVERSAL NAVIGATION
+   ========================================= */
 
-/* Top Nav (Anchors the Logo to Top-Left) */
-.top-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 2.5rem 4rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    z-index: 100;
-    pointer-events: none; /* Allows clicks to pass through the empty center */
+/* Desktop: 4-Corner Layout */
+@media (min-width: 769px) {
+    .top-nav {
+        position: fixed;
+        top: 0; left: 0; width: 100%;
+        padding: 2.5rem 4rem;
+        display: flex;
+        justify-content: flex-start;
+        z-index: 100;
+        pointer-events: none;
+    }
+
+    .master-logo { height: 36px; pointer-events: auto; }
+
+    .desktop-menu {
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        pointer-events: none; z-index: 100;
+    }
+
+    .desktop-menu span {
+        position: absolute; pointer-events: auto;
+        font-size: 0.75rem; letter-spacing: 2px;
+        font-weight: 600; cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .desktop-menu span:nth-child(1) { top: 3.2rem; right: 4rem; } /* HOME */
+    .desktop-menu span:nth-child(2) { bottom: 3rem; left: 4rem; }  /* ABOUT */
+    .desktop-menu span:nth-child(3) { bottom: 3rem; right: 4rem; } /* SOCIALS */
+    
+    .hamburger, .mobile-dropdown { display: none !important; }
 }
 
-.master-logo {
-    height: 36px;
-    width: auto;
-    border-radius: 4px; 
-    pointer-events: auto; /* Keeps the logo clickable */
-}
+/* Mobile: Hamburger Layout */
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 1.5rem 2rem;
+        display: flex; justify-content: space-between; align-items: center;
+        z-index: 100;
+    }
 
-/* The Invisible Full-Screen Wrapper for the corners */
-.desktop-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 100;
-    display: block !important; /* Forces it to remain visible on phones */
-}
-
-/* Base Link Math */
-.desktop-menu span {
-    position: absolute;
-    pointer-events: auto; /* Re-enables clicking on the words */
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-    border: none !important; /* Strips out any accidental dividers */
-}
-
-/* 1. HOME -> Top Right */
-.desktop-menu span:nth-child(1) {
-    top: 3.2rem; /* Aligns visually with the logo */
-    right: 4rem;
-}
-
-/* 2. ABOUT -> Bottom Left */
-.desktop-menu span:nth-child(2) {
-    bottom: 3rem;
-    left: 4rem;
-}
-
-/* 3. SOCIALS -> Bottom Right */
-.desktop-menu span:nth-child(3) {
-    bottom: 3rem;
-    right: 4rem;
-}
-
-/* Hover States */
-.desktop-menu span:hover {
-    color: var(--brand-accent);
-    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
+    .desktop-menu { display: none !important; }
+    
+    .hamburger {
+        display: flex; flex-direction: column; gap: 6px; cursor: pointer; z-index: 105;
+    }
+    
+    .bar { width: 26px; height: 2px; background: white; transition: 0.3s; }
 }
 /* =========================================
    GATEWAY (MAIN SCREEN) LAYOUT
