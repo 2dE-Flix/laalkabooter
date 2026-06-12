@@ -146,7 +146,7 @@ body {
 
 .split-container {
     display: flex;
-    gap: 10rem; 
+    gap: 16rem; /* Massively increased from 10rem to separate the targets */
     align-items: center;
 }
 
@@ -154,25 +154,24 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2rem; /* Tightened the space between the icon and the text slightly */
     cursor: pointer;
     transition: all 0.4s ease;
 }
 
 .split-icon {
-    height: 65px;
+    height: 42px; /* Shrunk from 65px for a sharper, precision-engineered look */
     width: auto;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     mix-blend-mode: screen; 
 }
 
 .split-text {
-    font-size: 0.85rem;
-    letter-spacing: 4px;
+    font-size: 0.75rem; /* Scaled down slightly */
+    letter-spacing: 6px; /* Widened the tracking for that premium, airy feel */
     font-weight: 400;
     transition: all 0.4s ease;
 }
-
 /* =========================================
    INTERACTION & HOVER MATH
    ========================================= */
@@ -440,14 +439,14 @@ body {
         margin-top: 2rem; 
     }
 
-    .split-icon {
-        height: 55px; 
+ .split-icon {
+        height: 36px; /* Scaled down to match the new professional hierarchy */
     }
     
     .split-text {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        letter-spacing: 5px;
     }
-    
     /* MOBILE OVERRIDE: Static, Aggressive Background */
     body {
         /* Locks the deep blue glow to the top/center where the options sit */
