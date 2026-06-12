@@ -266,7 +266,19 @@ body {
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: var(--brand-accent); }
 
-    .mobile-dropdown {
+   .logo-container {
+    flex-shrink: 0;
+    max-width: 140px;
+    overflow: hidden;
+    line-height: 0; /* removes phantom inline spacing */
+}
+
+.master-logo {
+    height: 28px !important;
+    width: auto !important;
+    max-width: 100% !important; /* respects container, not viewport */
+}
+   .mobile-dropdown {
         position: fixed; top: -100vh; left: 0; width: 100%;
         background-color: rgba(0, 2, 8, 0.98); backdrop-filter: blur(12px);
         padding: 7rem 2rem 3rem; display: flex; flex-direction: column;
