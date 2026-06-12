@@ -413,6 +413,71 @@ body {
     color: var(--brand-accent) !important;
     text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
 }
+/* =========================================
+   SOCIALS PAGE LAYOUT
+   ========================================= */
+
+.socials-container {
+    padding: 12rem 2rem 4rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.social-cards {
+    display: flex;
+    gap: 8vw; /* Uses viewport width to maintain that ultra-wide, premium negative space */
+    margin-top: 2rem;
+}
+
+/* The Clickable Card Interface */
+.social-card {
+    background: rgba(0, 2, 8, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3.5rem 3rem;
+    width: 360px;
+    text-decoration: none; /* Removes the default blue link underline */
+    border-radius: 4px;
+    backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-card h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    letter-spacing: 6px;
+    margin-bottom: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-card p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+}
+
+/* Card Hover Math */
+.social-card:hover {
+    transform: translateY(-12px);
+    border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15);
+    background: rgba(0, 2, 8, 0.8);
+}
+
+.social-card:hover h3 {
+    color: var(--brand-accent);
+    text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5);
+}
+
+.social-card:hover p {
+    color: #e5e7eb; /* Brightens the text slightly for better legibility when active */
+}
 
 /* =========================================
    RESPONSIVE BREAKPOINTS (MOBILE RE-ARCHITECTURE)
