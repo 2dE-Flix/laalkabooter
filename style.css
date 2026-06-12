@@ -148,7 +148,7 @@ body {
 
 .split-container {
     display: flex;
-    gap: 45vw; /* Massively increased from 10rem to separate the targets */
+    gap: 30vw; /* Massively increased from 10rem to separate the targets */
     align-items: center;
 }
 
