@@ -76,54 +76,72 @@ body {
     animation: filmGrain 0.15s steps(2) infinite;
 }
 
+
 /* =========================================
-   TOP NAVIGATION
+   THE 4-CORNER NAVIGATION (ALL SCREENS)
    ========================================= */
 
+/* Top Nav (Anchors the Logo to Top-Left) */
 .top-nav {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     padding: 2.5rem 4rem;
     display: flex;
-    justify-content: flex-start; /* Anchors the logo to the left */
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     z-index: 100;
+    pointer-events: none; /* Allows clicks to pass through the empty center */
 }
 
 .master-logo {
     height: 36px;
     width: auto;
     border-radius: 4px; 
-    position: relative;
-    z-index: 101; 
+    pointer-events: auto; /* Keeps the logo clickable */
 }
 
-/* Perfect Absolute Centering via CSS Grid */
+/* The Invisible Full-Screen Wrapper for the corners */
 .desktop-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 100;
+    display: block !important; /* Forces it to remain visible on phones */
+}
+
+/* Base Link Math */
+.desktop-menu span {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Forces exactly 3 equal columns */
-    width: 420px; /* Locks the total width */
-    align-items: center;
+    pointer-events: auto; /* Re-enables clicking on the words */
     font-size: 0.75rem;
     letter-spacing: 2px;
     font-weight: 600;
-}
-
-/* Navigation Base & Alignment */
-.desktop-menu span {
-    width: 100%; /* Forces the span to fill its grid column */
-    text-align: center; /* Centers the text inside that full column */
     cursor: pointer;
     transition: color 0.3s ease, text-shadow 0.3s ease;
+    border: none !important; /* Strips out any accidental dividers */
 }
 
-/* The Restored Divider Math */
-.desktop-menu span:not(:last-child) {
-    border-right: 1px solid rgba(255, 255, 255, 0.15); /* A subtle, premium line */
+/* 1. HOME -> Top Right */
+.desktop-menu span:nth-child(1) {
+    top: 3.2rem; /* Aligns visually with the logo */
+    right: 4rem;
+}
+
+/* 2. ABOUT -> Bottom Left */
+.desktop-menu span:nth-child(2) {
+    bottom: 3rem;
+    left: 4rem;
+}
+
+/* 3. SOCIALS -> Bottom Right */
+.desktop-menu span:nth-child(3) {
+    bottom: 3rem;
+    right: 4rem;
 }
 
 /* Hover States */
