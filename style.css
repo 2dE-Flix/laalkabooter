@@ -500,6 +500,7 @@ body {
             radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%),
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
+    }
     
   /* Mobile Override for the Timeline */
     
