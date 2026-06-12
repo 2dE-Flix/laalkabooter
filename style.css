@@ -2,219 +2,67 @@
    RAVIE.IN - MASTER STYLESHEET
    ========================================= */
 
-/* Core Reset & Variables */
+/* =========================================
+   1. CORE RESET & VARIABLES
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* STRICT VIEWPORT LOCK: Prevents mobile layout collapse */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
 :root {
     /* Brand Colors */
-    --bg-deep: #000208; /* Absolute deep void */
-    --brand-accent: #00E5FF; /* High-visibility Cyan */
+    --bg-deep: #000208;
+    --brand-accent: #00E5FF;
     --text-primary: #ffffff;
     --text-muted: #6b7280;
     
     /* High-Voltage Glow Variables */
-    --glow-core: rgba(255, 255, 255, 0.95);     /* White-hot center */
-    --glow-halo: rgba(0, 229, 255, 0.85);       /* Cyan outer glow */
+    --glow-core: rgba(255, 255, 255, 0.95);
+    --glow-halo: rgba(0, 229, 255, 0.85);
     
-    /* Dynamic Tracking Variables (Driven by JavaScript) */
+    /* Dynamic Tracking Variables */
     --x: 50%;
     --y: 50%;
-    --cursor-glow: #001a55; /* The aggressive deep blue that follows the cursor */
+    --cursor-glow: #001a55;
 }
 
 /* =========================================
-   ENVIRONMENT & BACKGROUND
+   2. ENVIRONMENT & BACKGROUND
    ========================================= */
-
 body {
     background-color: var(--bg-deep);
-    
-    /* The interactive mesh */
     background-image: 
         radial-gradient(circle at var(--x) var(--y), var(--cursor-glow) 0%, transparent 45%),
         radial-gradient(circle at calc(100% - var(--x)) calc(100% - var(--y)), #000d26 0%, transparent 50%),
         radial-gradient(circle at 50% 50%, #01030a 0%, transparent 60%);
-    
-    /* CORE FIX 1: Lock the lighting math to the viewport window */
     background-attachment: fixed;
-    
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
-    
-    /* CORE FIX 2: Change absolute height to minimum height */
     min-height: 100vh; 
-    
-    /* CORE FIX 3: Hide horizontal glitches, but allow vertical scrolling */
-    overflow-x: hidden; 
-    overflow-y: auto; 
-    
     position: relative;
+    overflow-y: auto; 
 }
 
-/* Premium Digital Noise Texture - Persistent & Aggressive */
+/* Premium Digital Noise Texture */
 .noise-overlay {
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200vw;
-    height: 200vh;
+    top: -50%; left: -50%;
+    width: 200vw; height: 200vh;
     pointer-events: none;
     z-index: 9999;
     opacity: 0.04; 
-    
-    /* Grayscale SVG filter prevents color banding in the void */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    
-    /* Screen blend mode ensures the grain illuminates the black pixels */
     mix-blend-mode: screen; 
-    
-    /* Aggressive cinematic film grain jitter */
     animation: filmGrain 0.15s steps(2) infinite;
 }
-
-
-/* =========================================
-   THE 4-CORNER NAVIGATION (ALL SCREENS)
-   ========================================= */
-/* =========================================
-   UNIVERSAL NAVIGATION
-   ========================================= */
-
-/* Desktop: 4-Corner Layout */
-@media (min-width: 769px) {
-    .top-nav {
-        position: fixed;
-        top: 0; left: 0; width: 100%;
-        padding: 2.5rem 4rem;
-        display: flex;
-        justify-content: flex-start;
-        z-index: 100;
-        pointer-events: none;
-    }
-
-.master-logo {
-    height: 36px !important;
-    width: auto !important;
-    max-width: 200px !important; /* Forces the browser to cap the size */
-    object-fit: contain;
-}
-
-   
-    .desktop-menu {
-        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        pointer-events: none; z-index: 100;
-    }
-
-    .desktop-menu span {
-        position: absolute; pointer-events: auto;
-        font-size: 0.75rem; letter-spacing: 2px;
-        font-weight: 600; cursor: pointer;
-        transition: color 0.3s ease;
-    }
-
-    .desktop-menu span:nth-child(1) { top: 3.2rem; right: 4rem; } /* HOME */
-    .desktop-menu span:nth-child(2) { bottom: 3rem; left: 4rem; }  /* ABOUT */
-    .desktop-menu span:nth-child(3) { bottom: 3rem; right: 4rem; } /* SOCIALS */
-    
-    .hamburger, .mobile-dropdown { display: none !important; }
-}
-
-/* Mobile: Hamburger Layout */
-@media (max-width: 768px) {
-    .top-nav {
-        padding: 1.5rem 2rem;
-        display: flex; justify-content: space-between; align-items: center;
-        z-index: 100;
-    }
-
-    .desktop-menu { display: none !important; }
-    
-    .hamburger {
-        display: flex; flex-direction: column; gap: 6px; cursor: pointer; z-index: 105;
-    }
-    
-    .bar { width: 26px; height: 2px; background: white; transition: 0.3s; }
-}
-/* =========================================
-   GATEWAY (MAIN SCREEN) LAYOUT
-   ========================================= */
-
-#app-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.view {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.6s ease-in-out;
-}
-
-.view.active-view {
-    display: flex;
-    opacity: 1;
-}
-
-.split-container {
-    display: flex;
-    gap: 25vw; /* Massively increased from 10rem to separate the targets */
-    align-items: center;
-}
-
-.split-option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem; /* Tightened the space between the icon and the text slightly */
-    cursor: pointer;
-    transition: all 0.4s ease;
-}
-
-.split-icon {
-    height: 42px; /* Shrunk from 65px for a sharper, precision-engineered look */
-    width: auto;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    mix-blend-mode: screen; 
-}
-
-.split-text {
-    font-size: 0.75rem; /* Scaled down slightly */
-    letter-spacing: 6px; /* Widened the tracking for that premium, airy feel */
-    font-weight: 400;
-    transition: all 0.4s ease;
-}
-/* =========================================
-   INTERACTION & HOVER MATH
-   ========================================= */
-
-.split-container:hover .split-option {
-    opacity: 0.15; /* Aggressively dims the unselected option */
-}
-
-.split-container .split-option:hover {
-    opacity: 1; 
-}
-
-/* Layered High-Voltage Glow Activation */
-.split-option:hover .split-icon {
-    filter: drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
-    transform: scale(1.08) translateY(-5px);
-}
-
-.split-option:hover .split-text {
-    color: #ffffff;
-    text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
-}
-
-/* =========================================
-   ANIMATIONS
-   ========================================= */
 
 @keyframes filmGrain {
     0% { transform: translate(0, 0); }
@@ -223,345 +71,226 @@ body {
     75% { transform: translate(-0.5%, -0.5%); }
     100% { transform: translate(0.5%, 0.5%); }
 }
+
 /* =========================================
-   MOBILE MENU & HAMBURGER STYLES
+   3. UNIVERSAL NAVIGATION (DESKTOP FIRST)
    ========================================= */
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    z-index: 105; /* Keeps it above the dropdown */
-}
-
-.hamburger .bar {
-    width: 26px;
-    height: 2px;
-    background-color: var(--text-primary);
-    transition: all 0.3s ease;
-}
-
-/* Transforms the hamburger into an 'X' when active */
-.hamburger.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-    background-color: var(--brand-accent);
-}
-.hamburger.active .bar:nth-child(2) {
-    opacity: 0;
-}
-.hamburger.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-    background-color: var(--brand-accent);
-}
-
-/* The Dropdown Container */
-.mobile-dropdown {
-    position: absolute;
-    top: -100vh; /* Hidden off-screen by default */
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 2, 8, 0.98);
-    backdrop-filter: blur(12px); /* High-end glassmorphism */
-    padding: 7rem 2rem 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
+.top-nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    padding: 2.5rem 4rem;
+    display: flex; justify-content: flex-start;
     z-index: 100;
-    transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+    pointer-events: none;
 }
 
-.mobile-dropdown.active-menu {
-    top: 0; /* Slides down into view */
+.logo-container {
+    pointer-events: auto;
 }
 
-.mobile-dropdown span {
-    font-size: 0.9rem;
-    letter-spacing: 4px;
-    font-weight: 600;
-    color: var(--text-primary);
-    transition: color 0.3s ease;
+/* The Ultimate Image Lock */
+.master-logo {
+    height: 36px !important;
+    width: auto !important;
+    max-width: 200px !important;
+    object-fit: contain;
+    display: block;
 }
 
-.mobile-dropdown span:hover {
-    color: var(--brand-accent);
-    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
+/* 4-Corner Layout */
+.desktop-menu {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 100;
 }
 
-/* =========================================
-   ABOUT US PAGE LAYOUT
-   ========================================= */
-
-/* =========================================
-   TIMELINE ARCHITECTURE (DESKTOP)
-   ========================================= */
-
-.about-container {
-    padding: 10rem 2rem 4rem; /* Added heavy top padding to clear the header */
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 10;
-}
-
-.timeline {
-    position: relative;
-    margin-top: 4rem;
-}
-
-/* The Vertical Ledger Line */
-.timeline::before {
-    content: '';
+.desktop-menu span {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 120px; /* Anchors the line 120px from the left edge */
-    width: 1px;
-    background: rgba(0, 229, 255, 0.2);
+    pointer-events: auto;
+    font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.timeline-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 5rem;
-    position: relative;
-}
+.desktop-menu span:nth-child(1) { top: 3.2rem; right: 4rem; } 
+.desktop-menu span:nth-child(2) { bottom: 3rem; left: 4rem; }  
+.desktop-menu span:nth-child(3) { bottom: 3rem; right: 4rem; } 
 
-/* "PHASE 1" Text */
-.timeline-node {
-    width: 120px; 
-    flex-shrink: 0;
-    padding-right: 2.5rem; /* Pushes the text away from the line */
-    text-align: right;
-    color: var(--brand-accent);
-    font-weight: 600;
-    letter-spacing: 3px;
-    font-size: 0.85rem;
-    position: relative;
-    padding-top: 2rem; /* Aligns text vertically with the card */
-}
-
-/* The Glowing Cyan Dot */
-.timeline-node::after {
-    content: '';
-    position: absolute;
-    top: 2.2rem;
-    right: -5px; /* Centers the dot perfectly on the 1px vertical line */
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--brand-accent);
-    box-shadow: 0 0 15px var(--brand-accent);
-}
-
-/* The Glass Card */
-.timeline-content {
-    flex-grow: 1;
-    margin-left: 4rem; /* MASSIVE fix: Forces the card far away from the dot */
-    background: rgba(0, 2, 8, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 3rem;
-    border-radius: 4px;
-    backdrop-filter: blur(12px);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.timeline-content:hover {
-    border-color: rgba(0, 229, 255, 0.3);
-    transform: translateX(10px); /* Slides slightly right on hover for a premium feel */
-}
-
-.timeline-content h3 {
-    font-size: 1.1rem;
-    letter-spacing: 4px;
-    margin-bottom: 1.2rem;
-}
-
-.timeline-content p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
-.about-footer {
-    margin-top: 6rem;
-    font-size: 0.75rem;
-    letter-spacing: 4px;
-    color: var(--text-muted);
-    text-align: center;
-}
-
-/* Active Link State */
-.active-link {
+.desktop-menu span:hover, .active-link {
     color: var(--brand-accent) !important;
     text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
 }
-/* =========================================
-   SOCIALS PAGE LAYOUT
-   ========================================= */
 
-.socials-container {
-    padding: 12rem 2rem 4rem; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 10;
-}
-
-.social-cards {
-    display: flex;
-    gap: 8vw; /* Uses viewport width to maintain that ultra-wide, premium negative space */
-    margin-top: 2rem;
-}
-
-/* The Clickable Card Interface */
-.social-card {
-    background: rgba(0, 2, 8, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 3.5rem 3rem;
-    width: 360px;
-    text-decoration: none; /* Removes the default blue link underline */
-    border-radius: 4px;
-    backdrop-filter: blur(12px);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.social-card h3 {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    letter-spacing: 6px;
-    margin-bottom: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.social-card p {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    line-height: 1.8;
-    transition: color 0.3s ease;
-}
-
-/* Card Hover Math */
-.social-card:hover {
-    transform: translateY(-12px);
-    border-color: rgba(0, 229, 255, 0.4);
-    box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15);
-    background: rgba(0, 2, 8, 0.8);
-}
-
-.social-card:hover h3 {
-    color: var(--brand-accent);
-    text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5);
-}
-
-.social-card:hover p {
-    color: #e5e7eb; /* Brightens the text slightly for better legibility when active */
+.hamburger, .mobile-dropdown {
+    display: none;
 }
 
 /* =========================================
-   RESPONSIVE BREAKPOINTS (MOBILE RE-ARCHITECTURE)
+   4. GATEWAY (MAIN SCREEN) LAYOUT
    ========================================= */
+#app-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center; align-items: center;
+}
 
-@media (max-width: 768px) {
-    /* Compress Navigation Padding */
-    .top-nav {
-        padding: 1.5rem 2rem;
-        justify-content: space-between; 
-    }
+.view {
+    display: none; opacity: 0; transition: opacity 0.6s ease-in-out;
+}
+.view.active-view {
+    display: flex; opacity: 1;
+}
 
-    /* Hide Desktop Tabs, Show Hamburger */
-    .desktop-menu {
-        display: none;
-    }
-    
-    .hamburger {
-        display: flex;
-    }
+.split-container {
+    display: flex; gap: 25vw; align-items: center;
+}
+.split-option {
+    display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    cursor: pointer; transition: all 0.4s ease;
+}
 
-    /* Transform Main Layout from Horizontal to Vertical Stack */
-    .split-container {
-        flex-direction: column; 
-        gap: 4.5rem; 
-        margin-top: 2rem; 
-    }
-
-
-    .split-icon {
+.split-icon {
     height: 42px !important;
     width: auto !important;
-    max-width: 150px !important; /* Prevents the zoom blowout */
+    max-width: 150px !important; 
     object-fit: contain;
+    mix-blend-mode: screen; 
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-   
-    .split-text {
-        font-size: 0.7rem;
-        letter-spacing: 5px;
-    }
-    /* MOBILE OVERRIDE: Static, Aggressive Background */
+    display: block;
+}
+
+.split-text {
+    font-size: 0.75rem; letter-spacing: 6px; font-weight: 400;
+    transition: all 0.4s ease;
+}
+
+/* Hover Math */
+.split-container:hover .split-option { opacity: 0.15; }
+.split-container .split-option:hover { opacity: 1; }
+.split-option:hover .split-icon {
+    filter: drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
+    transform: scale(1.08) translateY(-5px);
+}
+.split-option:hover .split-text {
+    color: #ffffff; text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
+}
+
+/* =========================================
+   5. ABOUT PAGE LAYOUT
+   ========================================= */
+.about-container {
+    padding: 10rem 2rem 4rem; max-width: 1200px; margin: 0 auto;
+    position: relative; z-index: 10;
+}
+.about-header { text-align: center; margin-bottom: 4rem; }
+.page-title { font-size: 1.5rem; letter-spacing: 8px; font-weight: 300; }
+.separator-line {
+    width: 60px; height: 2px; background: var(--brand-accent);
+    margin: 1.5rem auto 0; box-shadow: 0 0 10px var(--brand-accent);
+}
+
+.timeline { position: relative; margin-top: 4rem; }
+.timeline::before {
+    content: ''; position: absolute; top: 0; bottom: 0; left: 120px;
+    width: 1px; background: rgba(0, 229, 255, 0.2);
+}
+.timeline-item { display: flex; align-items: flex-start; margin-bottom: 5rem; position: relative; }
+.timeline-node {
+    width: 120px; flex-shrink: 0; padding-right: 2.5rem; text-align: right;
+    color: var(--brand-accent); font-weight: 600; letter-spacing: 3px; font-size: 0.85rem;
+    position: relative; padding-top: 2rem;
+}
+.timeline-node::after {
+    content: ''; position: absolute; top: 2.2rem; right: -5px; width: 10px; height: 10px;
+    border-radius: 50%; background: var(--brand-accent); box-shadow: 0 0 15px var(--brand-accent);
+}
+.timeline-content {
+    flex-grow: 1; margin-left: 4rem; background: rgba(0, 2, 8, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05); padding: 3rem; border-radius: 4px;
+    backdrop-filter: blur(12px); transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.timeline-content:hover {
+    border-color: rgba(0, 229, 255, 0.3); transform: translateX(10px);
+}
+.timeline-content h3 { font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 1.2rem; }
+.timeline-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
+.about-footer {
+    margin-top: 6rem; font-size: 0.75rem; letter-spacing: 4px; color: var(--text-muted); text-align: center;
+}
+
+/* =========================================
+   6. SOCIALS PAGE LAYOUT
+   ========================================= */
+.socials-container {
+    padding: 12rem 2rem 4rem; display: flex; flex-direction: column;
+    align-items: center; position: relative; z-index: 10;
+}
+.social-cards { display: flex; gap: 8vw; margin-top: 2rem; }
+.social-card {
+    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3.5rem 3rem; width: 360px; text-decoration: none; border-radius: 4px;
+    backdrop-filter: blur(12px); transition: all 0.4s ease; cursor: pointer;
+    position: relative; overflow: hidden;
+}
+.social-card h3 { color: var(--text-primary); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 1.2rem; transition: color 0.3s ease; }
+.social-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; transition: color 0.3s ease; }
+.social-card:hover {
+    transform: translateY(-12px); border-color: rgba(0, 229, 255, 0.4);
+    box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15); background: rgba(0, 2, 8, 0.8);
+}
+.social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
+.social-card:hover p { color: #e5e7eb; }
+
+/* =========================================
+   7. MOBILE RE-ARCHITECTURE 
+   ========================================= */
+@media (max-width: 768px) {
+    /* Freeze Background to prevent touch-panics */
     body {
-        /* Locks the deep blue glow to the top/center where the options sit */
         background-image: 
             radial-gradient(circle at 50% 30%, var(--cursor-glow) 0%, transparent 60%),
             radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%),
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
     }
+
+    /* Nav Swaps */
+    .top-nav { padding: 1.5rem 2rem; justify-content: space-between; align-items: center; pointer-events: auto; }
+    .desktop-menu { display: none !important; }
     
-  /* Mobile Override for the Timeline */
-    
-    .about-container {
-        padding-top: 8rem; /* Forces the ALL ABOUT RAVIE title down away from the logo */
-    }
+    .hamburger { display: flex; flex-direction: column; gap: 6px; cursor: pointer; z-index: 105; pointer-events: auto; }
+    .hamburger .bar { width: 26px; height: 2px; background-color: var(--text-primary); transition: all 0.3s ease; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: var(--brand-accent); }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: var(--brand-accent); }
 
-    /* Move the vertical line to the far left edge */
-    .timeline::before {
-        left: 15px;
+    .mobile-dropdown {
+        position: fixed; top: -100vh; left: 0; width: 100%;
+        background-color: rgba(0, 2, 8, 0.98); backdrop-filter: blur(12px);
+        padding: 7rem 2rem 3rem; display: flex; flex-direction: column;
+        align-items: center; gap: 2.5rem; z-index: 100; transition: top 0.4s ease;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.15);
     }
+    .mobile-dropdown.active-menu { top: 0; }
+    .mobile-dropdown span { font-size: 0.9rem; letter-spacing: 4px; font-weight: 600; color: var(--text-primary); transition: color 0.3s ease; cursor: pointer; }
 
-    .timeline-item {
-        flex-direction: column; /* Stacks the PHASE text on top of the card */
-        margin-bottom: 3rem;
-    }
+    /* Gateway Overrides */
+    .split-container { flex-direction: column; gap: 4.5rem; }
+    .split-icon { height: 36px !important; max-width: 120px !important; }
+    .split-text { font-size: 0.7rem; letter-spacing: 5px; }
 
-    .timeline-node {
-        width: 100%;
-        text-align: left;
-        padding-left: 40px; /* Pushes the PHASE text to the right of the vertical line */
-        padding-top: 0;
-        margin-bottom: 1.5rem;
-    }
+    /* About Overrides */
+    .about-container { padding-top: 8rem; }
+    .timeline::before { left: 15px; }
+    .timeline-item { flex-direction: column; margin-bottom: 3rem; }
+    .timeline-node { width: 100%; text-align: left; padding-left: 40px; padding-top: 0; margin-bottom: 1.5rem; }
+    .timeline-node::after { right: auto; left: 10px; top: 2px; }
+    .timeline-content { margin-left: 15px; padding: 2rem 1.5rem; }
 
-    /* Reposition the glowing dot onto the left-aligned vertical line */
-    .timeline-node::after {
-        right: auto;
-        left: 10px; /* Centers dot on the 15px line */
-        top: 2px;
-    }
-
-    .timeline-content {
-        margin-left: 15px; /* Aligns the left edge of the card with the vertical line */
-        padding: 2rem 1.5rem;
-    }
-/* Mobile Override for Socials Page */
-    .socials-container {
-        padding-top: 9rem;
-    }
-
-    .social-cards {
-        flex-direction: column;
-        gap: 2.5rem;
-    }
-
-    .social-card {
-        width: 100%;
-        max-width: 380px; /* Prevents them from getting too wide on tablets */
-        padding: 2.5rem 2rem;
-    }
-
-    }
+    /* Socials Overrides */
+    .socials-container { padding-top: 9rem; }
+    .social-cards { flex-direction: column; gap: 2.5rem; }
+    .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
+}
