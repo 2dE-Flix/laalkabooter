@@ -549,4 +549,19 @@ body {
         margin-left: 1.5rem; /* Indents text away from the line */
         padding: 1.5rem;
     }
-}
+/* Mobile Override for Socials Page */
+    .socials-container {
+        padding-top: 9rem;
+    }
+
+    .social-cards {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .social-card {
+        width: 100%;
+        max-width: 380px; /* Prevents them from getting too wide on tablets */
+        padding: 2.5rem 2rem;
+    }
+    }
