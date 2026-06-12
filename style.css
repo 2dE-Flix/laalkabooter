@@ -96,8 +96,14 @@ body {
         pointer-events: none;
     }
 
-    .master-logo { height: 36px; pointer-events: auto; }
+.master-logo {
+    height: 36px !important;
+    width: auto !important;
+    max-width: 200px !important; /* Forces the browser to cap the size */
+    object-fit: contain;
+}
 
+   
     .desktop-menu {
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
         pointer-events: none; z-index: 100;
@@ -484,10 +490,15 @@ body {
         margin-top: 2rem; 
     }
 
- .split-icon {
-        height: 36px; /* Scaled down to match the new professional hierarchy */
+
+    .split-icon {
+    height: 42px !important;
+    width: auto !important;
+    max-width: 150px !important; /* Prevents the zoom blowout */
+    object-fit: contain;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+   
     .split-text {
         font-size: 0.7rem;
         letter-spacing: 5px;
