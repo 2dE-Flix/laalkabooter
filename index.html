@@ -31,12 +31,14 @@
         </nav>
     </div>
 
-    <div class="mobile-dropdown" id="mobile-dropdown">
+<div class="mobile-dropdown" id="mobile-dropdown">
         <span onclick="window.location.href='index.html'">HOME</span>
         <span onclick="window.location.href='about.html'">ABOUT</span>
         <span onclick="window.location.href='socials.html'">SOCIALS</span>
     </div>
+    
     <main id="app-container">
+        
         <section id="gateway-view" class="view active-view">
             <div class="split-container">
                 <div class="split-option" id="btn-creators">
@@ -50,6 +52,52 @@
                 </div>
             </div>
         </section>
+
+        <section id="platform-view" class="view">
+            
+            <aside class="platform-sidebar">
+                <div class="sidebar-option active-sidebar" id="side-talents">
+                    <img src="assets/creator (web logo).png" alt="Talents" class="sidebar-icon">
+                    <span>TALENTS</span>
+                </div>
+                
+                <div class="sidebar-option" id="side-brands">
+                    <img src="assets/Brand (web logo).png" alt="Brands" class="sidebar-icon">
+                    <span>BRANDS</span>
+                </div>
+            </aside>
+
+            <div class="platform-content">
+                
+                <div class="ledger-stream active-stream" id="ledger-talents">
+                    
+                    <div class="ledger-card">
+                        <div class="card-node"></div>
+                        <h3>CREATOR VERIFICATION</h3>
+                        <p>All talent nodes within the Ravie network undergo strict mathematical auditing. We filter out vanity metrics, bot interactions, and dead engagement to ensure absolute data purity before deployment.</p>
+                    </div>
+
+                    <div class="ledger-card">
+                        <div class="card-node"></div>
+                        <h3>MILESTONE COMPENSATION</h3>
+                        <p>Capital is distributed purely on performance. Smart contracts and Discord-integrated ticketing systems guarantee that creators are compensated relative to the verified momentum they generate for the brand.</p>
+                    </div>
+
+                    <div class="ledger-card contact-card">
+                        <div class="card-node contact-node"></div>
+                        <h3>ENTER THE NETWORK</h3>
+                        <p>Ready to deploy your audience? Connect with our onboarding team to begin the verification protocol.</p>
+                        <a href="mailto:contact@ravie.in" class="contact-btn">INITIALIZE CONTACT</a>
+                    </div>
+
+                </div>
+
+                <div class="ledger-stream" id="ledger-brands">
+                    </div>
+
+            </div>
+        </section>
+
     </main>
 
     <script src="script.js"></script>
