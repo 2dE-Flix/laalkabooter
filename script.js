@@ -53,39 +53,64 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-    // 3. HOME VIEW GATEWAY ROUTING
+        // 3. HOME VIEW GATEWAY ROUTING & PLATFORM ENGINE
     const btnCreators = document.getElementById("btn-creators");
     const btnBrands = document.getElementById("btn-brands");
     const gatewayView = document.getElementById("gateway-view");
-    const appContainer = document.getElementById("app-container");
+    const platformView = document.getElementById("platform-view");
+    
+    // Inner Compass Elements
+    const sideTalents = document.getElementById("side-talents");
+    const sideBrands = document.getElementById("side-brands");
+    const streamTalents = document.getElementById("ledger-talents");
+    const streamBrands = document.getElementById("ledger-brands");
 
-    function transitionToRoute(route) {
-        if (gatewayView && appContainer) {
-            // Fade out the gateway layer
+    function transitionToPlatform(targetStream) {
+        if (gatewayView && platformView) {
+            // Fade out the center gateway
             gatewayView.style.opacity = '0';
+            gatewayView.style.pointerEvents = 'none';
             
             setTimeout(() => {
-                // Hide the gateway completely after fade
+                // Hide gateway, prep platform
                 gatewayView.classList.remove('active-view');
                 gatewayView.style.display = 'none';
                 
-                // Temporary console placeholder for inner platform screens
-                console.log(`[RAVIE.IN] System routed to: ${route.toUpperCase()}`);
+                platformView.style.display = 'block';
                 
-                // Safely inject the loading text without shattering the DOM
-                const transitionScreen = document.createElement('div');
-                transitionScreen.style.cssText = `
-                    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                    font-family: 'Inter'; letter-spacing: 3px; color: #fff; font-size: 0.85rem; 
-                    text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.8); text-align: center;
-                `;
-                transitionScreen.innerHTML = `INITIALIZING ${route.toUpperCase()} PROTOCOL...`;
-                
-                appContainer.appendChild(transitionScreen);
+                // Trigger a tiny delay to allow CSS to register the display change
+                setTimeout(() => {
+                    platformView.classList.add('active-platform');
+                    switchStream(targetStream);
+                }, 50);
+
             }, 600);
         }
     }
 
-    if (btnCreators) btnCreators.addEventListener("click", () => transitionToRoute("talents"));
-    if (btnBrands) btnBrands.addEventListener("click", () => transitionToRoute("brands"));
-});
+    function switchStream(target) {
+        // Reset Compass
+        sideTalents.classList.remove('active-sidebar');
+        sideBrands.classList.remove('active-sidebar');
+        // Hide all streams
+        streamTalents.classList.remove('active-stream');
+        streamBrands.classList.remove('active-stream');
+
+        // Activate targeted stream & compass link
+        if (target === 'talents') {
+            sideTalents.classList.add('active-sidebar');
+            streamTalents.classList.add('active-stream');
+        } else if (target === 'brands') {
+            sideBrands.classList.add('active-sidebar');
+            streamBrands.classList.add('active-stream');
+        }
+    }
+
+    // Gateway Click Listeners
+    if (btnCreators) btnCreators.addEventListener("click", () => transitionToPlatform("talents"));
+    if (btnBrands) btnBrands.addEventListener("click", () => transitionToPlatform("brands"));
+
+    // Inner Compass Click Listeners
+    if (sideTalents) sideTalents.addEventListener("click", () => switchStream("talents"));
+    if (sideBrands) sideBrands.addEventListener("click", () => switchStream("brands"));
+    
