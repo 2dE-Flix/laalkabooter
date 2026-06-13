@@ -1,7 +1,6 @@
 /* =========================================
    RAVIE.IN - MASTER STYLESHEET
    ========================================= */
-
 /* =========================================
    1. CORE RESET & VARIABLES
    ========================================= */
@@ -9,6 +8,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Kills the blue mobile tap flash globally */
+    -webkit-tap-highlight-color: transparent; 
+}
+
+/* Kills focus outlines and prevents accidental text highlighting on UI elements */
+a, button, span, .split-option, .hamburger, .social-card {
+    outline: none !important;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 /* STRICT VIEWPORT LOCK: Prevents mobile layout collapse */
