@@ -341,6 +341,144 @@ body.locked-gateway {
     height: 100dvh;
 }
 /* =========================================
+   INNER PLATFORM: THE Y-AXIS LEDGER
+   ========================================= */
+
+#platform-view {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100dvh;
+    display: none; /* Hidden initially */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(40px); /* Prepares the slide-in from the right */
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 50;
+}
+
+#platform-view.active-platform {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0); /* Slides into place */
+}
+
+/* 1. The Compass (Desktop Left Axis) */
+.platform-sidebar {
+    position: fixed;
+    left: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-left: 1px solid rgba(0, 229, 255, 0.2);
+    padding-left: 1.5rem;
+}
+
+.sidebar-option {
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.sidebar-option span {
+    font-size: 0.85rem; /* Small, precision text */
+    letter-spacing: 6px;
+    font-weight: 600;
+}
+
+.sidebar-option:hover {
+    opacity: 0.8;
+}
+
+.sidebar-option.active-sidebar {
+    opacity: 1;
+    color: var(--brand-accent);
+    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.4);
+}
+
+/* 2. The Ledger Data Stream */
+.platform-content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 600px;
+    height: 100dvh;
+    padding: 10rem 2rem 4rem; /* Clears the header */
+    overflow-y: auto;
+    scrollbar-width: none; /* Hides scrollbar Firefox */
+}
+.platform-content::-webkit-scrollbar { display: none; } /* Hides scrollbar Chrome/Safari */
+
+.ledger-stream {
+    display: none;
+    flex-direction: column;
+    gap: 2rem;
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ledger-stream.active-stream {
+    display: flex;
+}
+
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. The Standard Glass Card */
+.ledger-card {
+    background: rgba(0, 2, 8, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3rem;
+    border-radius: 4px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+}
+
+.ledger-card h3 {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.ledger-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* 4. The Contact Card (Semi-Transparent Light Theme) */
+.contact-card {
+    background: rgba(255, 255, 255, 0.05); /* Frosty white tint */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Brighter border */
+    margin-top: 2rem; /* Creates a slight gap from the data cards */
+}
+
+.contact-card h3 { color: #ffffff; }
+
+.contact-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    border: 1px solid var(--brand-accent);
+    color: var(--brand-accent);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: var(--brand-accent);
+    color: #000;
+    box-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5);
+}
+
+/* =========================================
    7. MOBILE RE-ARCHITECTURE 
    ========================================= */
 @media (max-width: 768px) {
@@ -352,7 +490,24 @@ body.locked-gateway {
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
     }
+    /* Mobile Platform Overrides */
+    .platform-sidebar {
+        position: fixed;
+        left: 0;
+        top: 6rem; /* Sits directly below the mobile header */
+        width: 100vw;
+        flex-direction: row; /* Horizontal layout */
+        justify-content: center;
+        gap: 3rem;
+        border-left: none;
+        padding-left: 0;
+        z-index: 40;
+    }
 
+    .platform-content {
+        padding-top: 11rem; /* Pushes content down below the top compass */
+    }
+   
     /* Nav Swaps */
 /* Keeps the logo and the 'X' button floating ABOVE the dropdown */
     .top-nav { 
