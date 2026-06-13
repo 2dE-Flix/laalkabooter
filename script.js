@@ -27,7 +27,25 @@ document.addEventListener("DOMContentLoaded", () => {
             mobileDropdown.classList.toggle('active-menu');
         });
     }
+// 2.5 GATEWAY LIQUID GLASS MENU
+    const gatewayMenuBtn = document.getElementById('gateway-menu-btn');
+    const liquidGlassOverlay = document.getElementById('liquid-glass-overlay');
 
+    if (gatewayMenuBtn && liquidGlassOverlay) {
+        gatewayMenuBtn.addEventListener('click', () => {
+            const isActive = liquidGlassOverlay.classList.contains('active-glass');
+            
+            if (isActive) {
+                // Close the menu
+                liquidGlassOverlay.classList.remove('active-glass');
+                gatewayMenuBtn.textContent = 'MENU';
+            } else {
+                // Open the menu
+                liquidGlassOverlay.classList.add('active-glass');
+                gatewayMenuBtn.textContent = 'CLOSE';
+            }
+        });
+    }
     // 3. HOME VIEW GATEWAY ROUTING
     const btnCreators = document.getElementById("btn-creators");
     const btnBrands = document.getElementById("btn-brands");
