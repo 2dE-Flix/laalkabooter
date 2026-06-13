@@ -205,7 +205,7 @@ body {
     background: rgba(0, 2, 8, 0.4); /* Extremely sheer dark tint */
     backdrop-filter: blur(30px); /* Heavy liquid glass distortion */
     -webkit-backdrop-filter: blur(30px); /* Safari support */
-    z-index: 150;
+    z-index: 90; /* Drops the glass behind the header so the CLOSE button and logo stay visible */
     display: flex;
     justify-content: center;
     align-items: center;
