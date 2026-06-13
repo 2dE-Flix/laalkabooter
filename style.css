@@ -324,22 +324,7 @@ body {
 }
 .social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
 .social-card:hover p { color: #e5e7eb; }
-/* =========================================
-   GATEWAY STRICT LOCK (Kills Phantom Scroll)
-   ========================================= */
-body.locked-gateway {
-    overflow: hidden !important; 
-    /* Modern fix for mobile browser address bars */
-    height: 100dvh; 
-    min-height: 100dvh;
-    /* Prevents the entire page from bouncing when dragged on touch screens */
-    touch-action: none; 
-}
 
-/* Update the app container to respect dynamic viewport height */
-.locked-gateway #app-container {
-    height: 100dvh;
-}
 /* =========================================
    INNER PLATFORM: THE Y-AXIS LEDGER
    ========================================= */
