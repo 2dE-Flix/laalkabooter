@@ -362,6 +362,7 @@ body {
     .mobile-dropdown span { font-size: 0.9rem; letter-spacing: 4px; font-weight: 600; color: var(--text-primary); transition: color 0.3s ease; cursor: pointer; }
 
     /* Gateway Overrides */
+   .gateway-menu-toggle { top: 1.5rem; right: 2rem; }
     .split-container { flex-direction: column; gap: 4.5rem; }
     .split-icon { height: 36px !important; max-width: 120px !important; }
     .split-text { font-size: 0.7rem; letter-spacing: 5px; }
