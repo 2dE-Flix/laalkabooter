@@ -5,8 +5,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
 
-    // 1. KINETIC BACKGROUND TRACKING (DESKTOP ONLY)
+ // 1. KINETIC BACKGROUND TRACKING (DESKTOP ONLY)
     document.addEventListener("mousemove", (e) => {
+        const glassLayer = document.getElementById('liquid-glass-overlay');
+        
+        // ABORT tracking if the glass menu is open
+        if (glassLayer && glassLayer.classList.contains('active-glass')) {
+            return; 
+        }
+
         if (window.innerWidth > 768) {
             requestAnimationFrame(() => {
                 const x = (e.clientX / window.innerWidth) * 100;
