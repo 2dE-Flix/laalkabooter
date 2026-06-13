@@ -366,7 +366,11 @@ body {
     .split-container { flex-direction: column; gap: 4.5rem; }
     .split-icon { height: 36px !important; max-width: 120px !important; }
     .split-text { font-size: 0.7rem; letter-spacing: 5px; }
-
+/* MOBILE OVERRIDE: Kill the PC Liquid Glass Menu */
+    .gateway-menu-toggle,
+    .liquid-glass-overlay {
+        display: none !important;
+    }
     /* About Overrides */
     .about-container { padding-top: 8rem; }
     .timeline::before { left: 15px; }
