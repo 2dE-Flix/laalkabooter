@@ -202,9 +202,9 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: rgba(0, 2, 8, 0.4); /* Extremely sheer dark tint */
-    backdrop-filter: blur(30px); /* Heavy liquid glass distortion */
-    -webkit-backdrop-filter: blur(30px); /* Safari support */
+    background: rgba(0, 2, 8, 0.6); /* Extremely sheer dark tint */
+    backdrop-filter: blur(20px); /* Heavy liquid glass distortion */
+    -webkit-backdrop-filter: blur(20px); /* Safari support */
     z-index: 90; /* Drops the glass behind the header so the CLOSE button and logo stay visible */
     display: flex;
     justify-content: center;
@@ -223,13 +223,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3.5rem;
+    gap: 2rem;
 }
 
 .glass-nav-links span {
-    font-size: 1.5rem; /* Massive, confident typography */
-    letter-spacing: 12px;
-    font-weight: 300;
+    font-size: 0.85rem; /* Massive, confident typography */
+    letter-spacing: 8px;
+    font-weight: 400;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
