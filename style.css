@@ -188,7 +188,8 @@ body {
     letter-spacing: 2px;
     font-weight: 600;
     cursor: pointer;
-    z-index: 200; /* Keeps it above the glass overlay */
+    z-index: 200; 
+    pointer-events: auto; /* <--- THIS IS THE FIX */
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
