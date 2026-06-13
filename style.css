@@ -331,7 +331,14 @@ body {
     }
 
     /* Nav Swaps */
-    .top-nav { padding: 1.5rem 2rem; justify-content: space-between; align-items: center; pointer-events: auto; }
+/* Keeps the logo and the 'X' button floating ABOVE the dropdown */
+    .top-nav { 
+        padding: 1.5rem 2rem; 
+        justify-content: space-between; 
+        align-items: center; 
+        pointer-events: auto; 
+        z-index: 300 !important; /* <--- THE FIX */
+    }
     .desktop-menu { display: none !important; }
     
     .hamburger { display: flex; flex-direction: column; gap: 6px; cursor: pointer; z-index: 105; pointer-events: auto; }
@@ -352,11 +359,22 @@ body {
     width: auto !important;
     max-width: 100% !important; /* respects container, not viewport */
 }
-   .mobile-dropdown {
-        position: fixed; top: -100vh; left: 0; width: 100%;
-        background-color: rgba(0, 2, 8, 0.98); backdrop-filter: blur(12px);
-        padding: 7rem 2rem 3rem; display: flex; flex-direction: column;
-        align-items: center; gap: 2.5rem; z-index: 100; transition: top 0.4s ease;
+  /* Edge-to-Edge Premium Dark Glass (No bubbly white cards) */
+    .mobile-dropdown {
+        position: fixed; 
+        top: -100vh; 
+        left: 0; 
+        width: 100%;
+        background-color: rgba(0, 2, 8, 0.85); /* Slightly sheer for depth */
+        backdrop-filter: blur(20px); /* Heavy liquid glass effect */
+        -webkit-backdrop-filter: blur(20px);
+        padding: 7rem 2rem 3rem; 
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        gap: 2.5rem; 
+        z-index: 250; /* <--- Drops safely beneath the header */
+        transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         border-bottom: 1px solid rgba(0, 229, 255, 0.15);
     }
     .mobile-dropdown.active-menu { top: 0; }
