@@ -624,3 +624,27 @@ body::after {
     .social-cards { flex-direction: column; gap: 2.5rem; }
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
 }
+/* ... all your other code is above this ... */
+
+/* =========================================
+   THE FAST WHITE LAYER (6s Speed)
+   ========================================= */
+.light-orb {
+    position: fixed;
+    top: 10%; 
+    left: 20%; 
+    width: 400px; 
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+    pointer-events: none; 
+    z-index: -2; 
+    mix-blend-mode: plus-lighter; 
+    animation: driftFast 6s infinite ease-in-out;
+}
+
+@keyframes driftFast {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30vw, 20vh) scale(1.2); } 
+    66% { transform: translate(10vw, 40vh) scale(0.8); } 
+    100% { transform: translate(0, 0) scale(1); } 
+}
