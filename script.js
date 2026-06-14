@@ -4,8 +4,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
-    
-    });
 
     // 2. MOBILE HAMBURGER DROPDOWN
     const hamburger = document.getElementById('hamburger-menu');
@@ -60,19 +58,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     platformView.classList.add('active-platform');
                     switchStream(targetStream);
-                }, 50);
-            }, 600);
+                }, 50); // Small delay to allow display:block to render before fading in
+            }, 600); // Matches CSS transition timing
         }
     }
 
     function switchStream(target) {
-        // Safely reset Compass
+        // Safely reset Compass (Left Axis)
         sideTalents?.classList.remove('active-sidebar');
         sideBrands?.classList.remove('active-sidebar');
-        // Safely hide Streams
+        
+        // Safely hide Streams (Right Axis)
         streamTalents?.classList.remove('active-stream');
         streamBrands?.classList.remove('active-stream');
 
+        // Activate the target streams
         if (target === 'talents') {
             sideTalents?.classList.add('active-sidebar');
             streamTalents?.classList.add('active-stream');
