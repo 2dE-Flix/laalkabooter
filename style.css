@@ -101,7 +101,7 @@ body::before {
         radial-gradient(circle at 60% 30%, rgba(5, 5, 20, 0.4) 0%, transparent 60%);
         
     /* SLOWest speed: creates long-tail complexity. Non-linear path. */
-    animation: driftSlow 35s infinite ease-in-out;
+    animation: driftSlow 10s infinite ease-in-out;
 }
 
 /* Layer 2: The High-Voltage Silver-Cyan Feature (The Bright Spot from image_1.png) */
