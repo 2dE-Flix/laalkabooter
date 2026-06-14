@@ -27,19 +27,19 @@ html, body {
 
 :root {
     /* Brand Colors */
-    --bg-deep: #000208;
+    --bg-deep: #010a18;
     --brand-accent: #00E5FF;
     --text-primary: #ffffff;
     --text-muted: #6b7280;
     
     /* High-Voltage Glow Variables */
     --glow-core: rgba(255, 255, 255, 0.95);
-    --glow-halo: rgba(0, 229, 255, 0.85);
+    --glow-halo: rgba(100, 180, 255, 0.85);
     
     /* Dynamic Tracking Variables */
     --x: 50%;
     --y: 50%;
-    --cursor-glow: #001a55;
+    --cursor-glow: #001233;
 }
 /* =========================================
    2. ENVIRONMENT & BACKGROUND (FLUID MESH)
@@ -71,12 +71,13 @@ body {
 body::before {
     content: '';
     position: fixed;
-    top: -30vh;
-    left: -20vw;
+    top: -20vh;
+    right: -10vw;
+    left: auto;
     width: 100vw;
     height: 100vw; /* Kept square for perfect seamless rotation */
     
-    background: radial-gradient(circle, rgba(0, 229, 255, 0.12) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(100,160,255,0.30) 35%, transparent 65%);
     
     /* Extreme blur destroys the circle and creates liquid rendering */
     filter: blur(120px);
@@ -93,12 +94,13 @@ body::before {
 /* FLUID MESH LAYER 2: The Silver Drift (Reusing your light-orb div) */
 .light-orb {
     position: fixed;
-    bottom: -30vh; 
-    right: -20vw; 
+    bottom: -20vh;
+    left: -10vw;
+    right: auto;
     width: 90vw; 
     height: 90vw;
     
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.10) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(50,100,220,0.35) 0%, rgba(80,140,255,0.18) 40%, transparent 65%);
     
     filter: blur(120px); 
     -webkit-filter: blur(120px);
@@ -112,7 +114,18 @@ body::before {
     /* Spins the opposite direction at a different speed for chaos */
     animation: fluidSpin 35s infinite linear reverse; 
 }
-
+.light-orb-2 {
+    position: fixed;
+    top: 40vh;
+    left: 20vw;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(20,60,160,0.20) 0%, transparent 60%);
+    filter: blur(80px);
+    z-index: -2;
+    pointer-events: none;
+    animation: fluidSpin 50s infinite linear;
+}
 /* THE PHYSICS: Continuous smooth rotation */
 @keyframes fluidSpin {
     0% { transform: rotate(0deg) scale(1); }
