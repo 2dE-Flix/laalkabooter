@@ -43,27 +43,99 @@ html, body {
 }
 
 /* =========================================
-   2. ENVIRONMENT & BACKGROUND
+   2. ENVIRONMENT & BACKGROUND (REV 3.1)
    ========================================= */
+
+/* The base container that holds all life and noise. We lock this to prevent bleeding. */
 body {
-    /* The Ambient Drift Gradient Engine */
-    background: linear-gradient(-45deg, #000208, #08142b, #000208, #0f2545);
-    background-size: 400% 400%;
-    animation: ambientDrift 20s ease infinite;
-    
-    /* Global Layout Locks */
+    background-color: var(--bg-deep); /* void black #000208 */
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
-    min-height: 100vh; 
+    min-height: 100vh;
+    width: 100vw;
     position: relative;
-    overflow-y: auto; 
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+    /* We isolate the blending layers from the UI content. */
+    z-index: 1; 
 }
 
-/* The Breathing Light Math */
-@keyframes ambientDrift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* THE DIGITAL NOISE CORE (REQUIRED for image_1.png aesthetic)
+   This layer goes first to create the base texture before the light is overlaid.
+*/
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    /* This creates the granular noise filter. Do not remove. */
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E");
+    opacity: 0.18; /* Intense grain to match image_1.png */
+    mix-blend-mode: screen; /* Lightens the black areas with grain */
+    pointer-events: none; /* Text/clicks pass right through */
+    z-index: -1; /* Placed immediately above the background */
+}
+
+/* THE AMBIENT DRIFT ENGINE (Simulated Randomness)
+   We use multiple layered pseudo-elements, each moving at different speeds to create complexity.
+*/
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: -50vh; /* We bleed the elements significantly over the edges... */
+    left: -50vw;
+    width: 200vw; /* ...to ensure smooth transitions during movement on desktop. */
+    height: 200vh;
+    pointer-events: none;
+    z-index: -2; /* Safely placed below the noise and content. */
+    
+    /* This mix-blend-mode makes the light interact with the noise on the deep void. */
+    mix-blend-mode: plus-lighter; 
+}
+
+/* Layer 1: The Deep Blue Core Drift (Left Side Tones) */
+body::before {
+    /* Diffuse deep, moody tones */
+    background-image: 
+        radial-gradient(circle at 30% 60%, rgba(0, 15, 60, 0.5) 0%, transparent 60%),
+        radial-gradient(circle at 60% 30%, rgba(5, 5, 20, 0.4) 0%, transparent 60%);
+        
+    /* SLOWest speed: creates long-tail complexity. Non-linear path. */
+    animation: driftSlow 35s infinite ease-in-out;
+}
+
+/* Layer 2: The High-Voltage Silver-Cyan Feature (The Bright Spot from image_1.png) */
+body::after {
+    /* The specific bright, diffuse light spot from image_1.png on the right. 
+       We use a "silver" tone (high white, low saturation Cyan) to match the tech feel.
+    */
+    background-image: 
+        radial-gradient(circle at 75% 25%, rgba(160, 230, 255, 0.28) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.08) 0%, transparent 50%); /* Minor central cyan bleed */
+        
+    /* MEDIUM speed: provides the active, observable movement. Non-linear path. */
+    animation: driftMedium 22s infinite ease-in-out;
+}
+
+/* =========================================
+   3. THE ADVANCED DRIFT MATH (Keyframes)
+   ========================================= */
+
+/* driftSlow: A lazy, oval drift for the background core. */
+@keyframes driftSlow {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-10vw, 5vh) scale(1.05); }
+    66% { transform: translate(5vw, -8vh) scale(0.98); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+/* driftMedium: More complex, diagonal path, simulating random complexity. */
+@keyframes driftMedium {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(15vw, -5vh) rotate(2deg) scale(1.1); }
+    50% { transform: translate(-10vw, 15vh) rotate(-1deg) scale(0.9); }
+    75% { transform: translate(-5vw, -10vh) rotate(1deg) scale(1.05); }
+    100% { transform: translate(0, 0) scale(1); }
 }
 
 /* =========================================
