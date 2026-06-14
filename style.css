@@ -46,12 +46,12 @@ html, body {
    2. ENVIRONMENT & BACKGROUND
    ========================================= */
 body {
-    background-color: var(--bg-deep);
-    background-image: 
-        radial-gradient(circle at var(--x) var(--y), var(--cursor-glow) 0%, transparent 45%),
-        radial-gradient(circle at calc(100% - var(--x)) calc(100% - var(--y)), #000d26 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, #01030a 0%, transparent 60%);
-    background-attachment: fixed;
+    /* The Ambient Drift Gradient Engine */
+    background: linear-gradient(-45deg, #000208, #08142b, #000208, #0f2545);
+    background-size: 400% 400%;
+    animation: ambientDrift 20s ease infinite;
+    
+    /* Global Layout Locks */
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     min-height: 100vh; 
@@ -59,25 +59,11 @@ body {
     overflow-y: auto; 
 }
 
-/* Premium Digital Noise Texture */
-.noise-overlay {
-    position: fixed;
-    top: -50%; left: -50%;
-    width: 200vw; height: 200vh;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.04; 
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    mix-blend-mode: screen; 
-    animation: filmGrain 0.15s steps(2) infinite;
-}
-
-@keyframes filmGrain {
-    0% { transform: translate(0, 0); }
-    25% { transform: translate(-1%, 1%); }
-    50% { transform: translate(1%, -1%); }
-    75% { transform: translate(-0.5%, -0.5%); }
-    100% { transform: translate(0.5%, 0.5%); }
+/* The Breathing Light Math */
+@keyframes ambientDrift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* =========================================
