@@ -4,21 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
-
-    // 1. KINETIC BACKGROUND TRACKING (DESKTOP ONLY)
-    document.addEventListener("mousemove", (e) => {
-        const glassLayer = document.getElementById('liquid-glass-overlay');
-        
-        if (glassLayer && glassLayer.classList.contains('active-glass')) return; 
-
-        if (window.innerWidth > 768) {
-            requestAnimationFrame(() => {
-                const x = (e.clientX / window.innerWidth) * 100;
-                const y = (e.clientY / window.innerHeight) * 100;
-                body.style.setProperty('--x', `${x}%`);
-                body.style.setProperty('--y', `${y}%`);
-            });
-        }
+    
     });
 
     // 2. MOBILE HAMBURGER DROPDOWN
