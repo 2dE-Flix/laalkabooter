@@ -627,24 +627,32 @@ body::after {
 /* ... all your other code is above this ... */
 
 /* =========================================
-   THE FAST WHITE LAYER (6s Speed)
+   THE ORGANIC BLOBS (8s Photo-Real Drift)
    ========================================= */
 .light-orb {
     position: fixed;
-    top: 10%; 
-    left: 20%; 
-    width: 400px; 
-    height: 400px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+    top: -10%; 
+    left: -10%; 
+    width: 800px; /* Made it massive so it spreads out */
+    height: 800px;
+    
+    /* THIS is what destroys the shape and makes it a soft photo blur */
+    filter: blur(100px); 
+    -webkit-filter: blur(100px);
+    
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
     pointer-events: none; 
     z-index: -2; 
     mix-blend-mode: plus-lighter; 
-    animation: driftFast 6s infinite ease-in-out;
+    
+    /* Slowed down to 8 seconds */
+    animation: driftBlob 8s infinite ease-in-out;
 }
 
-@keyframes driftFast {
+/* Smooth, wandering animation path */
+@keyframes driftBlob {
     0% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30vw, 20vh) scale(1.2); } 
-    66% { transform: translate(10vw, 40vh) scale(0.8); } 
+    33% { transform: translate(40vw, 30vh) scale(1.3); } 
+    66% { transform: translate(15vw, 50vh) scale(0.9); } 
     100% { transform: translate(0, 0) scale(1); } 
 }
