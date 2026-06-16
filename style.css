@@ -54,31 +54,41 @@ body {
     z-index: 1;
 }
 
+/* Base Canvas with transition physics */
 #webgl-canvas {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    filter: blur(35px) brightness(0.40); /* Standard State */
-    transform: scale(1.08) translateY(0);/* Prevents blurred edges from bleeding */
     z-index: -3;
     pointer-events: none;
-    /* This creates the smooth transition when the menu opens */
-    transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+    /* Smooth 1.2s transition for that heavy, underwater feeling */
+    transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 
-/* The state triggered by JavaScript when menu opens */
+/* DEPTH STATE 1: Surface (Talents) */
+#webgl-canvas.depth-surface {
+    filter: blur(35px) brightness(0.32); /* Your specific dim request */
+    transform: scale(1.08) translateY(0);
+}
+
+/* DEPTH STATE 2: Deep Ocean (Brands) */
+#webgl-canvas.depth-deep {
+    filter: blur(45px) brightness(0.15); /* Darker, murkier */
+    transform: scale(1.15) translateY(-10vh); /* Sinks the camera down into the fluid */
+}
+
+/* Menu Freeze State (Overrides brightness/blur, but keeps current depth position) */
 #webgl-canvas.frozen-blur {
-    filter: blur(80px) brightness(0.20); /* Deep blur, heavy dim */
+    filter: blur(80px) brightness(0.15) !important; 
 }
 
+/* The Paper Grain Texture */
 .grain {
     position: fixed; inset: 0; 
     pointer-events: none; 
     z-index: -2; 
-    opacity: 0.85; /* Cranked up to give the paper strong physical presence */
+    opacity: 0.85; /* Strong physical presence */
     mix-blend-mode: overlay;
-    
-    /* THE PAPER MATH: baseFrequency='0.85' creates the fibers, numOctaves='4' gives it the rough "tooth" */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 /* =========================================
