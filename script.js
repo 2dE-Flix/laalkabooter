@@ -5,11 +5,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
 
-    // 2. MOBILE HAMBURGER DROPDOWN
+// 2. MOBILE HAMBURGER DROPDOWN
     const hamburger = document.getElementById('hamburger-menu');
     const mobileDropdown = document.getElementById('mobile-dropdown');
 
-   if (hamburger && mobileDropdown) {
+    if (hamburger && mobileDropdown) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             mobileDropdown.classList.toggle('active-menu');
@@ -19,14 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if(canvas) canvas.classList.toggle('frozen-blur');
         });
     }
-        });
-    }
 
     // 3. GATEWAY LIQUID GLASS MENU (PC ONLY)
     const gatewayMenuBtn = document.getElementById('gateway-menu-btn');
     const liquidGlassOverlay = document.getElementById('liquid-glass-overlay');
 
-if (gatewayMenuBtn && liquidGlassOverlay) {
+    if (gatewayMenuBtn && liquidGlassOverlay) {
         gatewayMenuBtn.addEventListener('click', () => {
             const isActive = liquidGlassOverlay.classList.contains('active-glass');
             if (isActive) {
