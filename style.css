@@ -274,46 +274,133 @@ body {
     transform: scale(1.05) !important;
 }
 /* =========================================
-   5. ABOUT PAGE LAYOUT
+   ABOUT PAGE - TIMELINE & MANIFESTO
    ========================================= */
-.about-container {
-    padding: 10rem 2rem 4rem; max-width: 1200px; margin: 0 auto;
-    position: relative; z-index: 10;
-}
-.about-header { text-align: center; margin-bottom: 4rem; }
-.page-title { font-size: 1.5rem; letter-spacing: 8px; font-weight: 300; }
-.separator-line {
-    width: 60px; height: 2px; background: var(--brand-accent);
-    margin: 1.5rem auto 0; box-shadow: 0 0 10px var(--brand-accent);
+.page-container {
+    padding: 120px 5vw 100px 5vw; 
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
 }
 
-.timeline { position: relative; margin-top: 4rem; }
-.timeline::before {
-    content: ''; position: absolute; top: 0; bottom: 0; left: 120px;
-    width: 1px; background: rgba(0, 229, 255, 0.2);
+.page-title {
+    font-size: 1.2rem;
+    letter-spacing: 6px;
+    text-align: center;
+    margin-bottom: 100px;
+    color: #ffffff;
+    text-transform: uppercase;
 }
-.timeline-item { display: flex; align-items: flex-start; margin-bottom: 5rem; position: relative; }
-.timeline-node {
-    width: 120px; flex-shrink: 0; padding-right: 2.5rem; text-align: right;
-    color: var(--brand-accent); font-weight: 600; letter-spacing: 3px; font-size: 0.85rem;
-    position: relative; padding-top: 2rem;
+
+.timeline-wrapper {
+    position: relative;
+    padding-left: 180px; /* Pushes the text right to make room for the labels */
 }
-.timeline-node::after {
-    content: ''; position: absolute; top: 2.2rem; right: -5px; width: 10px; height: 10px;
-    border-radius: 50%; background: var(--brand-accent); box-shadow: 0 0 15px var(--brand-accent);
+
+/* The vertical thread */
+.timeline-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 0;
+    left: 140px; /* Locks exactly to the nodes */
+    width: 1px;
+    background: rgba(0, 229, 255, 0.2); 
 }
-.timeline-content {
-    flex-grow: 1; margin-left: 4rem; background: rgba(0, 2, 8, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05); padding: 3rem; border-radius: 4px;
-    backdrop-filter: blur(12px); transition: transform 0.3s ease, border-color 0.3s ease;
+
+.timeline-step {
+    position: relative;
+    margin-bottom: 90px;
 }
-.timeline-content:hover {
-    border-color: rgba(0, 229, 255, 0.3); transform: translateX(10px);
+
+.timeline-step:last-child {
+    margin-bottom: 0;
 }
-.timeline-content h3 { font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 1.2rem; }
-.timeline-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
-.about-footer {
-    margin-top: 6rem; font-size: 0.75rem; letter-spacing: 4px; color: var(--text-muted); text-align: center;
+
+/* The Label & Glowing Dot Container */
+.step-indicator {
+    position: absolute;
+    left: -180px;
+    width: 180px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    top: 0; 
+}
+
+.step-name {
+    font-family: monospace;
+    color: #00E5FF;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-right: 35px; /* Breathing room from the line */
+    margin-top: -2px;
+}
+
+.step-node {
+    position: absolute;
+    right: 37px;
+    top: 3px;
+    width: 7px;
+    height: 7px;
+    background: #00E5FF;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
+}
+
+.step-content {
+    padding-left: 0; 
+}
+
+/* Custom styling for the Founders names inside the raw text block */
+.step-content.raw-text-block h3 {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.step-content.raw-text-block h3:first-child {
+    margin-top: 0;
+}
+
+/* =========================================
+   ABOUT PAGE - MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 768px) {
+    .page-title {
+        margin-bottom: 60px;
+    }
+    .timeline-wrapper {
+        padding-left: 30px; /* Compresses the timeline to the left edge on mobile */
+    }
+    .timeline-wrapper::before {
+        left: 5px;
+    }
+    .step-indicator {
+        left: 0;
+        width: auto;
+        top: -30px; /* Moves the cyan label above the paragraph on small screens */
+        justify-content: flex-start;
+    }
+    .step-name {
+        margin-right: 0;
+        margin-left: 20px;
+        text-align: left;
+    }
+    .step-node {
+        left: 1px;
+        right: auto;
+        top: 2px;
+    }
+    .step-content {
+        margin-top: 40px;
+        margin-bottom: 60px;
+    }
 }
 
 /* =========================================
