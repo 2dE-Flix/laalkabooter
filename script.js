@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function switchStream(target) {
+   function switchStream(target) {
         // Safely reset Compass (Left Axis)
         sideTalents?.classList.remove('active-sidebar');
         sideBrands?.classList.remove('active-sidebar');
@@ -81,13 +81,28 @@ document.addEventListener("DOMContentLoaded", () => {
         streamTalents?.classList.remove('active-stream');
         streamBrands?.classList.remove('active-stream');
 
-        // Activate the target streams
+        // Grab the WebGL background
+        const bgCanvas = document.getElementById('webgl-canvas');
+
+        // Activate the target streams and trigger Depth Physics
         if (target === 'talents') {
             sideTalents?.classList.add('active-sidebar');
             streamTalents?.classList.add('active-stream');
+            
+            // Rise to Surface (Lighter, Normal Position)
+            if(bgCanvas) {
+                bgCanvas.classList.remove('depth-deep');
+                bgCanvas.classList.add('depth-surface');
+            }
         } else if (target === 'brands') {
             sideBrands?.classList.add('active-sidebar');
             streamBrands?.classList.add('active-stream');
+            
+            // Sink to Deep Ocean (Darker, Sinks Downwards)
+            if(bgCanvas) {
+                bgCanvas.classList.remove('depth-surface');
+                bgCanvas.classList.add('depth-deep');
+            }
         }
     }
 
