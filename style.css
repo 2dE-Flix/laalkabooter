@@ -58,8 +58,8 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    filter: blur(35px) brightness(0.55); /* Standard State */
-    transform: scale(1.08); /* Prevents blurred edges from bleeding */
+    filter: blur(35px) brightness(0.40); /* Standard State */
+    transform: scale(1.08) translateY(0);/* Prevents blurred edges from bleeding */
     z-index: -3;
     pointer-events: none;
     /* This creates the smooth transition when the menu opens */
@@ -74,9 +74,12 @@ body {
 .grain {
     position: fixed; inset: 0; 
     pointer-events: none; 
-    z-index: -2; /* Sits directly over the canvas, behind the UI */
-    opacity: 0.90; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    z-index: -2; 
+    opacity: 0.85; /* Cranked up to give the paper strong physical presence */
+    mix-blend-mode: overlay;
+    
+    /* THE PAPER MATH: baseFrequency='0.85' creates the fibers, numOctaves='4' gives it the rough "tooth" */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 /* =========================================
    3. UNIVERSAL NAVIGATION (DESKTOP FIRST)
