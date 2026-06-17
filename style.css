@@ -169,10 +169,12 @@ body {
 }
 
 .split-text {
-    font-size: 0.75rem; letter-spacing: 6px; font-weight: 400;
+    font-size: 0.75rem; 
+    letter-spacing: 6px; 
+    font-weight: 400;
+    color: #ffffff; /* Forces the text to stay pure white */
     transition: all 0.4s ease;
 }
-
 /* Hover Math */
 .split-container:hover .split-option { opacity: 0.15; }
 .split-container .split-option:hover { opacity: 1; }
