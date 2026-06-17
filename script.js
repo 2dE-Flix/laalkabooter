@@ -193,3 +193,30 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(render);
     }
 });
+// 4. REAL-TIME CONSOLE CLOCK ENGINE (IST UPDATED)
+    function startConsoleClock() {
+        const clockElement = document.getElementById('console-clock');
+        if (!clockElement) return;
+
+        setInterval(() => {
+            const now = new Date();
+            
+            // Force conversion to Indian Standard Time (IST) formatting
+            const options = {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+
+            // Generate the clean time string matching the local system
+            let istTimeString = now.toLocaleTimeString('en-US', options);
+
+            // Render the clean terminal time format with IST anchor
+            clockElement.textContent = `${istTimeString} IST`;
+        }, 1000);
+    }
+
+    // Initialize clock
+    startConsoleClock();
