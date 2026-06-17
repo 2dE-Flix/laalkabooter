@@ -694,26 +694,23 @@ body {
 }
 
 /* =========================================
-   REAL-TIME CONSOLE CLOCK
-   ========================================= */
-/* =========================================
    REAL-TIME CONSOLE CLOCK - CALIBRATED
    ========================================= */
 #console-clock {
     position: fixed;
-    bottom: 3rem; /* Adjusted to balance perfectly with the lower screen boundary */
-    left: 4rem; /* MATCHES LOGO LINE: Anchors it perfectly with top-left elements */
+    bottom: 3rem; 
+    left: 4rem; 
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem; /* Reduced size to look sleek and precision-engineered */
+    font-size: 0.6rem; /* Reduced by ~15% for maximum precision */
     font-weight: 600;
-    letter-spacing: 3px; /* Slightly tightened tracking to match smaller size */
-    color: rgba(255, 255, 255, 0.35); /* Elegant, muted presence */
+    letter-spacing: 3px; 
+    color: #ffffff; /* Upgraded to pure white */
     text-transform: uppercase;
     z-index: 10;
     pointer-events: none;
 }
 
-/* Hide on mobile screens to keep the viewport clean */
+/* Hide on mobile screens */
 @media (max-width: 768px) {
     #console-clock {
         display: none !important;
