@@ -483,87 +483,96 @@ body {
     text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.4);
 }
 
-/* 2. The Ledger Data Stream */
+/* 2. The Ledger Data Stream - CENTERED ARCHITECTURE */
 .platform-content {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100dvh;
-    padding: 10rem 2rem 4rem; /* Clears the header */
-    overflow-y: auto;
-    scrollbar-width: none; /* Hides scrollbar Firefox */
+    width: 100%;
+    padding: 0 2rem;
+    font-family: 'Inter', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-.platform-content::-webkit-scrollbar { display: none; } /* Hides scrollbar Chrome/Safari */
 
 .ledger-stream {
     display: none;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    gap: 2rem;
-    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .ledger-stream.active-stream {
     display: flex;
+    animation: textFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeUp {
-    0% { opacity: 0; transform: translateY(20px); }
+/* =========================================
+   RAW TEXT BLOCK DESIGN
+   ========================================= */
+.raw-text-block {
+    max-width: 680px; /* Optimal reading width */
+    text-align: center;
+    padding: 0 24px;
+}
+
+/* Main Headers (FOR TALENTS / FOR BRANDS) */
+.raw-text-block h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 5px; /* Premium tracking matching the main menu */
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 3rem; /* Breathing room below headings */
+}
+
+/* Paragraph Text Core */
+.raw-text-block p {
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.85; /* Generous padding between lines */
+    color: rgba(255, 255, 255, 0.75); /* Soft, elegant readability */
+    margin-bottom: 2.2rem; /* Clean visual space between paragraphs */
+}
+
+/* Target bold emphasis items dynamically */
+.raw-text-block strong {
+    color: #00E5FF; /* Accent cyan for brand phrasing */
+    font-weight: 600;
+}
+
+/* =========================================
+   CLEAN ACTION ANCHOR (EMAIL)
+   ========================================= */
+.terminal-link {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    padding-bottom: 6px;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.3); /* Custom accent underline */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+}
+
+.terminal-link:hover {
+    color: #00E5FF;
+    border-bottom-color: #00E5FF;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Global Transition Animation */
+@keyframes textFadeIn {
+    0% { opacity: 0; transform: translateY(15px); }
     100% { opacity: 1; transform: translateY(0); }
 }
-
-/* 3. The Standard Glass Card */
-.ledger-card {
-    background: rgba(0, 2, 8, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 3rem;
-    border-radius: 4px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    position: relative;
-}
-
-.ledger-card h3 {
-    font-size: 1rem;
-    letter-spacing: 4px;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-}
-
-.ledger-card p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-}
-
-/* 4. The Contact Card (Semi-Transparent Light Theme) */
-.contact-card {
-    background: rgba(255, 255, 255, 0.05); /* Frosty white tint */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Brighter border */
-    margin-top: 2rem; /* Creates a slight gap from the data cards */
-}
-
-.contact-card h3 { color: #ffffff; }
-
-.contact-btn {
-    display: inline-block;
-    margin-top: 1.5rem;
-    padding: 0.8rem 2rem;
-    border: 1px solid var(--brand-accent);
-    color: var(--brand-accent);
-    text-decoration: none;
-    font-size: 0.75rem;
-    letter-spacing: 4px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.contact-btn:hover {
-    background: var(--brand-accent);
-    color: #000;
-    box-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5);
-}
-
 /* =========================================
    7. MOBILE RE-ARCHITECTURE 
    ========================================= */
