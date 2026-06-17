@@ -627,10 +627,34 @@ body {
         z-index: 40;
     }
 
-    .platform-content {
-        padding-top: 11rem; /* Pushes content down below the top compass */
-    }
-   
+ .platform-content {
+    padding-top: 11rem;
+    height: auto;
+    min-height: 100dvh;
+    align-items: flex-start;   /* stop vertical centering, start from top instead */
+    padding-bottom: 4rem;
+}
+
+#platform-view {
+    height: auto;
+    min-height: 100dvh;
+}
+
+.raw-text-block {
+    padding: 0 8px;
+}
+
+.raw-text-block h2 {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    margin-bottom: 2rem;
+}
+
+.raw-text-block p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.6rem;
+}
     /* Nav Swaps */
 /* Keeps the logo and the 'X' button floating ABOVE the dropdown */
 /* =========================================
