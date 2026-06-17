@@ -680,15 +680,18 @@ body {
 /* =========================================
    REAL-TIME CONSOLE CLOCK
    ========================================= */
+/* =========================================
+   REAL-TIME CONSOLE CLOCK - CALIBRATED
+   ========================================= */
 #console-clock {
     position: fixed;
-    bottom: 40px; 
-    left: 5vw; /* Perfectly aligns vertically with your top-left logo */
+    bottom: 3rem; /* Adjusted to balance perfectly with the lower screen boundary */
+    left: 4rem; /* MATCHES LOGO LINE: Anchors it perfectly with top-left elements */
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem; /* Reduced size to look sleek and precision-engineered */
     font-weight: 600;
-    letter-spacing: 4px; /* Matches the clean tracking of your menu buttons */
-    color: rgba(255, 255, 255, 0.4); /* Dimmed so it acts as a subtle anchor, not a distraction */
+    letter-spacing: 3px; /* Slightly tightened tracking to match smaller size */
+    color: rgba(255, 255, 255, 0.35); /* Elegant, muted presence */
     text-transform: uppercase;
     z-index: 10;
     pointer-events: none;
