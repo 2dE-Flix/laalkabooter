@@ -668,3 +668,26 @@ body {
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
 }
 
+/* =========================================
+   REAL-TIME CONSOLE CLOCK
+   ========================================= */
+#console-clock {
+    position: fixed;
+    bottom: 40px; 
+    left: 5vw; /* Perfectly aligns vertically with your top-left logo */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 4px; /* Matches the clean tracking of your menu buttons */
+    color: rgba(255, 255, 255, 0.4); /* Dimmed so it acts as a subtle anchor, not a distraction */
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Hide on mobile screens to keep the viewport clean */
+@media (max-width: 768px) {
+    #console-clock {
+        display: none !important;
+    }
+}
