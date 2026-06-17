@@ -10,11 +10,37 @@
     box-sizing: border-box;
     /* Kills the blue mobile tap flash globally */
     -webkit-tap-highlight-color: transparent; 
-    
-    /* THE MASTER FONT LOCK: Forces Inter on every element */
-    font-family: 'Inter', sans-serif !important;
 }
 
+/* Kills focus outlines and prevents accidental text highlighting on UI elements */
+a, button, span, .split-option, .hamburger, .social-card {
+    outline: none !important;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* STRICT VIEWPORT LOCK: Prevents mobile layout collapse */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+:root {
+    /* Brand Colors */
+    --bg-deep: #010a18;
+    --brand-accent: #00E5FF;
+    --text-primary: #ffffff;
+    --text-muted: #6b7280;
+    
+    /* High-Voltage Glow Variables */
+    --glow-core: rgba(255, 255, 255, 0.95);
+    --glow-halo: rgba(100, 180, 255, 0.85);
+    
+    /* Dynamic Tracking Variables */
+    --x: 50%;
+    --y: 50%;
+    --cursor-glow: #001233;
+}
 body {
     background-color: #010a18; 
     color: var(--text-primary);
@@ -172,7 +198,6 @@ body {
     font-size: 0.75rem; 
     letter-spacing: 6px; 
     font-weight: 400;
-    color: #ffffff; /* Forces the text to stay pure white */
     transition: all 0.4s ease;
 }
 /* Hover Math */
