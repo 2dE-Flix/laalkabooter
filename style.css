@@ -285,14 +285,28 @@ body {
 }
 
 .page-title {
-    font-size: 1.2rem;
-    letter-spacing: 6px;
+    font-size: 2.2rem; /* Massive, commanding scale */
+    letter-spacing: 8px;
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     color: #ffffff;
     text-transform: uppercase;
+    position: relative;
+    padding-bottom: 25px; /* Creates breathing room for the cyan line */
 }
 
+/* The Cyan Separator Line */
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px; /* Sharp, precise width */
+    height: 2px;
+    background: #00E5FF;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); /* Brand glow */
+}
 .timeline-wrapper {
     position: relative;
     padding-left: 180px; /* Pushes the text right to make room for the labels */
@@ -318,15 +332,15 @@ body {
     margin-bottom: 0;
 }
 
-/* The Label & Glowing Dot Container */
+/* The Label Container */
 .step-indicator {
     position: absolute;
-    left: -180px;
-    width: 180px;
+    left: -180px; 
+    width: 140px; /* Spans exactly from the edge to the vertical line */
     display: flex;
-    align-items: flex-start;
+    align-items: center; /* Centers the text perfectly with the dot */
     justify-content: flex-end;
-    top: 0; 
+    top: 5px; 
 }
 
 .step-name {
@@ -335,25 +349,27 @@ body {
     font-size: 0.9rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-right: 35px; /* Breathing room from the line */
-    margin-top: -2px;
+    padding-right: 18px; /* Pushes the text safely away from the line */
 }
 
+/* The Glowing Dot */
 .step-node {
     position: absolute;
-    right: 37px;
-    top: 3px;
-    width: 7px;
-    height: 7px;
+    right: -4px; /* Locks the center of the dot exactly onto the cyan vertical line */
+    width: 8px;
+    height: 8px;
     background: #00E5FF;
     border-radius: 50%;
     box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
 }
-
 .step-content {
     padding-left: 0; 
 }
-
+/* Forces the manifesto text to snap flush left */
+.step-content.raw-text-block, 
+.step-content.raw-text-block p {
+    text-align: left !important;
+}
 /* Custom styling for the Founders names inside the raw text block */
 .step-content.raw-text-block h3 {
     font-size: 1.1rem;
