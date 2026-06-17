@@ -633,54 +633,131 @@ body {
    
     /* Nav Swaps */
 /* Keeps the logo and the 'X' button floating ABOVE the dropdown */
+/* =========================================
+       THE FLOATING PILL HEADER
+       ========================================= */
     .top-nav { 
-        padding: 1.5rem 2rem; 
+        position: fixed;
+        top: 15px !important; /* Pushes it down from the exact top edge */
+        left: 5% !important;
+        width: 90% !important; /* Floats with margins on both sides */
+        padding: 0.6rem 1.2rem !important; 
         justify-content: space-between; 
         align-items: center; 
         pointer-events: auto; 
-        z-index: 300 !important; /* <--- THE FIX */
+        z-index: 300 !important; 
+        
+        /* The Glass Pill Design */
+        border-radius: 50px;
+        background: rgba(0, 2, 8, 0.55);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
+    
     .desktop-menu { display: none !important; }
     
-    .hamburger { display: flex; flex-direction: column; gap: 6px; cursor: pointer; z-index: 105; pointer-events: auto; }
-    .hamburger .bar { width: 26px; height: 2px; background-color: var(--text-primary); transition: all 0.3s ease; }
-    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: var(--brand-accent); }
+    /* Shrinking the Logo */
+    .logo-container { max-width: 120px; }
+    .master-logo { 
+        height: 18px !important; /* Drastically smaller for that sleek, minimal look */
+    }
+
+    /* =========================================
+       CIRCULAR HAMBURGER BUTTON
+       ========================================= */
+    .hamburger { 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        gap: 4px; 
+        cursor: pointer; 
+        z-index: 105; 
+        pointer-events: auto;
+        
+        /* The Circular Container */
+        width: 42px;
+        height: 42px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger .bar { 
+        width: 16px; /* Shorter bars to fit beautifully inside the circle */
+        height: 2px; 
+        background-color: var(--text-primary); 
+        transition: all 0.3s ease; 
+    }
+    
+    /* The 'X' Transformation Math */
+    .hamburger.active { background: rgba(255, 255, 255, 0.1); }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: var(--brand-accent); }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: var(--brand-accent); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
 
-   .logo-container {
-    flex-shrink: 0;
-    max-width: 140px;
-    overflow: hidden;
-    line-height: 0; /* removes phantom inline spacing */
-}
-
-.master-logo {
-    height: 28px !important;
-    width: auto !important;
-    max-width: 100% !important; /* respects container, not viewport */
-}
-  /* Edge-to-Edge Premium Dark Glass (No bubbly white cards) */
+    /* =========================================
+       THE FLOATING DROPDOWN CARD
+       ========================================= */
     .mobile-dropdown {
         position: fixed; 
-        top: -100vh; 
-        left: 0; 
-        width: 100%;
-        background-color: rgba(0, 2, 8, 0.85); /* Slightly sheer for depth */
-        backdrop-filter: blur(20px); /* Heavy liquid glass effect */
-        -webkit-backdrop-filter: blur(20px);
-        padding: 7rem 2rem 3rem; 
+        top: 85px; /* Sits perfectly just below the pill header */
+        left: 5%; 
+        width: 90%;
+        
+        /* The Rounded Glass Card Design */
+        background-color: rgba(0, 2, 8, 0.85); 
+        backdrop-filter: blur(25px); 
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px; /* Soft, premium corners */
+        padding: 1.5rem 1rem; 
+        
         display: flex; 
         flex-direction: column;
-        align-items: center; 
-        gap: 2.5rem; 
-        z-index: 250; /* <--- Drops safely beneath the header */
-        transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+        z-index: 250; 
+        
+        /* Slide-Down Physics */
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-20px);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .mobile-dropdown.active-menu { top: 0; }
-    .mobile-dropdown span { font-size: 0.9rem; letter-spacing: 4px; font-weight: 600; color: var(--text-primary); transition: color 0.3s ease; cursor: pointer; }
-
+    
+    .mobile-dropdown.active-menu { 
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    
+    /* Left-Aligned, Interactive Menu Items */
+    .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+    
+    .mobile-nav-links span { 
+        font-size: 1.05rem; 
+        letter-spacing: 2px; 
+        font-weight: 500; 
+        color: var(--text-primary); 
+        transition: all 0.3s ease; 
+        cursor: pointer; 
+        padding: 1rem 1.5rem;
+        border-radius: 14px;
+        text-align: left; /* Snaps text to the left like your reference image */
+    }
+    
+    /* Touch Feedback */
+    .mobile-nav-links span:active {
+        background: rgba(0, 229, 255, 0.1); /* Subtle cyan highlight when tapped */
+        color: #00E5FF;
+    }
     /* Gateway Overrides */
    .gateway-menu-toggle { top: 1.5rem; right: 2rem; }
     .split-container { flex-direction: column; gap: 4.5rem; }
