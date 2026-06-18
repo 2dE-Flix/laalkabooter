@@ -88,8 +88,8 @@ body {
 
 /* DEPTH STATE 2: Deep Ocean (Brands) */
 #webgl-canvas.depth-deep {
-    filter: blur(45px) brightness(0.15); 
-    transform: scale(1.15) translateY(-10vh); 
+    filter: blur(48px) brightness(0.55) saturate(1.2); 
+    transform: scale(1.18) translateY(-8vh); 
 }
 
 /* Menu Freeze State */
@@ -470,6 +470,13 @@ body {
     z-index: 50;
 }
 
+@media (max-width: 768px) {
+    #platform-view {
+        height: auto;
+        min-height: 100dvh;
+    }
+}
+
 #platform-view.active-platform {
     opacity: 1;
     pointer-events: auto;
@@ -490,6 +497,9 @@ body {
 }
 
 .sidebar-option {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
     cursor: pointer;
     opacity: 0.4;
     transition: all 0.3s ease;
@@ -627,34 +637,30 @@ body {
         z-index: 40;
     }
 
- .platform-content {
-    padding-top: 11rem;
-    height: auto;
-    min-height: 100dvh;
-    align-items: flex-start;   /* stop vertical centering, start from top instead */
-    padding-bottom: 4rem;
-}
+    .platform-content {
+        padding-top: 11rem; /* Pushes content down below the top compass */
+        height: auto;
+        min-height: 100dvh;
+        align-items: flex-start;
+        padding-bottom: 4rem;
+    }
 
-#platform-view {
-    height: auto;
-    min-height: 100dvh;
-}
+    .raw-text-block {
+        padding: 0 8px;
+    }
 
-.raw-text-block {
-    padding: 0 8px;
-}
+    .raw-text-block h2 {
+        font-size: 1.1rem;
+        letter-spacing: 3px;
+        margin-bottom: 2rem;
+    }
 
-.raw-text-block h2 {
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    margin-bottom: 2rem;
-}
-
-.raw-text-block p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 1.6rem;
-}
+    .raw-text-block p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1.6rem;
+    }
+   
     /* Nav Swaps */
 /* Keeps the logo and the 'X' button floating ABOVE the dropdown */
 /* =========================================
