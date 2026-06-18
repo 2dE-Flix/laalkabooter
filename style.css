@@ -483,56 +483,56 @@ body {
     transform: translateX(0); /* Slides into place */
 }
 
-/* 1. The Compass (Desktop Left Axis) - UX UPGRADE */
+/* 1. The Compass (Desktop Left Axis) - UX UPGRADE (20% SMALLER) */
 .platform-sidebar {
     position: fixed;
-    left: 3rem; /* Pulled slightly closer to the edge */
+    left: 3rem; 
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; 
-    border-left: 1px solid rgba(255, 255, 255, 0.1); /* Faint structural line */
+    gap: 0.4rem; /* Tighter gap */
+    border-left: 1px solid rgba(255, 255, 255, 0.1); 
     padding-left: 0; 
     z-index: 100;
 }
 
 .sidebar-option {
     cursor: pointer;
-    opacity: 0.55; /* Bumped up so it's clearly visible against the void */
-    padding: 1rem 1.5rem;
-    border-radius: 0 12px 12px 0; /* Premium rounded right edge */
-    border-left: 3px solid transparent; 
+    opacity: 0.55; 
+    padding: 0.8rem 1.2rem; /* Reduced by 20% for a sharper look */
+    border-radius: 0 10px 10px 0; 
+    border-left: 2px solid transparent; /* Thinner border */
     background: rgba(0, 2, 8, 0.0); 
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar-option span {
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem; 
-    letter-spacing: 6px;
+    font-size: 0.68rem; /* Scaled down 20% */
+    letter-spacing: 5px; /* Tighter tracking */
     font-weight: 600;
     color: #ffffff;
-    pointer-events: none; /* Stops the text from interfering with the click box */
+    pointer-events: none; 
 }
 
-/* The Hover Cue: Tells the brain "I am clickable" */
+/* The Hover Cue - Scaled appropriately */
 .sidebar-option:hover {
     opacity: 1;
-    background: rgba(255, 255, 255, 0.04); /* Subtle frosted glass highlight */
-    transform: translateX(8px); /* Physically nudges outward when hovered */
+    background: rgba(255, 255, 255, 0.04); 
+    transform: translateX(6px); /* Lighter nudge */
 }
 
 /* The Active State Lock */
 .sidebar-option.active-sidebar {
     opacity: 1;
     background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
-    border-left: 3px solid #00E5FF; /* Locks a glowing cyan line to the edge */
+    border-left: 2px solid #00E5FF;
 }
 
 .sidebar-option.active-sidebar span {
     color: #00E5FF;
-    text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5);
+    text-shadow: 0px 0px 12px rgba(0, 229, 255, 0.5); /* Tighter glow */
 }
 /* 2. The Ledger Data Stream - CENTERED ARCHITECTURE */
 .platform-content {
@@ -636,44 +636,66 @@ body {
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
     }
-    /* Mobile Platform Overrides */
+/* =========================================
+       MOBILE PLATFORM COMPASS OVERRIDE
+       ========================================= */
     .platform-sidebar {
         position: fixed;
         left: 0;
-        top: 6rem; /* Sits directly below the mobile header */
+        top: 7rem; /* Anchors right below your floating pill header */
         width: 100vw;
-        flex-direction: row; /* Horizontal layout */
+        flex-direction: row; 
         justify-content: center;
         gap: 3rem;
-        border-left: none;
+        border-left: none; /* Kills the PC line */
         padding-left: 0;
         z-index: 40;
     }
 
-    .platform-content {
-        padding-top: 11rem; /* Pushes content down below the top compass */
-        height: auto;
-        min-height: 100dvh;
-        align-items: flex-start;
-        padding-bottom: 4rem;
+    /* Stripping the boxy PC UI */
+    .sidebar-option {
+        padding: 0.5rem;
+        border-left: none !important; /* Kills PC active line */
+        border-radius: 0;
+        background: transparent !important; /* Kills PC frosted glass */
+        transform: none !important; /* Kills PC hover slide */
+        position: relative; /* Creates an anchor for our new sliding underline */
     }
 
-    .raw-text-block {
-        padding: 0 8px;
+    .sidebar-option span {
+        font-size: 0.65rem;
+        letter-spacing: 4px;
+        opacity: 0.6; /* Dims inactive options */
+        transition: opacity 0.3s ease, color 0.3s ease;
     }
 
-    .raw-text-block h2 {
-        font-size: 1.1rem;
-        letter-spacing: 3px;
-        margin-bottom: 2rem;
+    /* Mobile Active State - Pure Glowing Text */
+    .sidebar-option.active-sidebar span {
+        opacity: 1;
+        color: #00E5FF;
+        text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.6);
     }
 
-    .raw-text-block p {
-        font-size: 0.95rem;
-        line-height: 1.7;
-        margin-bottom: 1.6rem;
+    /* THE MOBILE SLIDER: A glowing line that tracks the active item */
+    .sidebar-option::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0%; /* Starts invisible */
+        height: 2px;
+        background: #00E5FF;
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+        transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
     }
-   
+
+    /* Activates the slider */
+    .sidebar-option.active-sidebar::after {
+        width: 100%; /* Smoothly slides open from the center */
+        opacity: 1;
+    }
     /* Nav Swaps */
 /* Keeps the logo and the 'X' button floating ABOVE the dropdown */
 /* =========================================
