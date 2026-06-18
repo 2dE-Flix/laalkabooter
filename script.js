@@ -4,6 +4,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
+    let targetDepth = 0;   // 0 = surface (Talents), 1 = deep ocean (Brands)
+    let currentDepth = 0;  // smoothed value actually sent to the shader
 
 // 2. MOBILE HAMBURGER DROPDOWN
     const hamburger = document.getElementById('hamburger-menu');
@@ -88,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (target === 'talents') {
             sideTalents?.classList.add('active-sidebar');
             streamTalents?.classList.add('active-stream');
+            targetDepth = 0;
             
             // Rise to Surface (Lighter, Normal Position)
             if(bgCanvas) {
@@ -97,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (target === 'brands') {
             sideBrands?.classList.add('active-sidebar');
             streamBrands?.classList.add('active-stream');
+            targetDepth = 1;
             
             // Sink to Deep Ocean (Darker, Sinks Downwards)
             if(bgCanvas) {
@@ -123,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const VERT=`attribute vec2 pos;void main(){gl_Position=vec4(pos,0,1);}`;
         const FRAG=`
         precision highp float;
-        uniform float u_t; uniform vec2 u_res;
+        uniform float u_t; uniform vec2 u_res; uniform float u_depth;
         vec2 ghash(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.0+2.0*fract(sin(p)*43758.5453);}
         float gn(vec2 p){
           vec2 i=floor(p),f=fract(p),u=f*f*f*(f*(f*6.0-15.0)+10.0);
@@ -141,8 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
           return v;
         }
         vec3 pal(float n,float angle,float spd){
-          vec3 c0=vec3(0.004,0.012,0.065); vec3 c1=vec3(0.010,0.055,0.230); vec3 c2=vec3(0.035,0.175,0.650);
-          vec3 c3=vec3(0.070,0.330,0.900); vec3 c4=vec3(0.620,0.840,1.000); vec3 c5=vec3(0.940,0.970,1.000);
+          vec3 s0=vec3(0.004,0.012,0.065); vec3 s1=vec3(0.010,0.055,0.230); vec3 s2=vec3(0.035,0.175,0.650);
+          vec3 s3=vec3(0.070,0.330,0.900); vec3 s4=vec3(0.620,0.840,1.000); vec3 s5=vec3(0.940,0.970,1.000);
+          vec3 d0=vec3(0.001,0.003,0.014); vec3 d1=vec3(0.003,0.012,0.045); vec3 d2=vec3(0.006,0.038,0.110);
+          vec3 d3=vec3(0.012,0.085,0.190); vec3 d4=vec3(0.025,0.190,0.330); vec3 d5=vec3(0.070,0.340,0.460);
+          vec3 c0=mix(s0,d0,u_depth); vec3 c1=mix(s1,d1,u_depth); vec3 c2=mix(s2,d2,u_depth);
+          vec3 c3=mix(s3,d3,u_depth); vec3 c4=mix(s4,d4,u_depth); vec3 c5=mix(s5,d5,u_depth);
           vec3 col=c0; col=mix(col,c1,smoothstep(0.00,0.22,n)); col=mix(col,c2,smoothstep(0.18,0.50,n));
           col=mix(col,c3,smoothstep(0.42,0.72,n)); col=mix(col,c4,smoothstep(0.65,0.88,n)); col=mix(col,c5,smoothstep(0.84,0.97,n));
           float hue=sin(angle*2.0)*0.10; col.b=clamp(col.b+hue,0.0,1.0); col.r=clamp(col.r-hue*0.4,0.0,1.0);
@@ -151,12 +159,15 @@ document.addEventListener("DOMContentLoaded", () => {
         void main(){
           vec2 uv=gl_FragCoord.xy/u_res; vec2 st=(uv*2.0-1.0)*vec2(u_res.x/u_res.y,1.0);
           vec2 p=st*1.0; vec2 pos=p;vec3 col=vec3(0);float wsum=0.0;
+          float drift=1.0-0.35*u_depth;
           for(int step=0;step<5;step++){
-            vec2 flow=curlFBM(pos,u_t); pos-=flow*0.28; float n=gn(pos*0.85+u_t*0.012);
+            vec2 flow=curlFBM(pos,u_t); pos-=flow*0.28*drift; float n=gn(pos*0.85+u_t*0.012);
             float angle=atan(flow.y,flow.x); float spd=length(flow); float w=1.0/(float(step)+1.0);
             col+=pal(n,angle,spd)*w;wsum+=w;
           }
-          col/=wsum; float vig=1.0-smoothstep(0.45,1.35,length(st*0.65)); col*=0.35+0.65*vig;
+          col/=wsum;
+          float vigFloor=mix(0.35,0.10,u_depth); float vigRange=mix(0.65,0.80,u_depth);
+          float vig=1.0-smoothstep(0.45,1.35,length(st*0.65)); col*=vigFloor+vigRange*vig;
           gl_FragColor=vec4(col,1.0);
         }`;
         
@@ -168,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
         gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
         const ap=gl.getAttribLocation(prog,'pos');gl.enableVertexAttribArray(ap);gl.vertexAttribPointer(ap,2,gl.FLOAT,false,0,0);
         const uT=gl.getUniformLocation(prog,'u_t'); const uR=gl.getUniformLocation(prog,'u_res');
+        const uDepth=gl.getUniformLocation(prog,'u_depth');
         
         function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;gl.viewport(0,0,canvas.width,canvas.height);}
         resize(); window.addEventListener('resize',resize);
@@ -185,7 +197,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 shaderTime += deltaTime * 0.006; 
             }
 
+            // Ease the depth dial toward wherever the user last clicked (Talents=0, Brands=1)
+            currentDepth += (targetDepth - currentDepth) * Math.min(1, deltaTime * 0.0025);
+
             gl.uniform1f(uT, shaderTime);
+            gl.uniform1f(uDepth, currentDepth);
             gl.uniform2f(uR, canvas.width, canvas.height);
             gl.drawArrays(gl.TRIANGLES, 0, 6);
             requestAnimationFrame(render);
