@@ -609,44 +609,76 @@ body {
    CRITICAL SYSTEM RESCUE & OPTICAL CALIBRATION
    ========================================= */
 
-/* 1. ICY OFF-WHITE (Kills Halation & Eye-Strain) */
+/* =========================================
+   CRITICAL SYSTEM RESCUE & OPTICAL CALIBRATION
+   ========================================= */
+
+/* 1. EGG-WHITE & OPTICAL WARMTH (Premium Alabaster Tone) */
 :root {
-    --text-primary: #E2E8F0 !important; /* Premium Slate-White */
-    --text-muted: #94A3B8 !important;
-    --glow-core: rgba(226, 232, 240, 0.8) !important;
+    --text-primary: #FAF9F6 !important; /* Warm, creamy egg-white */
+    --text-muted: #B0ADA9 !important; /* Warmer grey for secondary text */
+    --glow-core: rgba(250, 249, 246, 0.8) !important;
 }
 
-/* Forces all critical typography to use the new premium off-white */
+/* Forces all critical typography to use the new premium egg-white */
 .text-logo, .gateway-menu-toggle, .raw-text-block h2, .terminal-link, .split-text {
     color: var(--text-primary) !important;
 }
 
-/* 2. PC GATEWAY ALIGNMENT (TIGHT DIA-STYLE SPACING) */
+/* 2. SCALE UP: BIGGER & CLEARER TYPOGRAPHY */
+/* Gateway Main Options */
+.split-text {
+    font-size: 0.9rem !important; /* Bumped up from 0.75rem */
+    letter-spacing: 7px !important; 
+}
+
+/* Floating Header Menu & Logo */
+.gateway-menu-toggle {
+    font-size: 0.85rem !important; /* Bumped up from 0.7rem */
+    letter-spacing: 5px !important;
+}
+.text-logo {
+    font-size: 1.55rem !important; /* Bumped up from 1.4rem */
+}
+
+/* The Console Clock */
+#console-clock {
+    font-size: 0.75rem !important; /* Bumped up from 0.6rem for sharp clarity */
+    letter-spacing: 4px !important;
+}
+
+/* The PC Micro-Compass (Left Sidebar) */
+.sidebar-option span {
+    font-size: 0.75rem !important; /* Bumped up from 0.6rem */
+    letter-spacing: 5px !important;
+}
+
+/* Mobile Dropdown Text Adjustment */
+.mobile-nav-links span {
+    font-size: 1.05rem !important; /* Bolder mobile readability */
+}
+
+/* 3. PC GATEWAY ALIGNMENT (TIGHT DIA-STYLE SPACING) */
 .split-container {
     display: flex !important;
-    gap: 8rem !important; /* Pulls Talents and Brands tightly into the center */
+    gap: 8rem !important; 
     align-items: center !important;
     justify-content: center !important;
 }
 
-/* 3. ABSOLUTE MOBILE LOCK (FIXES THE SCREEN BREAKS) */
+/* 4. ABSOLUTE MOBILE LOCK (FIXES THE SCREEN BREAKS) */
 @media (max-width: 768px) {
-    /* Rescues the layout: Forces Talents/Brands to stack vertically again */
     .split-container {
         flex-direction: column !important; 
         gap: 4.5rem !important; 
     }
-
-    /* Locks the Pill Nav physically so it CANNOT expand into a giant blob */
     .top-nav {
         height: 60px !important; 
         min-height: 60px !important;
         display: flex !important;
         align-items: center !important;
-        background: rgba(0, 89, 133, 0.4) !important; /* Deep Ocean Glass */
+        background: rgba(0, 89, 133, 0.4) !important; 
     }
-    
-    /* Locks the void curtain */
     .top-nav::before {
         height: 15px !important;
         background: #010a18 !important;
