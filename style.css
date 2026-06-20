@@ -1,6 +1,7 @@
 /* =========================================
-   RAVIE.IN - MASTER STYLESHEET
+   RAVIE.IN - MASTER STYLESHEET (BUG-FREE BUILD)
    ========================================= */
+
 /* =========================================
    1. CORE RESET & VARIABLES
    ========================================= */
@@ -10,38 +11,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Kills the blue mobile tap flash globally */
     -webkit-tap-highlight-color: transparent; 
-    
-    /* THE MASTER FONT LOCK: Locks General Sans on line 12 */
     font-family: 'General Sans', sans-serif !important;
 }
 
-/* Kills focus outlines and prevents accidental text highlighting on UI elements */
 a, button, span, .split-option, .hamburger, .social-card {
     outline: none !important;
     user-select: none;
     -webkit-user-select: none;
 }
 
-/* STRICT VIEWPORT LOCK: Prevents mobile layout collapse */
 html, body {
     max-width: 100vw;
     overflow-x: hidden;
 }
 
 :root {
-    /* Brand Colors */
     --bg-deep: #010a18;
     --brand-accent: #00E5FF;
     --text-primary: #ffffff;
     --text-muted: #6b7280;
-    
-    /* High-Voltage Glow Variables */
     --glow-core: rgba(255, 255, 255, 0.95);
     --glow-halo: rgba(100, 180, 255, 0.85);
-    
-    /* Dynamic Tracking Variables */
     --x: 50%;
     --y: 50%;
     --cursor-glow: #001233;
@@ -50,66 +41,50 @@ html, body {
 body {
     background-color: #010a18; 
     color: var(--text-primary);
-    -webkit-font-smoothing: antialiased; /* Ultra-crisp subpixel geometry */
+    -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh; width: 100vw;
     position: relative;
     overflow-x: hidden; overflow-y: auto;
     z-index: 1;
 }
+
 /* =========================================
    2. ENVIRONMENT & WEBGL BACKGROUND
    ========================================= */
-html, body {
-    margin: 0; padding: 0; /* Kills the browser's default white gaps */
-    background-color: #010a18; /* Forces the absolute bottom layer to be void black */
-}
-
-body {
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh; width: 100vw;
-    position: relative;
-    overflow-x: hidden; overflow-y: auto;
-    z-index: 1;
-}
-
-/* Base Canvas with transition physics */
 #webgl-canvas {
     position: fixed;
-    top: -5vh; left: -5vw; /* Pulls the canvas slightly off-screen */
-    width: 110vw; height: 110vh; /* Makes it physically larger than the monitor */
-    background-color: #010a18; /* Stops the blur from grabbing transparent/white pixels */
+    top: -5vh; left: -5vw; 
+    width: 110vw; height: 110vh; 
+    background-color: #010a18; 
     z-index: -3;
     pointer-events: none;
     transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 
-/* DEPTH STATE 1: Surface (Talents) */
 #webgl-canvas.depth-surface {
     filter: blur(35px) brightness(0.32);
-    transform: scale(1.05) translateY(0); /* Adjusted scale to work with the new oversized bounds */
+    transform: scale(1.05) translateY(0); 
 }
 
-/* DEPTH STATE 2: Deep Ocean (Brands) */
 #webgl-canvas.depth-deep {
     filter: blur(48px) brightness(0.55) saturate(1.2); 
     transform: scale(1.18) translateY(-8vh); 
 }
 
-/* Menu Freeze State */
 #webgl-canvas.frozen-blur {
     filter: blur(80px) brightness(0.15) !important; 
 }
-/* The Paper Grain Texture */
+
 .grain {
     position: fixed; inset: 0; 
     pointer-events: none; 
     z-index: -2; 
-    opacity: 0.85; /* Strong physical presence */
+    opacity: 0.85; 
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
 /* =========================================
    3. UNIVERSAL FLOATING HEADER (PC DESIGN)
    ========================================= */
@@ -119,98 +94,36 @@ body {
     left: 0; 
     width: 100vw;
     padding: 3rem 4rem; 
-    
-    /* THE FIX: Pushes them to the edges and perfectly centers them vertically */
     display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    
+    justify-content: space-between; /* Pushes Logo left, Menu right */
+    align-items: center; /* Perfect horizontal baseline */
     z-index: 100;
     pointer-events: none; 
 }
 
-/* Reactivates clicks for the individual items */
 .logo-container, .gateway-menu-toggle, .hamburger {
     pointer-events: auto; 
 }
 
-/* The MENU Button Styling */
-.gateway-menu-toggle {
-    font-size: 0.7rem; 
-    letter-spacing: 4px; 
-    font-weight: 700 !important;
-    color: #ffffff;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.gateway-menu-toggle:hover {
-    color: var(--brand-accent) !important;
-    text-shadow: 0px 0px 12px rgba(0, 229, 255, 0.5);
-}
-
-/* Kills the old absolute-positioned 4-corner menu if it's still hanging around */
-.desktop-menu { display: none !important; }
-
-/* =========================================
-   PURE TEXT LOGOTYPE (RAVIE)
-   ========================================= */
 .text-logo {
-    font-family: 'General Sans', sans-serif !important;
-    font-size: 1.4rem; /* Big, commanding presence */
-    font-weight: 700 !important; /* Full bold */
-    letter-spacing: 8px; /* Massive tracking */
-    color: #ffffff; /* Kills the default purple link color */
+    font-size: 1.4rem; 
+    letter-spacing: 8px; 
+    color: #ffffff; 
     text-transform: uppercase;
-    text-decoration: none; /* Kills the default underline */
-    transition: all 0.3s ease;
+    text-decoration: none; 
     display: inline-block;
 }
 
-/* Subtle brand-glow interaction */
-.text-logo:hover {
-    color: #00E5FF;
-    text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5);
-    transform: translateY(-1px);
-}
-
-/* Mobile Logo Scaling Override */
-@media (max-width: 768px) {
-    .text-logo {
-        font-size: 1.1rem; /* Scales down cleanly for your floating pill header */
-        letter-spacing: 6px; 
-    }
-}
-
-/* 4-Corner Layout */
-.desktop-menu {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    pointer-events: none;
-    z-index: 100;
-}
-
-.desktop-menu span {
-    position: absolute;
-    pointer-events: auto;
-    font-size: 0.75rem; letter-spacing: 2px; font-weight: 600;
+.gateway-menu-toggle {
+    font-size: 0.7rem; 
+    letter-spacing: 4px; 
+    color: #ffffff;
     cursor: pointer;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    text-transform: uppercase;
 }
 
-.desktop-menu span:nth-child(1) { top: 3.2rem; right: 4rem; } 
-.desktop-menu span:nth-child(2) { bottom: 3rem; left: 4rem; }  
-.desktop-menu span:nth-child(3) { bottom: 3rem; right: 4rem; } 
-
-.desktop-menu span:hover, .active-link {
-    color: var(--brand-accent) !important;
-    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
-}
-
-.hamburger, .mobile-dropdown {
-    display: none;
-}
+.desktop-menu { display: none !important; }
+.hamburger, .mobile-dropdown { display: none; }
 
 /* =========================================
    4. GATEWAY (MAIN SCREEN) LAYOUT
@@ -225,6 +138,7 @@ body {
 .view {
     display: none; opacity: 0; transition: opacity 0.6s ease-in-out;
 }
+
 .view.active-view {
     display: flex; opacity: 1;
 }
@@ -232,6 +146,7 @@ body {
 .split-container {
     display: flex; gap: 25vw; align-items: center;
 }
+
 .split-option {
     display: flex; flex-direction: column; align-items: center; gap: 2rem;
     cursor: pointer; transition: all 0.4s ease;
@@ -250,57 +165,33 @@ body {
 .split-text {
     font-size: 0.75rem; 
     letter-spacing: 6px; 
-    font-weight: 400;
     transition: all 0.4s ease;
 }
+
 /* Hover Math - FIXED DEADZONE */
-/* Only dims the un-hovered option IF an option is actively being hovered */
 .split-container:has(.split-option:hover) .split-option:not(:hover) { 
     opacity: 0.15; 
 }
-
-.split-option:hover { 
-    opacity: 1; 
-}
-
+.split-option:hover { opacity: 1; }
 .split-option:hover .split-icon {
     filter: drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
     transform: scale(1.08) translateY(-5px);
 }
-
 .split-option:hover .split-text {
     color: #ffffff; 
     text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
 }
+
 /* =========================================
-   LIQUID GLASS OVERLAY (GATEWAY)
+   LIQUID GLASS OVERLAY (MENU)
    ========================================= */
-
-.gateway-menu-toggle {
-    position: fixed;
-    top: 3.2rem;
-    right: 4rem;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    font-weight: 600;
-    cursor: pointer;
-    z-index: 200; 
-    pointer-events: auto; /* <--- THIS IS THE FIX */
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.gateway-menu-toggle:hover {
-    color: var(--brand-accent);
-    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5);
-}
-
 .liquid-glass-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: rgba(0, 2, 8, 0.75); /* Darkened the tint slightly to block background glare */
-    backdrop-filter: blur(35px); /* Massive blur upgrade for perfect readability */
-    -webkit-backdrop-filter: blur(35px); /* Safari support */
+    background: rgba(0, 2, 8, 0.75); 
+    backdrop-filter: blur(35px); 
+    -webkit-backdrop-filter: blur(35px); 
     z-index: 90; 
     display: flex;
     justify-content: center;
@@ -323,16 +214,14 @@ body {
 }
 
 .glass-nav-links span {
-    font-size: 0.85rem; /* Massive, confident typography */
+    font-size: 0.85rem; 
     letter-spacing: 8px;
-    font-weight: 400;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
-    transform: translateY(20px); /* Starts slightly pushed down */
+    transform: translateY(20px); 
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Staggered animation classes injected by JS */
 .liquid-glass-overlay.active-glass .glass-nav-links span {
     opacity: 1;
     transform: translateY(0);
@@ -342,14 +231,146 @@ body {
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(2) { transition-delay: 0.2s; }
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(3) { transition-delay: 0.3s; }
 
-.glass-nav-links span:hover {
-    color: var(--brand-accent);
-    text-shadow: 0px 0px 20px rgba(0, 229, 255, 0.6);
-    transform: scale(1.05) !important;
-    transition-duration: 0.1s !important; /* THE KINETIC FIX: Snaps instantly on hover */
-}
 /* =========================================
-   ABOUT PAGE - TIMELINE & MANIFESTO
+   INNER PLATFORM: THE Y-AXIS LEDGER
+   ========================================= */
+#platform-view {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100dvh;
+    display: none; 
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(40px); 
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 50;
+}
+
+#platform-view.active-platform {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0); 
+}
+
+/* MICRO COMPASS (DESKTOP) */
+.platform-sidebar {
+    position: fixed;
+    left: 3rem; 
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem; 
+    padding-left: 0; 
+    z-index: 100;
+}
+
+.sidebar-option {
+    cursor: pointer;
+    opacity: 0.55; 
+    padding: 0.7rem 1rem; 
+    border-radius: 0 8px 8px 0; 
+    border-left: 2px solid transparent; 
+    background: rgba(0, 2, 8, 0.0); 
+}
+
+.sidebar-option span {
+    font-size: 0.6rem; 
+    letter-spacing: 5px; 
+    color: #ffffff;
+    pointer-events: none; 
+}
+
+.sidebar-option.active-sidebar {
+    opacity: 1;
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
+    border-left: 2px solid #00E5FF;
+    transform: translateX(5px); 
+}
+
+/* LEDGER DATA STREAM (LEFT-ALIGNED + BUG FIXES) */
+.platform-content {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 100dvh;
+    width: 100%;
+    padding: 0 10vw 0 18rem; /* Clears the micro sidebar on PC */
+}
+
+.ledger-stream {
+    display: none !important; /* CRITICAL FIX: Forces inactive streams to vanish */
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ledger-stream.active-stream {
+    display: flex !important; /* CRITICAL FIX: Only allows clicked stream to show */
+    animation: textFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.raw-text-block {
+    max-width: 640px; 
+    text-align: left; 
+}
+
+.raw-text-block h2 {
+    font-size: 1.4rem;
+    letter-spacing: 5px; 
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem; 
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.raw-text-block h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    width: 40px; 
+    height: 2px;
+    background: #00E5FF;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+
+.raw-text-block p {
+    font-size: 1.05rem;
+    line-height: 1.85; 
+    color: rgba(255, 255, 255, 0.75); 
+    margin-bottom: 2rem; 
+}
+
+.raw-text-block strong { color: #00E5FF; }
+
+.terminal-link {
+    display: inline-block;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    padding-bottom: 6px;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.3); 
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+}
+
+.terminal-link:hover {
+    color: #00E5FF;
+    border-bottom-color: #00E5FF;
+}
+
+@keyframes textFadeIn {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   ABOUT & SOCIALS PAGES
    ========================================= */
 .page-container {
     padding: 120px 5vw 100px 5vw; 
@@ -360,333 +381,66 @@ body {
 }
 
 .page-title {
-    font-size: 2.2rem; /* Massive, commanding scale */
+    font-size: 2.2rem; 
     letter-spacing: 8px;
     text-align: center;
     margin-bottom: 80px;
     color: #ffffff;
     text-transform: uppercase;
     position: relative;
-    padding-bottom: 25px; /* Creates breathing room for the cyan line */
+    padding-bottom: 25px; 
 }
 
-/* The Cyan Separator Line */
 .page-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px; /* Sharp, precise width */
-    height: 2px;
-    background: #00E5FF;
-    box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); /* Brand glow */
-}
-.timeline-wrapper {
-    position: relative;
-    padding-left: 180px; /* Pushes the text right to make room for the labels */
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 2px; background: #00E5FF; box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); 
 }
 
-/* The vertical thread */
+.timeline-wrapper { position: relative; padding-left: 180px; }
 .timeline-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    bottom: 0;
-    left: 140px; /* Locks exactly to the nodes */
-    width: 1px;
-    background: rgba(0, 229, 255, 0.2); 
+    content: ''; position: absolute; top: 5px; bottom: 0; left: 140px; width: 1px; background: rgba(0, 229, 255, 0.2); 
 }
 
-.timeline-step {
-    position: relative;
-    margin-bottom: 90px;
-}
+.timeline-step { position: relative; margin-bottom: 90px; }
+.timeline-step:last-child { margin-bottom: 0; }
 
-.timeline-step:last-child {
-    margin-bottom: 0;
-}
-
-/* The Label Container */
 .step-indicator {
-    position: absolute;
-    left: -180px; 
-    width: 140px; /* Spans exactly from the edge to the vertical line */
-    display: flex;
-    align-items: center; /* Centers the text perfectly with the dot */
-    justify-content: flex-end;
-    top: 5px; 
+    position: absolute; left: -180px; width: 140px; 
+    display: flex; align-items: center; justify-content: flex-end; top: 5px; 
 }
 
 .step-name {
-    font-family: monospace;
-    color: #00E5FF;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding-right: 18px; /* Pushes the text safely away from the line */
+    font-family: monospace; color: #00E5FF; font-size: 0.9rem;
+    letter-spacing: 2px; text-transform: uppercase; padding-right: 18px; 
 }
 
-/* The Glowing Dot */
 .step-node {
-    position: absolute;
-    right: -4px; /* Locks the center of the dot exactly onto the cyan vertical line */
-    width: 8px;
-    height: 8px;
-    background: #00E5FF;
-    border-radius: 50%;
-    box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
+    position: absolute; right: -4px; width: 8px; height: 8px;
+    background: #00E5FF; border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
 }
-.step-content {
-    padding-left: 0; 
-}
-/* Forces the manifesto text to snap flush left */
-.step-content.raw-text-block, 
-.step-content.raw-text-block p {
-    text-align: left !important;
-}
-/* Custom styling for the Founders names inside the raw text block */
+
+.step-content { padding-left: 0; }
+.step-content.raw-text-block, .step-content.raw-text-block p { text-align: left !important; }
 .step-content.raw-text-block h3 {
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    color: #fff;
-    margin-top: 2.5rem;
-    margin-bottom: 0.8rem;
-    text-transform: uppercase;
+    font-size: 1.1rem; letter-spacing: 3px; color: #fff; margin-top: 2.5rem; margin-bottom: 0.8rem; text-transform: uppercase;
 }
+.step-content.raw-text-block h3:first-child { margin-top: 0; }
 
-.step-content.raw-text-block h3:first-child {
-    margin-top: 0;
-}
-
-/* =========================================
-   ABOUT PAGE - MOBILE RESPONSIVENESS
-   ========================================= */
-@media (max-width: 768px) {
-    .page-title {
-        margin-bottom: 60px;
-    }
-    .timeline-wrapper {
-        padding-left: 30px; /* Compresses the timeline to the left edge on mobile */
-    }
-    .timeline-wrapper::before {
-        left: 5px;
-    }
-    .step-indicator {
-        left: 0;
-        width: auto;
-        top: -30px; /* Moves the cyan label above the paragraph on small screens */
-        justify-content: flex-start;
-    }
-    .step-name {
-        margin-right: 0;
-        margin-left: 20px;
-        text-align: left;
-    }
-    .step-node {
-        left: 1px;
-        right: auto;
-        top: 2px;
-    }
-    .step-content {
-        margin-top: 40px;
-        margin-bottom: 60px;
-    }
-}
-
-/* =========================================
-   6. SOCIALS PAGE LAYOUT
-   ========================================= */
-.socials-container {
-    padding: 12rem 2rem 4rem; display: flex; flex-direction: column;
-    align-items: center; position: relative; z-index: 10;
-}
+.socials-container { padding: 12rem 2rem 4rem; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 .social-cards { display: flex; gap: 8vw; margin-top: 2rem; }
 .social-card {
-    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 3.5rem 3rem; width: 360px; text-decoration: none; border-radius: 4px;
-    backdrop-filter: blur(12px); transition: all 0.4s ease; cursor: pointer;
-    position: relative; overflow: hidden;
+    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 3.5rem 3rem; width: 360px; text-decoration: none; border-radius: 4px; backdrop-filter: blur(12px); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
 }
 .social-card h3 { color: var(--text-primary); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 1.2rem; transition: color 0.3s ease; }
 .social-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; transition: color 0.3s ease; }
-.social-card:hover {
-    transform: translateY(-12px); border-color: rgba(0, 229, 255, 0.4);
-    box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15); background: rgba(0, 2, 8, 0.8);
-}
+.social-card:hover { transform: translateY(-12px); border-color: rgba(0, 229, 255, 0.4); box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15); background: rgba(0, 2, 8, 0.8); }
 .social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
 .social-card:hover p { color: #e5e7eb; }
 
 /* =========================================
-   INNER PLATFORM: THE Y-AXIS LEDGER
-   ========================================= */
-
-#platform-view {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100vw; height: 100dvh;
-    display: none; /* Hidden initially */
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(40px); /* Prepares the slide-in from the right */
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 50;
-}
-
-@media (max-width: 768px) {
-    #platform-view {
-        height: auto;
-        min-height: 100dvh;
-    }
-}
-
-#platform-view.active-platform {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0); /* Slides into place */
-}
-
-/* 1. The Compass (Desktop Left Axis) - ULTRA MINIMAL */
-.platform-sidebar {
-    position: fixed;
-    left: 3rem; 
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem; /* Tighter gap to match the smaller scale */
-    padding-left: 0; 
-    z-index: 100;
-}
-
-.sidebar-option {
-    cursor: pointer;
-    opacity: 0.55; 
-    padding: 0.7rem 1rem; /* Shrunk by another 10% for a razor-sharp footprint */
-    border-radius: 0 8px 8px 0; /* Slightly tighter corner radius */
-    border-left: 2px solid transparent; 
-    background: rgba(0, 2, 8, 0.0); 
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sidebar-option span {
-    font-size: 0.6rem; /* Dropped to a true micro-typography scale */
-    letter-spacing: 5px; 
-    color: #ffffff;
-    pointer-events: none; 
-}
-
-/* The Hover Cue */
-.sidebar-option:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.04); 
-    transform: translateX(5px); /* Shortened the physical nudge to match the smaller size */
-}
-
-/* The Active State Lock */
-.sidebar-option.active-sidebar {
-    opacity: 1;
-    background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
-    border-left: 2px solid #00E5FF;
-    transform: translateX(5px); /* Perfectly locks forward without snapping back */
-}
-
-.sidebar-option.active-sidebar span {
-    color: #00E5FF;
-    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5); /* Tighter glow */
-}
-/* 2. The Ledger Data Stream - LEFT-ALIGNED ARCHITECTURE */
-.platform-content {
-    display: flex;
-    justify-content: flex-start; /* Snaps the container layout to the left */
-    align-items: center;
-    height: 100dvh;
-    width: 100%;
-    /* Pushes content right to clear the micro-sidebar, adds massive breathing room on the right */
-    padding: 0 10vw 0 18rem; 
-}
-
-/* =========================================
-   RAW TEXT BLOCK DESIGN (FLUSH-LEFT)
-   ========================================= */
-.raw-text-block {
-    max-width: 640px; /* Optimal reading line-length */
-    text-align: left; /* Snaps headers, paragraphs, and links flush-left */
-}
-
-/* Main Headers (FOR TALENTS / FOR BRANDS) */
-.raw-text-block h2 {
-    font-size: 1.4rem;
-    font-weight: 700 !important;
-    letter-spacing: 5px; 
-    color: #ffffff;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem; 
-    position: relative;
-    padding-bottom: 15px;
-}
-
-/* Optional: Injecting the sharp About-page style line under the section headers */
-.raw-text-block h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0; /* Aligns the accent line to the left edge of the text */
-    width: 40px; 
-    height: 2px;
-    background: #00E5FF;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
-}
-
-/* Paragraph Text Core */
-.raw-text-block p {
-    font-size: 1.05rem;
-    font-weight: 600 !important; /* Managed by your master weight override */
-    line-height: 1.85; 
-    color: rgba(255, 255, 255, 0.75); 
-    margin-bottom: 2rem; 
-}
-/* Target bold emphasis items dynamically */
-.raw-text-block strong {
-    color: #00E5FF; /* Accent cyan for brand phrasing */
-    font-weight: 600;
-}
-
-/* =========================================
-   CLEAN ACTION ANCHOR (EMAIL)
-   ========================================= */
-.terminal-link {
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #ffffff;
-    text-decoration: none;
-    margin-top: 1.5rem;
-    padding-bottom: 6px;
-    border-bottom: 2px solid rgba(0, 229, 255, 0.3); /* Custom accent underline */
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: auto;
-}
-
-.terminal-link:hover {
-    color: #00E5FF;
-    border-bottom-color: #00E5FF;
-    text-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
-    transform: translateY(-2px);
-}
-
-/* Global Transition Animation */
-@keyframes textFadeIn {
-    0% { opacity: 0; transform: translateY(15px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-/* =========================================
    7. MOBILE RE-ARCHITECTURE 
    ========================================= */
 @media (max-width: 768px) {
-    /* Freeze Background to prevent touch-panics */
     body {
         background-image: 
             radial-gradient(circle at 50% 30%, var(--cursor-glow) 0%, transparent 60%),
@@ -694,281 +448,145 @@ body {
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
     }
-/* =========================================
-       MOBILE PLATFORM COMPASS OVERRIDE
-       ========================================= */
-    .platform-sidebar {
-        position: fixed;
-        left: 0;
-        top: 7rem; /* Anchors right below your floating pill header */
-        width: 100vw;
-        flex-direction: row; 
-        justify-content: center;
-        gap: 3rem;
-        border-left: none; /* Kills the PC line */
-        padding-left: 0;
-        z-index: 40;
-    }
 
-    /* Stripping the boxy PC UI */
-    .sidebar-option {
-        padding: 0.5rem;
-        border-left: none !important; /* Kills PC active line */
-        border-radius: 0;
-        background: transparent !important; /* Kills PC frosted glass */
-        transform: none !important; /* Kills PC hover slide */
-        position: relative; /* Creates an anchor for our new sliding underline */
-    }
-
-    .sidebar-option span {
-        font-size: 0.65rem;
-        letter-spacing: 4px;
-        opacity: 0.6; /* Dims inactive options */
-        transition: opacity 0.3s ease, color 0.3s ease;
-    }
-
-    /* Mobile Active State - Pure Glowing Text */
-    .sidebar-option.active-sidebar span {
-        opacity: 1;
-        color: #00E5FF;
-        text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.6);
-    }
-
-    /* THE MOBILE SLIDER: A glowing line that tracks the active item */
-    .sidebar-option::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0%; /* Starts invisible */
-        height: 2px;
-        background: #00E5FF;
-        box-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
-        transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        opacity: 0;
-    }
-
-    /* Activates the slider */
-    .sidebar-option.active-sidebar::after {
-        width: 100%; /* Smoothly slides open from the center */
-        opacity: 1;
-    }
-    /* Nav Swaps */
-/* Keeps the logo and the 'X' button floating ABOVE the dropdown */
-/* =========================================
-       THE FLOATING PILL HEADER
-       ========================================= */
-.top-nav { 
-        position: fixed;
+    /* THE PILL HEADER */
+    .top-nav { 
         top: 15px !important; 
         left: 5% !important;
         width: 90% !important; 
         padding: 0.6rem 1.2rem !important; 
-        justify-content: space-between; 
-        align-items: center; 
-        pointer-events: auto; 
-        z-index: 300 !important; 
-        
         border-radius: 50px;
-        
-        /* THE COLOR UPGRADE: Deep Blue Tint + High Glass Saturation */
-        background: rgba(2, 16, 36, 0.4); /* Swapped from black to a deep, translucent ocean blue */
-        backdrop-filter: blur(20px) saturate(120%); /* Saturates the fluid colors passing through the glass */
+        background: rgba(2, 16, 36, 0.4); 
+        backdrop-filter: blur(20px) saturate(120%); 
         -webkit-backdrop-filter: blur(20px) saturate(120%);
-        
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
-    /* Invisible Scroll Mask (Keep this exactly as it was) */
     .top-nav::before {
-        content: '';
-        position: absolute;
-        top: -15px; 
-        left: -10vw; 
-        width: 120vw; 
-        height: 120px; 
-        background: linear-gradient(to bottom, #010a18 45%, transparent 100%);
-        z-index: -1; 
-        pointer-events: none;
-        border-radius: 0;
+        content: ''; position: absolute; top: -15px; left: -10vw; width: 120vw; height: 120px; 
+        background: linear-gradient(to bottom, #010a18 45%, transparent 100%); z-index: -1; pointer-events: none;
     }
-    .desktop-menu { display: none !important; }
     
-    /* Shrinking the Logo */
-    .logo-container { max-width: 120px; }
-    .master-logo { 
-        height: 18px !important; /* Drastically smaller for that sleek, minimal look */
-    }
+    .text-logo { font-size: 1.1rem; letter-spacing: 6px; }
 
-    /* =========================================
-       CIRCULAR HAMBURGER BUTTON
-       ========================================= */
+    /* HAMBURGER */
     .hamburger { 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: center;
-        align-items: center;
-        gap: 4px; 
-        cursor: pointer; 
-        z-index: 105; 
-        pointer-events: auto;
-        
-        /* The Circular Container */
-        width: 42px;
-        height: 42px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        transition: all 0.3s ease;
+        display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; z-index: 105; pointer-events: auto;
+        width: 42px; height: 42px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;
     }
-    
-    .hamburger .bar { 
-        width: 16px; /* Shorter bars to fit beautifully inside the circle */
-        height: 2px; 
-        background-color: var(--text-primary); 
-        transition: all 0.3s ease; 
-    }
-    
-    /* The 'X' Transformation Math */
+    .hamburger .bar { width: 16px; height: 2px; background-color: var(--text-primary); transition: all 0.3s ease; }
     .hamburger.active { background: rgba(255, 255, 255, 0.1); }
     .hamburger.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: var(--brand-accent); }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
 
-    /* =========================================
-       THE FLOATING DROPDOWN CARD
-       ========================================= */
-/* =========================================
-       THE FLOATING DROPDOWN CARD (LIQUID GLASS)
-       ========================================= */
+    /* FLOATING DROPDOWN */
     .mobile-dropdown {
-        position: fixed; 
-        top: 85px; 
-        left: 5%; 
-        width: 90%;
-        
-        /* PREMIUM LIQUID GLASS FORMULA */
-        background: rgba(0, 2, 8, 0.35); /* Much sheerer background */
-        backdrop-filter: blur(40px) saturate(150%); /* Heavy fluid distortion and color pull */
-        -webkit-backdrop-filter: blur(40px) saturate(150%);
-        border: 1px solid rgba(255, 255, 255, 0.15); /* Sharper glassy edge highlight */
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Deep drop shadow + inner top reflection */
-        
-        border-radius: 24px; 
-        padding: 1.2rem 1rem; /* Slightly tighter box around the smaller text */
-        
-        display: flex; 
-        flex-direction: column;
-        z-index: 250; 
-        
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-20px);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: fixed; top: 85px; left: 5%; width: 90%;
+        background: rgba(0, 2, 8, 0.35); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border-radius: 24px; padding: 1.2rem 1rem; display: flex; flex-direction: column; z-index: 250; 
+        opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
-    .mobile-dropdown.active-menu { 
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
+    .mobile-dropdown.active-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .mobile-nav-links { display: flex; flex-direction: column; width: 100%; gap: 0.3rem; }
+    .mobile-nav-links span { font-size: 0.9rem; letter-spacing: 3px; padding: 0.8rem 1.5rem; border-radius: 12px; text-align: left; }
+
+    /* INNER PLATFORM MOBILE RESET (FIXED OFF-SCREEN BUG) */
+    .platform-content {
+        padding: 11rem 5vw 4rem 5vw !important; 
+        height: auto !important;
+        min-height: 100vh;
     }
-    
-    .mobile-nav-links {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 0.3rem; /* Tighter vertical gap between links */
+    #platform-view { height: auto; min-height: 100dvh; }
+
+    /* MOBILE COMPASS SLIDER */
+    .platform-sidebar {
+        position: fixed; left: 0; top: 7rem; width: 100vw; flex-direction: row; justify-content: center; gap: 3rem; border-left: none; padding-left: 0; z-index: 40;
     }
-    
-    /* 10% SMALLER OPTIONS */
-    .mobile-nav-links span { 
-        font-size: 0.9rem; /* Scaled down perfectly */
-        letter-spacing: 3px; /* Slightly tighter tracking for smaller font */
-        font-weight: 500; 
-        color: var(--text-primary); 
-        transition: all 0.3s ease; 
-        cursor: pointer; 
-        padding: 0.8rem 1.5rem; /* Reduced padding to fit the new text size */
-        border-radius: 12px;
-        text-align: left; 
+    .sidebar-option {
+        padding: 0.5rem; border-left: none !important; border-radius: 0; background: transparent !important; position: relative;
     }
-    
-    .mobile-nav-links span:active {
-        background: rgba(0, 229, 255, 0.1); 
-        color: #00E5FF;
+    .sidebar-option span { font-size: 0.65rem; letter-spacing: 4px; opacity: 0.6; }
+    .sidebar-option.active-sidebar span { opacity: 1; }
+    .sidebar-option::after {
+        content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0%; height: 2px;
+        background: #00E5FF; box-shadow: 0 0 10px rgba(0, 229, 255, 0.8); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
     }
-    /* Gateway Overrides */
-   .gateway-menu-toggle { top: 1.5rem; right: 2rem; }
+    .sidebar-option.active-sidebar::after { width: 100%; opacity: 1; }
+
+    /* GATEWAY & COMPONENT HIDES */
     .split-container { flex-direction: column; gap: 4.5rem; }
     .split-icon { height: 36px !important; max-width: 120px !important; }
     .split-text { font-size: 0.7rem; letter-spacing: 5px; }
-/* MOBILE OVERRIDE: Kill the PC Liquid Glass Menu */
-    .gateway-menu-toggle,
-    .liquid-glass-overlay {
-        display: none !important;
-    }
-    /* About Overrides */
+    .gateway-menu-toggle, .liquid-glass-overlay { display: none !important; }
+    #console-clock { display: none !important; }
+
+    /* PAGE OVERRIDES */
     .about-container { padding-top: 8rem; }
-    .timeline::before { left: 15px; }
+    .page-title { margin-bottom: 60px; }
+    .timeline-wrapper { padding-left: 30px; }
+    .timeline-wrapper::before { left: 5px; }
     .timeline-item { flex-direction: column; margin-bottom: 3rem; }
     .timeline-node { width: 100%; text-align: left; padding-left: 40px; padding-top: 0; margin-bottom: 1.5rem; }
     .timeline-node::after { right: auto; left: 10px; top: 2px; }
     .timeline-content { margin-left: 15px; padding: 2rem 1.5rem; }
+    .step-indicator { left: 0; width: auto; top: -30px; justify-content: flex-start; }
+    .step-name { margin-right: 0; margin-left: 20px; text-align: left; }
+    .step-node { left: 1px; right: auto; top: 2px; }
+    .step-content { margin-top: 40px; margin-bottom: 60px; }
 
-    /* Socials Overrides */
     .socials-container { padding-top: 9rem; }
     .social-cards { flex-direction: column; gap: 2.5rem; }
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
 }
 
-/* =========================================
-   REAL-TIME CONSOLE CLOCK - CALIBRATED
-   ========================================= */
 #console-clock {
-    position: fixed;
-    bottom: 3rem; 
-    left: 4rem; 
-    font-family: 'Inter', sans-serif;
-    font-size: 0.6rem; /* Reduced by ~15% for maximum precision */
-    font-weight: 600;
-    letter-spacing: 3px; 
-    color: #ffffff; /* Upgraded to pure white */
-    text-transform: uppercase;
-    z-index: 10;
-    pointer-events: none;
+    position: fixed; bottom: 3rem; left: 4rem; 
+    font-size: 0.6rem; letter-spacing: 3px; color: #ffffff; text-transform: uppercase; z-index: 10; pointer-events: none;
 }
 
-/* Hide on mobile screens */
-@media (max-width: 768px) {
-    #console-clock {
-        display: none !important;
-    }
+/* =========================================
+   ZERO-LATENCY / NO GLOW UI OVERRIDE
+   ========================================= */
+.glass-nav-links span:hover,
+.mobile-nav-links span:hover,
+.mobile-nav-links span:active,
+.gateway-menu-toggle:hover,
+.text-logo:hover,
+.sidebar-option:hover span,
+.sidebar-option.active-sidebar span {
+    color: #00E5FF !important; 
+    text-shadow: none !important; /* Kills all glow */
+    transform: none !important; /* Stops all scaling/movement */
+    transition: all 0s !important; /* ZERO MILLISECOND REACTION */
 }
+
 /* =========================================
    MASTER OVERRIDE: WEIGHT HIERARCHY
    ========================================= */
-
-/* SEMI-BOLD (600): The New Baseline */
+/* SEMI-BOLD (600): UI Controls & Standard Text */
 .raw-text-block p, 
 .gateway-menu-toggle,
 .desktop-menu span,
 .sidebar-option span,
 .step-name,
 .split-text,
-#console-clock {
+#console-clock,
+.glass-nav-links span, 
+.mobile-nav-links span 
+{
     font-weight: 600 !important;
 }
 
-/* BOLD (700): Commanding Hierarchy */
+/* BOLD (700): Anchors & Headers */
 .page-title,
 .raw-text-block h2,
 .step-content.raw-text-block h3,
 .raw-text-block strong,
 .terminal-link,
-.glass-nav-links span,  /* MOVED TO FULL BOLD */
-.mobile-nav-links span  /* MOVED TO FULL BOLD */
+.text-logo
 {
     font-weight: 700 !important;
 }
