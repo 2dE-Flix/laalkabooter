@@ -605,3 +605,50 @@ body {
 {
     font-weight: 700 !important;
 }
+/* =========================================
+   CRITICAL SYSTEM RESCUE & OPTICAL CALIBRATION
+   ========================================= */
+
+/* 1. ICY OFF-WHITE (Kills Halation & Eye-Strain) */
+:root {
+    --text-primary: #E2E8F0 !important; /* Premium Slate-White */
+    --text-muted: #94A3B8 !important;
+    --glow-core: rgba(226, 232, 240, 0.8) !important;
+}
+
+/* Forces all critical typography to use the new premium off-white */
+.text-logo, .gateway-menu-toggle, .raw-text-block h2, .terminal-link, .split-text {
+    color: var(--text-primary) !important;
+}
+
+/* 2. PC GATEWAY ALIGNMENT (TIGHT DIA-STYLE SPACING) */
+.split-container {
+    display: flex !important;
+    gap: 8rem !important; /* Pulls Talents and Brands tightly into the center */
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* 3. ABSOLUTE MOBILE LOCK (FIXES THE SCREEN BREAKS) */
+@media (max-width: 768px) {
+    /* Rescues the layout: Forces Talents/Brands to stack vertically again */
+    .split-container {
+        flex-direction: column !important; 
+        gap: 4.5rem !important; 
+    }
+
+    /* Locks the Pill Nav physically so it CANNOT expand into a giant blob */
+    .top-nav {
+        height: 60px !important; 
+        min-height: 60px !important;
+        display: flex !important;
+        align-items: center !important;
+        background: rgba(0, 89, 133, 0.4) !important; /* Deep Ocean Glass */
+    }
+    
+    /* Locks the void curtain */
+    .top-nav::before {
+        height: 15px !important;
+        background: #010a18 !important;
+    }
+}
