@@ -111,20 +111,47 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 /* =========================================
-   3. UNIVERSAL NAVIGATION (DESKTOP FIRST)
+   3. UNIVERSAL FLOATING HEADER (PC DESIGN)
    ========================================= */
 .top-nav {
     position: fixed;
-    top: 0; left: 0; width: 100%;
-    padding: 2.5rem 4rem;
-    display: flex; justify-content: flex-start;
+    top: 0; 
+    left: 0; 
+    width: 100vw;
+    padding: 3rem 4rem; 
+    
+    /* THE FIX: Pushes them to the edges and perfectly centers them vertically */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    
     z-index: 100;
-    pointer-events: none;
+    pointer-events: none; 
 }
 
-.logo-container {
-    pointer-events: auto;
+/* Reactivates clicks for the individual items */
+.logo-container, .gateway-menu-toggle, .hamburger {
+    pointer-events: auto; 
 }
+
+/* The MENU Button Styling */
+.gateway-menu-toggle {
+    font-size: 0.7rem; 
+    letter-spacing: 4px; 
+    font-weight: 700 !important;
+    color: #ffffff;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gateway-menu-toggle:hover {
+    color: var(--brand-accent) !important;
+    text-shadow: 0px 0px 12px rgba(0, 229, 255, 0.5);
+}
+
+/* Kills the old absolute-positioned 4-corner menu if it's still hanging around */
+.desktop-menu { display: none !important; }
 
 /* =========================================
    PURE TEXT LOGOTYPE (RAVIE)
