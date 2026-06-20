@@ -8,21 +8,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body> 
-<canvas id="webgl-canvas" class="depth-surface"></canvas>
+    <canvas id="webgl-canvas" class="depth-surface"></canvas>
     <div class="grain"></div>
-<header class="top-nav">
+    
+    <header class="top-nav">
         <div class="logo-container">
             <a href="index.html" class="text-logo">RAVIE</a>
         </div>
-
         <div class="gateway-menu-toggle" id="gateway-menu-btn">MENU</div>
-
         <div class="hamburger" id="hamburger-menu">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
     </header>
+
     <div class="liquid-glass-overlay" id="liquid-glass-overlay">
         <nav class="glass-nav-links">
             <span onclick="window.location.href='index.html'">HOME</span>
@@ -38,42 +38,39 @@
             <span onclick="window.location.href='socials.html'">SOCIALS</span>
         </nav>
     </div>
+
     <main id="app-container">
-        
         <section id="gateway-view" class="view active-view">
             <div class="split-container">
                 <div class="split-option" id="btn-creators">
-                    <img src="assets/creator (web logo).png" alt="Creator Logo" class="split-icon outline-chevron">
+                    <img src="assets/creator.png" alt="Creator Logo" class="split-icon outline-chevron">
                     <span class="split-text">TALENTS</span>
                 </div>
 
                 <div class="split-option" id="btn-brands">
-                    <img src="assets/Brand (web logo).png" alt="Brand Logo" class="split-icon solid-chevron">
+                    <img src="assets/brand.png" alt="Brand Logo" class="split-icon solid-chevron">
                     <span class="split-text">BRANDS</span>
                 </div>
             </div>
         </section>
 
         <section id="platform-view" class="view">
-            
-  <aside class="platform-sidebar">
+            <aside class="platform-sidebar">
                 <div class="sidebar-option active-sidebar" id="side-talents">
                     <span>TALENTS</span>
                 </div>
-                
                 <div class="sidebar-option" id="side-brands">
                     <span>BRANDS</span>
                 </div>
             </aside>
             <div class="platform-content">
-           <div class="ledger-stream" id="ledger-talents">
+                <div class="ledger-stream active-stream" id="ledger-talents">
                     <div class="raw-text-block">
                         <h2>FOR TALENTS</h2>
                         <p>At RAVIE, we take time to actually understand your content, style, and vision. If you have an engaging community, we connect you with brands that genuinely fit your niche.</p>
                         <p>We believe every small creator has potential and they must be rewarded. Beyond just brand deals, we also help with creative direction, giving you fresh ideas whenever you get stuck or when you want to try something new.</p>
                         <p>Together, we take your content to the next level. Our model is open for every potential creator, and that's how we are <strong>Decentralizing Opportunities.</strong></p>
-                        
-                  <a href="mailto:talents@ravie.in" class="terminal-link">Email — talents@ravie.in</a>
+                        <a href="mailto:talents@ravie.in" class="terminal-link">Email — talents@ravie.in</a>
                     </div>
                 </div>
 
@@ -83,15 +80,15 @@
                         <p>We believe various potential creators can do more for you than a few big ones. So we take time to understand what your brand stands for and who you’re trying to reach. Then we match you with hundreds of potential small creators whose content genuinely aligns with your goals, not whoever only has the biggest following.</p>
                         <p>We work closely with these small creators to shape content that feels native to their platform while still delivering your message clearly.</p>
                         <p>A few big people can't represent the whole niche due to a lack of deep connection, so spreading brand awareness among thousands of small creators is our vision.</p>
-                        
-                       <a href="mailto:brands@ravie.in" class="terminal-link">Email — brands@ravie.in</a>
+                        <a href="mailto:brands@ravie.in" class="terminal-link">Email — brands@ravie.in</a>
                     </div>
                 </div>
-            </div>  </section>
-
+            </div>  
+        </section>
     </main>
-<div id="console-clock" class="desktop-only">00:00:00</div>
- </main>
+    
+    <div id="console-clock" class="desktop-only">00:00:00</div>
+    
     <script src="script.js"></script>
 </body>
 </html>
