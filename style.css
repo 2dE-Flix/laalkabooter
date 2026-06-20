@@ -205,15 +205,24 @@ body {
     font-weight: 400;
     transition: all 0.4s ease;
 }
-/* Hover Math */
-.split-container:hover .split-option { opacity: 0.15; }
-.split-container .split-option:hover { opacity: 1; }
+/* Hover Math - FIXED DEADZONE */
+/* Only dims the un-hovered option IF an option is actively being hovered */
+.split-container:has(.split-option:hover) .split-option:not(:hover) { 
+    opacity: 0.15; 
+}
+
+.split-option:hover { 
+    opacity: 1; 
+}
+
 .split-option:hover .split-icon {
     filter: drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
     transform: scale(1.08) translateY(-5px);
 }
+
 .split-option:hover .split-text {
-    color: #ffffff; text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
+    color: #ffffff; 
+    text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
 }
 /* =========================================
    LIQUID GLASS OVERLAY (GATEWAY)
@@ -488,7 +497,7 @@ body {
     transform: translateX(0); /* Slides into place */
 }
 
-/* 1. The Compass (Desktop Left Axis) - UX UPGRADE (20% SMALLER) */
+/* 1. The Compass (Desktop Left Axis) - ULTRA MINIMAL */
 .platform-sidebar {
     position: fixed;
     left: 3rem; 
@@ -496,8 +505,7 @@ body {
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 0.4rem; /* Tighter gap */
-    border-left: 1px solid rgba(255, 255, 255, 0.1); 
+    gap: 0.3rem; /* Tighter gap to match the smaller scale */
     padding-left: 0; 
     z-index: 100;
 }
@@ -505,27 +513,25 @@ body {
 .sidebar-option {
     cursor: pointer;
     opacity: 0.55; 
-    padding: 0.8rem 1.2rem; /* Reduced by 20% for a sharper look */
-    border-radius: 0 10px 10px 0; 
-    border-left: 2px solid transparent; /* Thinner border */
+    padding: 0.7rem 1rem; /* Shrunk by another 10% for a razor-sharp footprint */
+    border-radius: 0 8px 8px 0; /* Slightly tighter corner radius */
+    border-left: 2px solid transparent; 
     background: rgba(0, 2, 8, 0.0); 
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar-option span {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.68rem; /* Scaled down 20% */
-    letter-spacing: 5px; /* Tighter tracking */
-    font-weight: 600;
+    font-size: 0.6rem; /* Dropped to a true micro-typography scale */
+    letter-spacing: 5px; 
     color: #ffffff;
     pointer-events: none; 
 }
 
-/* The Hover Cue - Scaled appropriately */
+/* The Hover Cue */
 .sidebar-option:hover {
     opacity: 1;
     background: rgba(255, 255, 255, 0.04); 
-    transform: translateX(6px); /* Lighter nudge */
+    transform: translateX(5px); /* Shortened the physical nudge to match the smaller size */
 }
 
 /* The Active State Lock */
@@ -533,11 +539,12 @@ body {
     opacity: 1;
     background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
     border-left: 2px solid #00E5FF;
+    transform: translateX(5px); /* Perfectly locks forward without snapping back */
 }
 
 .sidebar-option.active-sidebar span {
     color: #00E5FF;
-    text-shadow: 0px 0px 12px rgba(0, 229, 255, 0.5); /* Tighter glow */
+    text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5); /* Tighter glow */
 }
 /* 2. The Ledger Data Stream - CENTERED ARCHITECTURE */
 .platform-content {
