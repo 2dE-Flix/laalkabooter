@@ -29,15 +29,19 @@ html, body {
 :root {
     --bg-deep: #010a18;
     --brand-accent: #00E5FF;
-    --text-primary: #ffffff;
-    --text-muted: #6b7280;
-    --glow-core: rgba(255, 255, 255, 0.95);
-    --glow-halo: rgba(100, 180, 255, 0.85);
+    
+    /* THE FIX: Replaced pure white with a premium icy off-white to stop eye strain */
+    --text-primary: #E2E8F0; 
+    --text-muted: #94A3B8; /* Shifted to match the new slate tone */
+    
+    /* Softened the glow variables so they don't blind the user */
+    --glow-core: rgba(226, 232, 240, 0.8);
+    --glow-halo: rgba(100, 180, 255, 0.4);
+    
     --x: 50%;
     --y: 50%;
     --cursor-glow: #001233;
 }
-
 body {
     background-color: #010a18; 
     color: var(--text-primary);
@@ -108,7 +112,7 @@ body {
 .text-logo {
     font-size: 1.4rem; 
     letter-spacing: 8px; 
-    color: #ffffff; 
+    color: var(--text-primary); /* Swapped */
     text-transform: uppercase;
     text-decoration: none; 
     display: inline-block;
@@ -117,7 +121,7 @@ body {
 .gateway-menu-toggle {
     font-size: 0.7rem; 
     letter-spacing: 4px; 
-    color: #ffffff;
+    color: var(--text-primary); /* Swapped */
     cursor: pointer;
     text-transform: uppercase;
 }
@@ -306,7 +310,7 @@ body {
 .raw-text-block h2 {
     font-size: 1.55rem; /* Up 10% - Larger, commanding title */
     letter-spacing: 5px; 
-    color: #ffffff;
+   color: var(--text-primary); /* Swapped */
     text-transform: uppercase;
     margin-bottom: 2.5rem; 
     position: relative;
@@ -338,7 +342,7 @@ body {
     font-size: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #ffffff;
+   color: var(--text-primary);
     text-decoration: none;
     margin-top: 1.5rem;
     padding-bottom: 6px;
