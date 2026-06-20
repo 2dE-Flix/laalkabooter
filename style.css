@@ -4,12 +4,17 @@
 /* =========================================
    1. CORE RESET & VARIABLES
    ========================================= */
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@600,700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     /* Kills the blue mobile tap flash globally */
     -webkit-tap-highlight-color: transparent; 
+    
+    /* THE MASTER FONT LOCK: Locks General Sans on line 12 */
+    font-family: 'General Sans', sans-serif !important;
 }
 
 /* Kills focus outlines and prevents accidental text highlighting on UI elements */
@@ -41,11 +46,11 @@ html, body {
     --y: 50%;
     --cursor-glow: #001233;
 }
+
 body {
     background-color: #010a18; 
     color: var(--text-primary);
-    font-family: 'Inter', sans-serif !important;
-    -webkit-font-smoothing: antialiased; /* Makes the font look ultra-crisp on Mac/iOS */
+    -webkit-font-smoothing: antialiased; /* Ultra-crisp subpixel geometry */
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh; width: 100vw;
     position: relative;
@@ -887,4 +892,29 @@ body {
     #console-clock {
         display: none !important;
     }
+}
+/* =========================================
+   MASTER OVERRIDE: WEIGHT HIERARCHY
+   ========================================= */
+
+/* SEMI-BOLD (600): The New Baseline */
+.raw-text-block p, 
+.glass-nav-links span, 
+.mobile-nav-links span, 
+.gateway-menu-toggle,
+.desktop-menu span,
+.sidebar-option span,
+.step-name,
+.split-text,
+#console-clock {
+    font-weight: 600 !important;
+}
+
+/* BOLD (700): Commanding Hierarchy */
+.page-title,
+.raw-text-block h2,
+.step-content.raw-text-block h3,
+.raw-text-block strong,
+.terminal-link {
+    font-weight: 700 !important;
 }
