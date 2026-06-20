@@ -568,60 +568,57 @@ body {
     color: #00E5FF;
     text-shadow: 0px 0px 10px rgba(0, 229, 255, 0.5); /* Tighter glow */
 }
-/* 2. The Ledger Data Stream - CENTERED ARCHITECTURE */
+/* 2. The Ledger Data Stream - LEFT-ALIGNED ARCHITECTURE */
 .platform-content {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Snaps the container layout to the left */
     align-items: center;
     height: 100dvh;
     width: 100%;
-    padding: 0 2rem;
-    font-family: 'Inter', sans-serif !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.ledger-stream {
-    display: none;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.ledger-stream.active-stream {
-    display: flex;
-    animation: textFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* Pushes content right to clear the micro-sidebar, adds massive breathing room on the right */
+    padding: 0 10vw 0 18rem; 
 }
 
 /* =========================================
-   RAW TEXT BLOCK DESIGN
+   RAW TEXT BLOCK DESIGN (FLUSH-LEFT)
    ========================================= */
 .raw-text-block {
-    max-width: 680px; /* Optimal reading width */
-    text-align: center;
-    padding: 0 24px;
+    max-width: 640px; /* Optimal reading line-length */
+    text-align: left; /* Snaps headers, paragraphs, and links flush-left */
 }
 
 /* Main Headers (FOR TALENTS / FOR BRANDS) */
 .raw-text-block h2 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: 5px; /* Premium tracking matching the main menu */
+    font-size: 1.4rem;
+    font-weight: 700 !important;
+    letter-spacing: 5px; 
     color: #ffffff;
     text-transform: uppercase;
-    margin-bottom: 3rem; /* Breathing room below headings */
+    margin-bottom: 2.5rem; 
+    position: relative;
+    padding-bottom: 15px;
+}
+
+/* Optional: Injecting the sharp About-page style line under the section headers */
+.raw-text-block h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0; /* Aligns the accent line to the left edge of the text */
+    width: 40px; 
+    height: 2px;
+    background: #00E5FF;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
 }
 
 /* Paragraph Text Core */
 .raw-text-block p {
     font-size: 1.05rem;
-    font-weight: 400;
-    line-height: 1.85; /* Generous padding between lines */
-    color: rgba(255, 255, 255, 0.75); /* Soft, elegant readability */
-    margin-bottom: 2.2rem; /* Clean visual space between paragraphs */
+    font-weight: 600 !important; /* Managed by your master weight override */
+    line-height: 1.85; 
+    color: rgba(255, 255, 255, 0.75); 
+    margin-bottom: 2rem; 
 }
-
 /* Target bold emphasis items dynamically */
 .raw-text-block strong {
     color: #00E5FF; /* Accent cyan for brand phrasing */
