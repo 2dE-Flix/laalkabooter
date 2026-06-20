@@ -3,57 +3,72 @@
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
-    const body = document.body;
+    
+    // ==========================================
+    // 1. GLOBAL STATE & DOM ELEMENTS
+    // ==========================================
     let targetDepth = 0;   // 0 = surface (Talents), 1 = deep ocean (Brands)
-    let currentDepth = 0;  // smoothed value actually sent to the shader
+    let currentDepth = 0;  // smoothed value sent to shader
+    let isBackgroundFrozen = false; // The Kill Switch for blur effects
 
-// 2. MOBILE HAMBURGER DROPDOWN
+    // Background
+    const canvas = document.getElementById('webgl-canvas');
+    
+    // Menus & Overlays
     const hamburger = document.getElementById('hamburger-menu');
     const mobileDropdown = document.getElementById('mobile-dropdown');
+    const gatewayMenuBtn = document.getElementById('gateway-menu-btn');
+    const liquidGlassOverlay = document.getElementById('liquid-glass-overlay');
+    
+    // Platform Views
+    const gatewayView = document.getElementById("gateway-view");
+    const platformView = document.getElementById("platform-view");
+    const btnCreators = document.getElementById("btn-creators");
+    const btnBrands = document.getElementById("btn-brands");
+    
+    // Ledger Streams
+    const sideTalents = document.getElementById("side-talents");
+    const sideBrands = document.getElementById("side-brands");
+    const streamTalents = document.getElementById("ledger-talents");
+    const streamBrands = document.getElementById("ledger-brands");
 
+    // ==========================================
+    // 2. UI NAVIGATION ENGINE
+    // ==========================================
+    
+    // Mobile Hamburger Toggle
     if (hamburger && mobileDropdown) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             mobileDropdown.classList.toggle('active-menu');
             
-            // Toggle Freeze & Blur
             isBackgroundFrozen = !isBackgroundFrozen;
-            if(canvas) canvas.classList.toggle('frozen-blur');
+            if (canvas) canvas.classList.toggle('frozen-blur');
         });
     }
 
-    // 3. GATEWAY LIQUID GLASS MENU (PC ONLY)
-    const gatewayMenuBtn = document.getElementById('gateway-menu-btn');
-    const liquidGlassOverlay = document.getElementById('liquid-glass-overlay');
-
+    // Desktop Gateway Glass Menu Toggle
     if (gatewayMenuBtn && liquidGlassOverlay) {
         gatewayMenuBtn.addEventListener('click', () => {
             const isActive = liquidGlassOverlay.classList.contains('active-glass');
+            
             if (isActive) {
                 liquidGlassOverlay.classList.remove('active-glass');
                 gatewayMenuBtn.textContent = 'MENU';
-                // Unfreeze & Remove Blur
                 isBackgroundFrozen = false;
-                if(canvas) canvas.classList.remove('frozen-blur');
+                if (canvas) canvas.classList.remove('frozen-blur');
             } else {
                 liquidGlassOverlay.classList.add('active-glass');
                 gatewayMenuBtn.textContent = 'CLOSE';
-                // Freeze & Add Blur
                 isBackgroundFrozen = true;
-                if(canvas) canvas.classList.add('frozen-blur');
+                if (canvas) canvas.classList.add('frozen-blur');
             }
         });
     }
-    // 4. INNER PLATFORM ENGINE (LEDGER)
-    const btnCreators = document.getElementById("btn-creators");
-    const btnBrands = document.getElementById("btn-brands");
-    const gatewayView = document.getElementById("gateway-view");
-    const platformView = document.getElementById("platform-view");
-    
-    const sideTalents = document.getElementById("side-talents");
-    const sideBrands = document.getElementById("side-brands");
-    const streamTalents = document.getElementById("ledger-talents");
-    const streamBrands = document.getElementById("ledger-brands");
+
+    // ==========================================
+    // 3. PLATFORM ROUTING ENGINE
+    // ==========================================
 
     function transitionToPlatform(targetStream) {
         if (gatewayView && platformView) {
@@ -63,69 +78,62 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 gatewayView.classList.remove('active-view');
                 gatewayView.style.display = 'none';
-                
                 platformView.style.display = 'block';
                 
                 setTimeout(() => {
                     platformView.classList.add('active-platform');
                     switchStream(targetStream);
-                }, 50); // Small delay to allow display:block to render before fading in
-            }, 600); // Matches CSS transition timing
+                }, 50); 
+            }, 600); 
         }
     }
 
-   function switchStream(target) {
+    function switchStream(target) {
         // Safely reset Compass (Left Axis)
-        sideTalents?.classList.remove('active-sidebar');
-        sideBrands?.classList.remove('active-sidebar');
+        if (sideTalents) sideTalents.classList.remove('active-sidebar');
+        if (sideBrands) sideBrands.classList.remove('active-sidebar');
         
         // Safely hide Streams (Right Axis)
-        streamTalents?.classList.remove('active-stream');
-        streamBrands?.classList.remove('active-stream');
-
-        // Grab the WebGL background
-        const bgCanvas = document.getElementById('webgl-canvas');
+        if (streamTalents) streamTalents.classList.remove('active-stream');
+        if (streamBrands) streamBrands.classList.remove('active-stream');
 
         // Activate the target streams and trigger Depth Physics
         if (target === 'talents') {
-            sideTalents?.classList.add('active-sidebar');
-            streamTalents?.classList.add('active-stream');
+            if (sideTalents) sideTalents.classList.add('active-sidebar');
+            if (streamTalents) streamTalents.classList.add('active-stream');
             targetDepth = 0;
             
-            // Rise to Surface (Lighter, Normal Position)
-            if(bgCanvas) {
-                bgCanvas.classList.remove('depth-deep');
-                bgCanvas.classList.add('depth-surface');
+            if (canvas) {
+                canvas.classList.remove('depth-deep');
+                canvas.classList.add('depth-surface');
             }
         } else if (target === 'brands') {
-            sideBrands?.classList.add('active-sidebar');
-            streamBrands?.classList.add('active-stream');
+            if (sideBrands) sideBrands.classList.add('active-sidebar');
+            if (streamBrands) streamBrands.classList.add('active-stream');
             targetDepth = 1;
             
-            // Sink to Deep Ocean (Darker, Sinks Downwards)
-            if(bgCanvas) {
-                bgCanvas.classList.remove('depth-surface');
-                bgCanvas.classList.add('depth-deep');
+            if (canvas) {
+                canvas.classList.remove('depth-surface');
+                canvas.classList.add('depth-deep');
             }
         }
     }
 
-    // Event Listeners for Gateway & Compass
-    btnCreators?.addEventListener("click", () => transitionToPlatform("talents"));
-    btnBrands?.addEventListener("click", () => transitionToPlatform("brands"));
-    sideTalents?.addEventListener("click", () => switchStream("talents"));
-    sideBrands?.addEventListener("click", () => switchStream("brands"));
+    // Attach Gateway Listeners
+    if (btnCreators) btnCreators.addEventListener("click", () => transitionToPlatform("talents"));
+    if (btnBrands) btnBrands.addEventListener("click", () => transitionToPlatform("brands"));
+    if (sideTalents) sideTalents.addEventListener("click", () => switchStream("talents"));
+    if (sideBrands) sideBrands.addEventListener("click", () => switchStream("brands"));
+
     // ==========================================
-    // 5. WEBGL FLUID BACKGROUND ENGINE
+    // 4. WEBGL FLUID BACKGROUND ENGINE
     // ==========================================
-    const canvas = document.getElementById('webgl-canvas');
-    let isBackgroundFrozen = false; // The Kill Switch
     
     if (canvas) {
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         
-        const VERT=`attribute vec2 pos;void main(){gl_Position=vec4(pos,0,1);}`;
-        const FRAG=`
+        const VERT = `attribute vec2 pos;void main(){gl_Position=vec4(pos,0,1);}`;
+        const FRAG = `
         precision highp float;
         uniform float u_t; uniform vec2 u_res; uniform float u_depth;
         vec2 ghash(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.0+2.0*fract(sin(p)*43758.5453);}
@@ -184,7 +192,6 @@ document.addEventListener("DOMContentLoaded", () => {
         function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;gl.viewport(0,0,canvas.width,canvas.height);}
         resize(); window.addEventListener('resize',resize);
         
-        // Custom Time Engine for the Freeze Effect
         let lastTime = 0;
         let shaderTime = 0;
 
@@ -192,12 +199,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let deltaTime = ts - lastTime;
             lastTime = ts;
 
-            // Only advance the fluid simulation if the menu is CLOSED
             if (!isBackgroundFrozen) {
                 shaderTime += deltaTime * 0.006; 
             }
 
-            // Ease the depth dial toward wherever the user last clicked (Talents=0, Brands=1)
             currentDepth += (targetDepth - currentDepth) * Math.min(1, deltaTime * 0.0025);
 
             gl.uniform1f(uT, shaderTime);
@@ -208,9 +213,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         requestAnimationFrame(render);
     }
-});
 
-// 4. REAL-TIME CONSOLE CLOCK ENGINE (MINIMALIST)
+    // ==========================================
+    // 5. REAL-TIME CONSOLE CLOCK ENGINE
+    // ==========================================
+    
     function startConsoleClock() {
         const clockElement = document.getElementById('console-clock');
         if (!clockElement) return;
@@ -218,7 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setInterval(() => {
             const now = new Date();
             
-            // Force conversion to Indian Standard Time (IST) math behind the scenes
             const options = {
                 timeZone: 'Asia/Kolkata',
                 hour: '2-digit',
@@ -227,13 +233,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 hour12: false
             };
 
-            // Generate the clean time string
-            let istTimeString = now.toLocaleTimeString('en-US', options);
-
-            // Render strictly the numbers, no suffix
-            clockElement.textContent = istTimeString;
+            clockElement.textContent = now.toLocaleTimeString('en-US', options);
         }, 1000);
     }
 
-    // Initialize clock
     startConsoleClock();
+
+});
