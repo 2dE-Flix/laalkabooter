@@ -288,35 +288,23 @@ body {
     transform: translateX(5px); 
 }
 
-/* LEDGER DATA STREAM (LEFT-ALIGNED + BUG FIXES) */
+/* LEDGER DATA STREAM (CENTERED BLOCK, LEFT-ALIGNED TEXT) */
 .platform-content {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: center; /* Snaps the entire text block back to the center */
     align-items: center;
     height: 100dvh;
     width: 100%;
-    padding: 0 10vw 0 18rem; /* Clears the micro sidebar on PC */
-}
-
-.ledger-stream {
-    display: none !important; /* CRITICAL FIX: Forces inactive streams to vanish */
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.ledger-stream.active-stream {
-    display: flex !important; /* CRITICAL FIX: Only allows clicked stream to show */
-    animation: textFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    padding: 0 4rem 0 12rem; /* Offsets the center reading area safely away from the left compass */
 }
 
 .raw-text-block {
     max-width: 640px; 
-    text-align: left; 
+    text-align: left; /* Keeps the actual sentences perfectly flush-left */
 }
 
 .raw-text-block h2 {
-    font-size: 1.4rem;
+    font-size: 1.55rem; /* Up 10% - Larger, commanding title */
     letter-spacing: 5px; 
     color: #ffffff;
     text-transform: uppercase;
@@ -337,7 +325,7 @@ body {
 }
 
 .raw-text-block p {
-    font-size: 1.05rem;
+    font-size: 1rem; /* Down 5% - Tighter, more precise reading scale */
     line-height: 1.85; 
     color: rgba(255, 255, 255, 0.75); 
     margin-bottom: 2rem; 
@@ -449,25 +437,48 @@ body {
         background-size: 100% 100%;
     }
 
-    /* THE PILL HEADER */
+/* =========================================
+       THE FLOATING PILL HEADER (MOBILE DESIGN)
+       ========================================= */
     .top-nav { 
+        position: fixed;
         top: 15px !important; 
         left: 5% !important;
         width: 90% !important; 
         padding: 0.6rem 1.2rem !important; 
+        justify-content: space-between; 
+        align-items: center; 
+        pointer-events: auto; 
+        z-index: 300 !important; 
+        
         border-radius: 50px;
-        background: rgba(2, 16, 36, 0.4); 
-        backdrop-filter: blur(20px) saturate(120%); 
-        -webkit-backdrop-filter: blur(20px) saturate(120%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        
+        /* THE COLOR & DEFINITION UPGRADE: Deep Ocean Glass Blue */
+        /* Vibrant deep blue is used here to stand out from the void black background */
+        background: rgba(0, 89, 133, 0.35) !important;
+        backdrop-filter: blur(25px) saturate(140%); /* Rich blur distortion with a saturated color pull */
+        -webkit-backdrop-filter: blur(25px) saturate(140%);
+        
+        /* Edge definition that beg to be clicked */
+        border: 1px solid rgba(0, 229, 255, 0.15); /* Glowing cyan border highlight */
+        /* Deeper shadow pulls the element into the foreground so 'it's there' */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
+    /* THE CURTAIN (FIXING THE BLEEDING TEXT GAP) */
+    /* Instead of a complex mask, we use a solid curtain to cover the exact top 15px void void */
     .top-nav::before {
-        content: ''; position: absolute; top: -15px; left: -10vw; width: 120vw; height: 120px; 
-        background: linear-gradient(to bottom, #010a18 45%, transparent 100%); z-index: -1; pointer-events: none;
+        content: '';
+        position: absolute;
+        top: -15px; /* Aligns this block to the very top edge (top: 0px) */
+        left: -10vw; /* Pushes the curtain out to the sides for full coverage */
+        width: 120vw;
+        height: 15px; /* Perfectly spans the gap between the top edge and the floating pill */
+        background: #010a18; /* Perfectly solid block of the precise void black void */
+        z-index: -1;
+        pointer-events: none;
+        border-radius: 0;
     }
-    
     .text-logo { font-size: 1.1rem; letter-spacing: 6px; }
 
     /* HAMBURGER */
