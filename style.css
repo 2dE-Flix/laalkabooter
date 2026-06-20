@@ -126,13 +126,34 @@ body {
     pointer-events: auto;
 }
 
-/* The Ultimate Image Lock */
-.master-logo {
-    height: 36px !important;
-    width: auto !important;
-    max-width: 200px !important;
-    object-fit: contain;
-    display: block;
+/* =========================================
+   PURE TEXT LOGOTYPE (RAVIE)
+   ========================================= */
+.text-logo {
+    font-family: 'General Sans', sans-serif !important;
+    font-size: 1.4rem; /* Big, commanding presence */
+    font-weight: 700 !important; /* Full bold */
+    letter-spacing: 8px; /* Massive tracking */
+    color: #ffffff; /* Kills the default purple link color */
+    text-transform: uppercase;
+    text-decoration: none; /* Kills the default underline */
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Subtle brand-glow interaction */
+.text-logo:hover {
+    color: #00E5FF;
+    text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Mobile Logo Scaling Override */
+@media (max-width: 768px) {
+    .text-logo {
+        font-size: 1.1rem; /* Scales down cleanly for your floating pill header */
+        letter-spacing: 6px; 
+    }
 }
 
 /* 4-Corner Layout */
