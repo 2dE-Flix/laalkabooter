@@ -293,6 +293,17 @@ body {
 }
 
 /* LEDGER DATA STREAM (CENTERED BLOCK, LEFT-ALIGNED TEXT) */
+.ledger-stream {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.ledger-stream.active-stream {
+    display: block;
+    opacity: 1;
+    animation: textFadeIn 0.8s ease forwards;
+}
 .platform-content {
     display: flex;
     justify-content: center; /* Snaps the entire text block back to the center */
@@ -444,44 +455,37 @@ body {
 /* =========================================
        THE FLOATING PILL HEADER (MOBILE DESIGN)
        ========================================= */
-    .top-nav { 
+.top-nav { 
         position: fixed;
         top: 15px !important; 
-        left: 5% !important;
+        left: 50% !important; /* Move to true center */
+        transform: translateX(-50%); /* Pull back exactly half its width to perfectly center */
         width: 90% !important; 
+        max-width: 400px; /* Safety restraint for wider tablets/phones */
         padding: 0.6rem 1.2rem !important; 
         justify-content: space-between; 
         align-items: center; 
         pointer-events: auto; 
         z-index: 300 !important; 
-        
         border-radius: 50px;
-        
-        /* THE COLOR & DEFINITION UPGRADE: Deep Ocean Glass Blue */
-        /* Vibrant deep blue is used here to stand out from the void black background */
         background: rgba(0, 89, 133, 0.35) !important;
-        backdrop-filter: blur(25px) saturate(140%); /* Rich blur distortion with a saturated color pull */
+        backdrop-filter: blur(25px) saturate(140%); 
         -webkit-backdrop-filter: blur(25px) saturate(140%);
-        
-        /* Edge definition that beg to be clicked */
-        border: 1px solid rgba(0, 229, 255, 0.15); /* Glowing cyan border highlight */
-        /* Deeper shadow pulls the element into the foreground so 'it's there' */
+        border: 1px solid rgba(0, 229, 255, 0.15); 
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
-    /* THE CURTAIN (FIXING THE BLEEDING TEXT GAP) */
-    /* Instead of a complex mask, we use a solid curtain to cover the exact top 15px void void */
+    /* THE CURTAIN (Fixed Geometry) */
     .top-nav::before {
         content: '';
-        position: absolute;
-        top: -15px; /* Aligns this block to the very top edge (top: 0px) */
-        left: -10vw; /* Pushes the curtain out to the sides for full coverage */
-        width: 120vw;
-        height: 15px; /* Perfectly spans the gap between the top edge and the floating pill */
-        background: #010a18; /* Perfectly solid block of the precise void black void */
+        position: fixed; /* Lock to screen instead of the pill */
+        top: 0; 
+        left: 0; 
+        width: 100vw; /* Exact screen width, no overflow */
+        height: 15px; 
+        background: #010a18; 
         z-index: -1;
         pointer-events: none;
-        border-radius: 0;
     }
     .text-logo { font-size: 1.1rem; letter-spacing: 6px; }
 
@@ -495,13 +499,13 @@ body {
     .hamburger.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: var(--brand-accent); }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
-
-    /* FLOATING DROPDOWN */
+/* FLOATING DROPDOWN */
     .mobile-dropdown {
+        display: flex; /* THIS WAS MISSING! */
         position: fixed; top: 85px; left: 5%; width: 90%;
         background: rgba(0, 2, 8, 0.35); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
         border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        border-radius: 24px; padding: 1.2rem 1rem; display: flex; flex-direction: column; z-index: 250; 
+        border-radius: 24px; padding: 1.2rem 1rem; flex-direction: column; z-index: 250; 
         opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .mobile-dropdown.active-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
