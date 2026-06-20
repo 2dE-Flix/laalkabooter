@@ -271,15 +271,15 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: rgba(0, 2, 8, 0.6); /* Extremely sheer dark tint */
-    backdrop-filter: blur(20px); /* Heavy liquid glass distortion */
-    -webkit-backdrop-filter: blur(20px); /* Safari support */
-    z-index: 90; /* Drops the glass behind the header so the CLOSE button and logo stay visible */
+    background: rgba(0, 2, 8, 0.75); /* Darkened the tint slightly to block background glare */
+    backdrop-filter: blur(35px); /* Massive blur upgrade for perfect readability */
+    -webkit-backdrop-filter: blur(35px); /* Safari support */
+    z-index: 90; 
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    pointer-events: none; /* Allows clicks to pass through when hidden */
+    pointer-events: none; 
     transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -319,6 +319,7 @@ body {
     color: var(--brand-accent);
     text-shadow: 0px 0px 20px rgba(0, 229, 255, 0.6);
     transform: scale(1.05) !important;
+    transition-duration: 0.1s !important; /* THE KINETIC FIX: Snaps instantly on hover */
 }
 /* =========================================
    ABOUT PAGE - TIMELINE & MANIFESTO
@@ -927,8 +928,6 @@ body {
 
 /* SEMI-BOLD (600): The New Baseline */
 .raw-text-block p, 
-.glass-nav-links span, 
-.mobile-nav-links span, 
 .gateway-menu-toggle,
 .desktop-menu span,
 .sidebar-option span,
@@ -943,6 +942,9 @@ body {
 .raw-text-block h2,
 .step-content.raw-text-block h3,
 .raw-text-block strong,
-.terminal-link {
+.terminal-link,
+.glass-nav-links span,  /* MOVED TO FULL BOLD */
+.mobile-nav-links span  /* MOVED TO FULL BOLD */
+{
     font-weight: 700 !important;
 }
