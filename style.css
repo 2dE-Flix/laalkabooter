@@ -147,9 +147,12 @@ body {
     display: flex; opacity: 1;
 }
 
+/* 2. CENTRAL SPLIT SPACING */
 .split-container {
-    display: flex; gap: 25vw; align-items: center;
+    /* Pushes the two blocks significantly further apart */
+    gap: 16vw !important; 
 }
+
 
 .split-option {
     display: flex; flex-direction: column; align-items: center; gap: 2rem;
@@ -166,12 +169,11 @@ body {
     display: block;
 }
 
+/* Optional: Slight size bump to the center text to balance the new wide gap */
 .split-text {
-    font-size: 0.75rem; 
-    letter-spacing: 6px; 
-    transition: all 0.4s ease;
+    font-size: 0.85rem !important;
+    letter-spacing: 7px !important;
 }
-
 /* Hover Math - FIXED DEADZONE */
 .split-container:has(.split-option:hover) .split-option:not(:hover) { 
     opacity: 0.15; 
@@ -687,4 +689,31 @@ body {
         height: 15px !important;
         background: #010a18 !important;
     }
+}
+/* =========================================
+   FINAL UI CALIBRATION: SPACING & COLOR
+   ========================================= */
+
+:root {
+    /* Soft, anti-glare paper white to stop eye strain */
+    --text-primary: #F4F4F2 !important; 
+    --text-muted: #A1A1AA !important; 
+    --glow-core: rgba(244, 244, 242, 0.5) !important;
+}
+
+/* 1. PIN TO CORNERS (DESKTOP) */
+.top-nav {
+    /* 2.5rem from top, 3.5vw from the far left/right edges */
+    padding: 2.5rem 3.5vw !important; 
+}
+
+#console-clock {
+    /* Matches the exact padding of the top nav, but on the bottom */
+    bottom: 2.5rem !important;
+    left: 3.5vw !important;
+}
+
+/* Make sure the text elements actually use the soft white */
+.text-logo, .gateway-menu-toggle, .raw-text-block h2, .terminal-link, .split-text, #console-clock {
+    color: var(--text-primary) !important;
 }
