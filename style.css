@@ -1,5 +1,5 @@
 /* =========================================
-   RAVIE.IN - MASTER STYLESHEET (BUG-FREE BUILD)
+   RAVIE.IN - MASTER STYLESHEET (V2.0)
    ========================================= */
 
 /* =========================================
@@ -15,42 +15,34 @@
     font-family: 'General Sans', sans-serif !important;
 }
 
-a, button, span, .split-option, .hamburger, .social-card {
-    outline: none !important;
-    user-select: none;
-    -webkit-user-select: none;
+:root {
+    /* Base Colors */
+    --bg-deep: #010a18;
+    --brand-accent: #00E5FF;
+    
+    /* Anti-Glare Typography Calibration */
+    --text-primary: #F4F4F2; 
+    --text-muted: #A1A1AA; 
+    --glow-core: rgba(244, 244, 242, 0.4);
+    --glow-halo: rgba(100, 180, 255, 0.4);
 }
 
 html, body {
     max-width: 100vw;
     overflow-x: hidden;
-}
-
-:root {
-    --bg-deep: #010a18;
-    --brand-accent: #00E5FF;
-    
-    /* THE FIX: Replaced pure white with a premium icy off-white to stop eye strain */
-    --text-primary: #E2E8F0; 
-    --text-muted: #94A3B8; /* Shifted to match the new slate tone */
-    
-    /* Softened the glow variables so they don't blind the user */
-    --glow-core: rgba(226, 232, 240, 0.8);
-    --glow-halo: rgba(100, 180, 255, 0.4);
-    
-    --x: 50%;
-    --y: 50%;
-    --cursor-glow: #001233;
-}
-body {
-    background-color: #010a18; 
+    background-color: var(--bg-deep); 
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh; width: 100vw;
+    min-height: 100vh; 
     position: relative;
-    overflow-x: hidden; overflow-y: auto;
     z-index: 1;
+}
+
+a, button, span, .split-option, .hamburger, .social-card {
+    outline: none !important;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 /* =========================================
@@ -60,7 +52,7 @@ body {
     position: fixed;
     top: -5vh; left: -5vw; 
     width: 110vw; height: 110vh; 
-    background-color: #010a18; 
+    background-color: var(--bg-deep); 
     z-index: -3;
     pointer-events: none;
     transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
@@ -90,17 +82,16 @@ body {
 }
 
 /* =========================================
-   3. UNIVERSAL FLOATING HEADER (PC DESIGN)
+   3. UNIVERSAL FLOATING HEADER (DESKTOP)
    ========================================= */
 .top-nav {
     position: fixed;
-    top: 0; 
-    left: 0; 
+    top: 0; left: 0; 
     width: 100vw;
-    padding: 3rem 4rem; 
+    padding: 1.5rem 2vw; /* Pinned to corners */
     display: flex; 
-    justify-content: space-between; /* Pushes Logo left, Menu right */
-    align-items: center; /* Perfect horizontal baseline */
+    justify-content: space-between; 
+    align-items: center; 
     z-index: 100;
     pointer-events: none; 
 }
@@ -109,24 +100,34 @@ body {
     pointer-events: auto; 
 }
 
+/* Master Text Logo */
 .text-logo {
-    font-size: 1.4rem; 
+    font-size: 1.55rem; 
     letter-spacing: 8px; 
-    color: var(--text-primary); /* Swapped */
+    color: var(--text-primary);
     text-transform: uppercase;
     text-decoration: none; 
     display: inline-block;
+    font-weight: 700;
+}
+
+/* Master Image Logo (Fixes About/Socials Bug) */
+.master-logo {
+    height: 24px; 
+    width: auto;
+    object-fit: contain;
+    display: block;
 }
 
 .gateway-menu-toggle {
-    font-size: 0.7rem; 
-    letter-spacing: 4px; 
-    color: var(--text-primary); /* Swapped */
+    font-size: 0.85rem; 
+    letter-spacing: 5px; 
+    color: var(--text-primary);
     cursor: pointer;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
-.desktop-menu { display: none !important; }
 .hamburger, .mobile-dropdown { display: none; }
 
 /* =========================================
@@ -136,23 +137,23 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
-    justify-content: center; align-items: center;
+    justify-content: center; 
+    align-items: center;
 }
 
 .view {
     display: none; opacity: 0; transition: opacity 0.6s ease-in-out;
 }
-
 .view.active-view {
     display: flex; opacity: 1;
 }
 
-/* 2. CENTRAL SPLIT SPACING */
 .split-container {
-    /* Pushes the two blocks significantly further apart */
-    gap: 16vw !important; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: clamp(4rem, 12vw, 16rem); /* Fluid spacing: adapts to screen width */
 }
-
 
 .split-option {
     display: flex; flex-direction: column; align-items: center; gap: 2rem;
@@ -169,12 +170,15 @@ body {
     display: block;
 }
 
-/* Optional: Slight size bump to the center text to balance the new wide gap */
 .split-text {
-    font-size: 0.85rem !important;
-    letter-spacing: 7px !important;
+    font-size: 0.85rem; 
+    letter-spacing: 7px; 
+    transition: all 0.4s ease;
+    font-weight: 600;
+    color: var(--text-primary);
 }
-/* Hover Math - FIXED DEADZONE */
+
+/* Hover Interaction Math */
 .split-container:has(.split-option:hover) .split-option:not(:hover) { 
     opacity: 0.15; 
 }
@@ -184,12 +188,11 @@ body {
     transform: scale(1.08) translateY(-5px);
 }
 .split-option:hover .split-text {
-    color: #ffffff; 
     text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
 }
 
 /* =========================================
-   LIQUID GLASS OVERLAY (MENU)
+   5. LIQUID GLASS OVERLAY (MENU)
    ========================================= */
 .liquid-glass-overlay {
     position: fixed;
@@ -213,10 +216,7 @@ body {
 }
 
 .glass-nav-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 2rem;
 }
 
 .glass-nav-links span {
@@ -226,11 +226,11 @@ body {
     opacity: 0;
     transform: translateY(20px); 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: 600;
 }
 
 .liquid-glass-overlay.active-glass .glass-nav-links span {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; transform: translateY(0);
 }
 
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(1) { transition-delay: 0.1s; }
@@ -238,136 +238,76 @@ body {
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(3) { transition-delay: 0.3s; }
 
 /* =========================================
-   INNER PLATFORM: THE Y-AXIS LEDGER
+   6. INNER PLATFORM (THE Y-AXIS LEDGER)
    ========================================= */
 #platform-view {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100vw; height: 100dvh;
-    display: none; 
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(40px); 
+    position: absolute; top: 0; left: 0; width: 100vw; height: 100dvh;
+    display: none; opacity: 0; pointer-events: none; transform: translateX(40px); 
     transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 50;
 }
 
 #platform-view.active-platform {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0); 
+    opacity: 1; pointer-events: auto; transform: translateX(0); 
 }
 
-/* MICRO COMPASS (DESKTOP) */
+/* Micro Compass (Desktop) */
 .platform-sidebar {
-    position: fixed;
-    left: 3rem; 
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem; 
-    padding-left: 0; 
-    z-index: 100;
+    position: fixed; left: 3rem; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 0.3rem; z-index: 100;
 }
 
 .sidebar-option {
-    cursor: pointer;
-    opacity: 0.55; 
-    padding: 0.7rem 1rem; 
-    border-radius: 0 8px 8px 0; 
-    border-left: 2px solid transparent; 
+    cursor: pointer; opacity: 0.55; padding: 0.7rem 1rem; 
+    border-radius: 0 8px 8px 0; border-left: 2px solid transparent; 
     background: rgba(0, 2, 8, 0.0); 
 }
 
 .sidebar-option span {
-    font-size: 0.6rem; 
-    letter-spacing: 5px; 
-    color: #ffffff;
-    pointer-events: none; 
+    font-size: 0.75rem; letter-spacing: 5px; color: var(--text-primary); pointer-events: none; font-weight: 600;
 }
 
 .sidebar-option.active-sidebar {
     opacity: 1;
     background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
-    border-left: 2px solid #00E5FF;
+    border-left: 2px solid var(--brand-accent);
     transform: translateX(5px); 
 }
 
-/* LEDGER DATA STREAM (CENTERED BLOCK, LEFT-ALIGNED TEXT) */
-.ledger-stream {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
-
-.ledger-stream.active-stream {
-    display: block;
-    opacity: 1;
-    animation: textFadeIn 0.8s ease forwards;
-}
+/* Ledger Data Streams */
 .platform-content {
-    display: flex;
-    justify-content: center; /* Snaps the entire text block back to the center */
-    align-items: center;
-    height: 100dvh;
-    width: 100%;
-    padding: 0 4rem 0 12rem; /* Offsets the center reading area safely away from the left compass */
+    display: flex; justify-content: center; align-items: center;
+    height: 100dvh; width: 100%; padding: 0 4rem 0 12rem; 
 }
 
-.raw-text-block {
-    max-width: 640px; 
-    text-align: left; /* Keeps the actual sentences perfectly flush-left */
-}
+/* Hide inactive streams to fix overlap bug */
+.ledger-stream { display: none; opacity: 0; transition: opacity 0.6s ease; }
+.ledger-stream.active-stream { display: block; opacity: 1; animation: textFadeIn 0.8s ease forwards; }
+
+.raw-text-block { max-width: 640px; text-align: left; }
 
 .raw-text-block h2 {
-    font-size: 1.55rem; /* Up 10% - Larger, commanding title */
-    letter-spacing: 5px; 
-   color: var(--text-primary); /* Swapped */
-    text-transform: uppercase;
-    margin-bottom: 2.5rem; 
-    position: relative;
-    padding-bottom: 15px;
+    font-size: 1.55rem; letter-spacing: 5px; color: var(--text-primary); text-transform: uppercase;
+    margin-bottom: 2.5rem; position: relative; padding-bottom: 15px; font-weight: 700;
 }
-
 .raw-text-block h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0; 
-    width: 40px; 
-    height: 2px;
-    background: #00E5FF;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+    content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px;
+    background: var(--brand-accent); box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
 }
 
 .raw-text-block p {
-    font-size: 1rem; /* Down 5% - Tighter, more precise reading scale */
-    line-height: 1.85; 
-    color: rgba(255, 255, 255, 0.75); 
-    margin-bottom: 2rem; 
+    font-size: 1rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 2rem; font-weight: 600;
 }
 
-.raw-text-block strong { color: #00E5FF; }
+.raw-text-block strong { color: var(--brand-accent); font-weight: 700; }
 
 .terminal-link {
-    display: inline-block;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-   color: var(--text-primary);
-    text-decoration: none;
-    margin-top: 1.5rem;
-    padding-bottom: 6px;
-    border-bottom: 2px solid rgba(0, 229, 255, 0.3); 
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: auto;
+    display: inline-block; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-primary); text-decoration: none; margin-top: 1.5rem; padding-bottom: 6px;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.3); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto; font-weight: 700;
 }
-
-.terminal-link:hover {
-    color: #00E5FF;
-    border-bottom-color: #00E5FF;
-}
+.terminal-link:hover { color: var(--brand-accent); border-bottom-color: var(--brand-accent); }
 
 @keyframes textFadeIn {
     0% { opacity: 0; transform: translateY(15px); }
@@ -375,30 +315,19 @@ body {
 }
 
 /* =========================================
-   ABOUT & SOCIALS PAGES
+   7. ABOUT & SOCIALS PAGES
    ========================================= */
 .page-container {
-    padding: 120px 5vw 100px 5vw; 
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 5;
+    padding: 120px 5vw 100px 5vw; max-width: 1000px; margin: 0 auto; position: relative; z-index: 5;
 }
 
 .page-title {
-    font-size: 2.2rem; 
-    letter-spacing: 8px;
-    text-align: center;
-    margin-bottom: 80px;
-    color: #ffffff;
-    text-transform: uppercase;
-    position: relative;
-    padding-bottom: 25px; 
+    font-size: 2.2rem; letter-spacing: 8px; text-align: center; margin-bottom: 80px;
+    color: var(--text-primary); text-transform: uppercase; position: relative; padding-bottom: 25px; font-weight: 700;
 }
-
 .page-title::after {
     content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 2px; background: #00E5FF; box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); 
+    width: 60px; height: 2px; background: var(--brand-accent); box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); 
 }
 
 .timeline-wrapper { position: relative; padding-left: 180px; }
@@ -410,88 +339,107 @@ body {
 .timeline-step:last-child { margin-bottom: 0; }
 
 .step-indicator {
-    position: absolute; left: -180px; width: 140px; 
-    display: flex; align-items: center; justify-content: flex-end; top: 5px; 
+    position: absolute; left: -180px; width: 140px; display: flex; align-items: center; justify-content: flex-end; top: 5px; 
 }
 
 .step-name {
-    font-family: monospace; color: #00E5FF; font-size: 0.9rem;
-    letter-spacing: 2px; text-transform: uppercase; padding-right: 18px; 
+    font-family: monospace; color: var(--brand-accent); font-size: 0.9rem; letter-spacing: 2px; 
+    text-transform: uppercase; padding-right: 18px; font-weight: 600;
 }
 
 .step-node {
-    position: absolute; right: -4px; width: 8px; height: 8px;
-    background: #00E5FF; border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
+    position: absolute; right: -4px; width: 8px; height: 8px; background: var(--brand-accent); 
+    border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
 }
 
 .step-content { padding-left: 0; }
-.step-content.raw-text-block, .step-content.raw-text-block p { text-align: left !important; }
 .step-content.raw-text-block h3 {
-    font-size: 1.1rem; letter-spacing: 3px; color: #fff; margin-top: 2.5rem; margin-bottom: 0.8rem; text-transform: uppercase;
+    font-size: 1.1rem; letter-spacing: 3px; color: var(--text-primary); margin-top: 2.5rem; 
+    margin-bottom: 0.8rem; text-transform: uppercase; font-weight: 700;
 }
 .step-content.raw-text-block h3:first-child { margin-top: 0; }
 
 .socials-container { padding: 12rem 2rem 4rem; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 .social-cards { display: flex; gap: 8vw; margin-top: 2rem; }
 .social-card {
-    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 3.5rem 3rem; width: 360px; text-decoration: none; border-radius: 4px; backdrop-filter: blur(12px); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
+    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 3.5rem 3rem; 
+    width: 360px; text-decoration: none; border-radius: 4px; backdrop-filter: blur(12px); 
+    transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
 }
 .social-card h3 { color: var(--text-primary); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 1.2rem; transition: color 0.3s ease; }
 .social-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; transition: color 0.3s ease; }
 .social-card:hover { transform: translateY(-12px); border-color: rgba(0, 229, 255, 0.4); box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15); background: rgba(0, 2, 8, 0.8); }
 .social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
-.social-card:hover p { color: #e5e7eb; }
 
 /* =========================================
-   7. MOBILE RE-ARCHITECTURE 
+   8. CONSOLE CLOCK
+   ========================================= */
+#console-clock {
+    position: fixed; bottom: 1.5rem; left: 2vw; /* Pinned to corners */
+    font-size: 0.75rem; letter-spacing: 4px; color: var(--text-primary); 
+    text-transform: uppercase; z-index: 10; pointer-events: none; font-weight: 600;
+}
+
+/* =========================================
+   9. INTERACTION CALIBRATION
+   ========================================= */
+
+/* ZERO-LATENCY UI (Instant snap for controls) */
+.gateway-menu-toggle:hover,
+.sidebar-option:hover span,
+.sidebar-option.active-sidebar span {
+    color: var(--brand-accent) !important; 
+    text-shadow: none !important; 
+    transform: none !important; 
+    transition: all 0s !important; 
+}
+
+/* FAKE BOLD FOR NAV LINKS (Smooth interpolation) */
+.glass-nav-links span, .mobile-nav-links span {
+    transition: -webkit-text-stroke 0.3s ease, color 0.3s ease;
+    -webkit-text-stroke: 0px var(--text-primary);
+}
+.glass-nav-links span:hover, .mobile-nav-links span:hover {
+    -webkit-text-stroke: 0.8px var(--text-primary); 
+}
+
+/* =========================================
+   10. MOBILE RE-ARCHITECTURE 
    ========================================= */
 @media (max-width: 768px) {
     body {
         background-image: 
-            radial-gradient(circle at 50% 30%, var(--cursor-glow) 0%, transparent 60%),
+            radial-gradient(circle at 50% 30%, #001233 0%, transparent 60%),
             radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%),
             radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
         background-size: 100% 100%;
     }
 
-/* =========================================
-       THE FLOATING PILL HEADER (MOBILE DESIGN)
-       ========================================= */
-.top-nav { 
+    /* THE CLEAN FLOATING PILL */
+    .top-nav { 
         position: fixed;
         top: 15px !important; 
-        left: 50% !important; /* Move to true center */
-        transform: translateX(-50%); /* Pull back exactly half its width to perfectly center */
+        left: 5% !important; 
         width: 90% !important; 
-        max-width: 400px; /* Safety restraint for wider tablets/phones */
-        padding: 0.6rem 1.2rem !important; 
-        justify-content: space-between; 
-        align-items: center; 
-        pointer-events: auto; 
-        z-index: 300 !important; 
+        height: 60px !important; 
+        min-height: 60px !important;
+        padding: 0 1.2rem !important; 
         border-radius: 50px;
-        background: rgba(0, 89, 133, 0.35) !important;
-        backdrop-filter: blur(25px) saturate(140%); 
-        -webkit-backdrop-filter: blur(25px) saturate(140%);
-        border: 1px solid rgba(0, 229, 255, 0.15); 
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        background: rgba(1, 10, 24, 0.65) !important;
+        backdrop-filter: blur(20px) saturate(120%); 
+        -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.08); 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        z-index: 300 !important;
     }
+    .top-nav::before { display: none !important; }
+    
+    .text-logo { font-size: 1.1rem !important; letter-spacing: 6px; }
 
-    /* THE CURTAIN (Fixed Geometry) */
-    .top-nav::before {
-        content: '';
-        position: fixed; /* Lock to screen instead of the pill */
-        top: 0; 
-        left: 0; 
-        width: 100vw; /* Exact screen width, no overflow */
-        height: 15px; 
-        background: #010a18; 
-        z-index: -1;
-        pointer-events: none;
-    }
-    .text-logo { font-size: 1.1rem; letter-spacing: 6px; }
-
-    /* HAMBURGER */
+    /* Hamburger */
     .hamburger { 
         display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; z-index: 105; pointer-events: auto;
         width: 42px; height: 42px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;
@@ -501,9 +449,10 @@ body {
     .hamburger.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: var(--brand-accent); }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
-/* FLOATING DROPDOWN */
+
+    /* Floating Dropdown */
     .mobile-dropdown {
-        display: flex; /* THIS WAS MISSING! */
+        display: flex !important; /* Forces visibility */
         position: fixed; top: 85px; left: 5%; width: 90%;
         background: rgba(0, 2, 8, 0.35); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
         border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -512,47 +461,37 @@ body {
     }
     .mobile-dropdown.active-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .mobile-nav-links { display: flex; flex-direction: column; width: 100%; gap: 0.3rem; }
-    .mobile-nav-links span { font-size: 0.9rem; letter-spacing: 3px; padding: 0.8rem 1.5rem; border-radius: 12px; text-align: left; }
+    .mobile-nav-links span { font-size: 1.05rem !important; letter-spacing: 3px; padding: 0.8rem 1.5rem; border-radius: 12px; text-align: left; }
 
-    /* INNER PLATFORM MOBILE RESET (FIXED OFF-SCREEN BUG) */
-    .platform-content {
-        padding: 11rem 5vw 4rem 5vw !important; 
-        height: auto !important;
-        min-height: 100vh;
-    }
-    #platform-view { height: auto; min-height: 100dvh; }
-
-    /* MOBILE COMPASS SLIDER */
-    .platform-sidebar {
-        position: fixed; left: 0; top: 7rem; width: 100vw; flex-direction: row; justify-content: center; gap: 3rem; border-left: none; padding-left: 0; z-index: 40;
-    }
-    .sidebar-option {
-        padding: 0.5rem; border-left: none !important; border-radius: 0; background: transparent !important; position: relative;
-    }
-    .sidebar-option span { font-size: 0.65rem; letter-spacing: 4px; opacity: 0.6; }
-    .sidebar-option.active-sidebar span { opacity: 1; }
-    .sidebar-option::after {
-        content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0%; height: 2px;
-        background: #00E5FF; box-shadow: 0 0 10px rgba(0, 229, 255, 0.8); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
-    }
-    .sidebar-option.active-sidebar::after { width: 100%; opacity: 1; }
-
-    /* GATEWAY & COMPONENT HIDES */
-    .split-container { flex-direction: column; gap: 4.5rem; }
+    /* Gateway & Components */
+    .split-container { flex-direction: column !important; gap: 4.5rem !important; }
     .split-icon { height: 36px !important; max-width: 120px !important; }
     .split-text { font-size: 0.7rem; letter-spacing: 5px; }
     .gateway-menu-toggle, .liquid-glass-overlay { display: none !important; }
     #console-clock { display: none !important; }
 
-    /* PAGE OVERRIDES */
+    /* Inner Platform Mobile Reset */
+    .platform-content { padding: 11rem 5vw 4rem 5vw !important; height: auto !important; min-height: 100vh; }
+    #platform-view { height: auto; min-height: 100dvh; }
+
+    /* Mobile Compass Slider */
+    .platform-sidebar {
+        position: fixed; left: 0; top: 7rem; width: 100vw; flex-direction: row; justify-content: center; gap: 3rem; border-left: none; padding-left: 0; z-index: 40; transform: none;
+    }
+    .sidebar-option { padding: 0.5rem; border-left: none !important; border-radius: 0; background: transparent !important; position: relative; }
+    .sidebar-option span { font-size: 0.65rem; letter-spacing: 4px; opacity: 0.6; }
+    .sidebar-option.active-sidebar span { opacity: 1; }
+    .sidebar-option::after {
+        content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0%; height: 2px;
+        background: var(--brand-accent); box-shadow: 0 0 10px rgba(0, 229, 255, 0.8); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
+    }
+    .sidebar-option.active-sidebar::after { width: 100%; opacity: 1; }
+
+    /* Page Overrides */
     .about-container { padding-top: 8rem; }
     .page-title { margin-bottom: 60px; }
     .timeline-wrapper { padding-left: 30px; }
     .timeline-wrapper::before { left: 5px; }
-    .timeline-item { flex-direction: column; margin-bottom: 3rem; }
-    .timeline-node { width: 100%; text-align: left; padding-left: 40px; padding-top: 0; margin-bottom: 1.5rem; }
-    .timeline-node::after { right: auto; left: 10px; top: 2px; }
-    .timeline-content { margin-left: 15px; padding: 2rem 1.5rem; }
     .step-indicator { left: 0; width: auto; top: -30px; justify-content: flex-start; }
     .step-name { margin-right: 0; margin-left: 20px; text-align: left; }
     .step-node { left: 1px; right: auto; top: 2px; }
@@ -561,159 +500,4 @@ body {
     .socials-container { padding-top: 9rem; }
     .social-cards { flex-direction: column; gap: 2.5rem; }
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
-}
-
-#console-clock {
-    position: fixed; bottom: 3rem; left: 4rem; 
-    font-size: 0.6rem; letter-spacing: 3px; color: #ffffff; text-transform: uppercase; z-index: 10; pointer-events: none;
-}
-
-/* =========================================
-   ZERO-LATENCY / NO GLOW UI OVERRIDE
-   ========================================= */
-.glass-nav-links span:hover,
-.mobile-nav-links span:hover,
-.mobile-nav-links span:active,
-.gateway-menu-toggle:hover,
-.text-logo:hover,
-.sidebar-option:hover span,
-.sidebar-option.active-sidebar span {
-    color: #00E5FF !important; 
-    text-shadow: none !important; /* Kills all glow */
-    transform: none !important; /* Stops all scaling/movement */
-    transition: all 0s !important; /* ZERO MILLISECOND REACTION */
-}
-
-/* =========================================
-   MASTER OVERRIDE: WEIGHT HIERARCHY
-   ========================================= */
-/* SEMI-BOLD (600): UI Controls & Standard Text */
-.raw-text-block p, 
-.gateway-menu-toggle,
-.desktop-menu span,
-.sidebar-option span,
-.step-name,
-.split-text,
-#console-clock,
-.glass-nav-links span, 
-.mobile-nav-links span 
-{
-    font-weight: 600 !important;
-}
-
-/* BOLD (700): Anchors & Headers */
-.page-title,
-.raw-text-block h2,
-.step-content.raw-text-block h3,
-.raw-text-block strong,
-.terminal-link,
-.text-logo
-{
-    font-weight: 700 !important;
-}
-/* =========================================
-   CRITICAL SYSTEM RESCUE & OPTICAL CALIBRATION
-   ========================================= */
-
-/* =========================================
-   CRITICAL SYSTEM RESCUE & OPTICAL CALIBRATION
-   ========================================= */
-
-/* 1. EGG-WHITE & OPTICAL WARMTH (Premium Alabaster Tone) */
-:root {
-    --text-primary: #FAF9F6 !important; /* Warm, creamy egg-white */
-    --text-muted: #B0ADA9 !important; /* Warmer grey for secondary text */
-    --glow-core: rgba(250, 249, 246, 0.8) !important;
-}
-
-/* Forces all critical typography to use the new premium egg-white */
-.text-logo, .gateway-menu-toggle, .raw-text-block h2, .terminal-link, .split-text {
-    color: var(--text-primary) !important;
-}
-
-/* 2. SCALE UP: BIGGER & CLEARER TYPOGRAPHY */
-/* Gateway Main Options */
-.split-text {
-    font-size: 0.9rem !important; /* Bumped up from 0.75rem */
-    letter-spacing: 7px !important; 
-}
-
-/* Floating Header Menu & Logo */
-.gateway-menu-toggle {
-    font-size: 0.85rem !important; /* Bumped up from 0.7rem */
-    letter-spacing: 5px !important;
-}
-.text-logo {
-    font-size: 1.55rem !important; /* Bumped up from 1.4rem */
-}
-
-/* The Console Clock */
-#console-clock {
-    font-size: 0.75rem !important; /* Bumped up from 0.6rem for sharp clarity */
-    letter-spacing: 4px !important;
-}
-
-/* The PC Micro-Compass (Left Sidebar) */
-.sidebar-option span {
-    font-size: 0.75rem !important; /* Bumped up from 0.6rem */
-    letter-spacing: 5px !important;
-}
-
-/* Mobile Dropdown Text Adjustment */
-.mobile-nav-links span {
-    font-size: 1.05rem !important; /* Bolder mobile readability */
-}
-
-/* 3. PC GATEWAY ALIGNMENT (TIGHT DIA-STYLE SPACING) */
-.split-container {
-    display: flex !important;
-    gap: 8rem !important; 
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-/* 4. ABSOLUTE MOBILE LOCK (FIXES THE SCREEN BREAKS) */
-@media (max-width: 768px) {
-    .split-container {
-        flex-direction: column !important; 
-        gap: 4.5rem !important; 
-    }
-    .top-nav {
-        height: 60px !important; 
-        min-height: 60px !important;
-        display: flex !important;
-        align-items: center !important;
-        background: rgba(0, 89, 133, 0.4) !important; 
-    }
-    .top-nav::before {
-        height: 15px !important;
-        background: #010a18 !important;
-    }
-}
-/* =========================================
-   FINAL UI CALIBRATION: SPACING & COLOR
-   ========================================= */
-
-:root {
-    /* Soft, anti-glare paper white to stop eye strain */
-    --text-primary: #F4F4F2 !important; 
-    --text-muted: #A1A1AA !important; 
-    --glow-core: rgba(244, 244, 242, 0.5) !important;
-}
-
-/* 1. PIN TO CORNERS (DESKTOP) */
-.top-nav {
-    /* 2.5rem from top, 3.5vw from the far left/right edges */
-    padding: 2.5rem 3.5vw !important; 
-}
-
-#console-clock {
-    /* Matches the exact padding of the top nav, but on the bottom */
-    bottom: 2.5rem !important;
-    left: 3.5vw !important;
-}
-
-/* Make sure the text elements actually use the soft white */
-.text-logo, .gateway-menu-toggle, .raw-text-block h2, .terminal-link, .split-text, #console-clock {
-    color: var(--text-primary) !important;
 }
