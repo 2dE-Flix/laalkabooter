@@ -20,11 +20,13 @@
     --bg-deep: #010a18;
     --brand-accent: #00E5FF;
     
-    /* Anti-Glare Typography Calibration (Warm Egg-White) */
-    --text-primary: #FDF8EE; /* Soft egg-white with a subtle warm yellow tint */
-    --text-muted: #A6A39C; /* Warmed up the grey slightly so it blends perfectly */
-    --glow-core: rgba(253, 248, 238, 0.4); /* Glow matches the new warm white */
-    --glow-halo: rgba(100, 180, 255, 0.4);
+    /* Ultra-Low Strain Typography (Dimmed Warm Bone) */
+    --text-primary: #D1CCC0; /* Significantly darker, muted warm-white */
+    --text-muted: #8E8A82; /* Dimmed secondary text to match */
+    
+    /* Drastically reduced the glow so the text stops bleeding/haloing */
+    --glow-core: rgba(209, 204, 192, 0.15); 
+    --glow-halo: rgba(100, 180, 255, 0.2);
 }
 
 html, body {
