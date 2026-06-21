@@ -151,39 +151,27 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 /* Increased gap by 15%+ */
+/* Widen the horizontal gap between TALENTS and BRANDS by ~10% */
 .split-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: clamp(5rem, 16vw, 20rem) !important; 
-}
-/* Tighten the vertical lockup between the chevron and the label */
-.split-option {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    gap: 0.8rem; /* Reduced from 2rem to bond the icon and text into one solid button */
-    cursor: pointer; 
-    transition: all 0.4s ease;
-}
-/* Shrunk by ~5% */
-.split-icon {
-    height: 38px !important; 
-    width: auto !important;
-    max-width: 140px !important; 
-    object-fit: contain;
-    mix-blend-mode: screen; 
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    display: block;
+    gap: clamp(6rem, 18vw, 22rem) !important; /* Bumped up from 16vw */
 }
 
-/* Shrunk text, and dropped font-weight slightly to kill the harsh glow */
+/* Widen the vertical gap between the Chevron and the Text */
+.split-option {
+    gap: 1.2rem !important; /* Bumped up from 0.8rem to kill the congestion */
+}
+/* Shrunk by ~5% */
+/* Brighten the central text */
 .split-text {
-    font-size: 0.8rem !important; 
-    letter-spacing: 7px !important; 
-    transition: all 0.4s ease;
+    color: #FFFFFF !important; /* Brighter white, distinct from the corner UI */
+    opacity: 0.95 !important;
     font-weight: 500 !important; 
-    color: var(--text-primary);
+}
+
+/* Brighten the central icons */
+.split-icon {
+    opacity: 1 !important;
+    filter: brightness(1.15) !important; /* Artificially boosts the image brightness by 15% */
 }
 /* Hover Interaction Math */
 .split-container:has(.split-option:hover) .split-option:not(:hover) { 
