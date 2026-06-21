@@ -20,10 +20,10 @@
     --bg-deep: #010a18;
     --brand-accent: #00E5FF;
     
-    /* Anti-Glare Typography Calibration */
-    --text-primary: #F4F4F2; 
-    --text-muted: #A1A1AA; 
-    --glow-core: rgba(244, 244, 242, 0.4);
+    /* Anti-Glare Typography Calibration (Warm Egg-White) */
+    --text-primary: #FDF8EE; /* Soft egg-white with a subtle warm yellow tint */
+    --text-muted: #A6A39C; /* Warmed up the grey slightly so it blends perfectly */
+    --glow-core: rgba(253, 248, 238, 0.4); /* Glow matches the new warm white */
     --glow-halo: rgba(100, 180, 255, 0.4);
 }
 
