@@ -536,3 +536,41 @@ a, button, span, .split-option, .hamburger, .social-card {
     bottom: 25px !important;
     left: 35px !important;
 }
+/* =========================================
+   12. THE TRIANGLE OF TENSION & LOGO LOCKUP
+   ========================================= */
+
+/* 1. Flexing the Icon and Text together */
+.logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Clean breathing room between the icon and the word */
+    text-decoration: none;
+}
+
+/* 2. Sizing the Image Icon */
+.master-icon {
+    height: 14px !important; /* Tiny, sharp, and premium */
+    width: auto !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* 3. Shrinking RAVIE to match the MENU */
+.text-logo {
+    font-size: 0.8rem !important; /* Shrunk down to match MENU */
+    letter-spacing: 5px !important;
+    font-weight: 500 !important; /* Matched the MENU weight to kill glare */
+    opacity: 0.9 !important; /* Slightly brighter than menu to maintain primary hierarchy */
+}
+
+/* 4. Anchoring the Clock to Bottom-Center */
+#console-clock {
+    bottom: 25px !important;
+    left: 50% !important; /* Pushes it to the middle of the screen */
+    transform: translateX(-50%) !important; /* Pulls it back perfectly on its own axis */
+    font-size: 0.65rem !important;
+    letter-spacing: 4px !important;
+    font-weight: 400 !important;
+    opacity: 0.4 !important; /* Keeps it very subtle so it doesn't distract from the center */
+}
