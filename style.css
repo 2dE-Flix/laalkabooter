@@ -150,36 +150,37 @@ a, button, span, .split-option, .hamburger, .social-card {
     display: flex; opacity: 1;
 }
 
+/* Increased gap by 15%+ */
 .split-container {
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    gap: clamp(4rem, 12vw, 16rem); /* Fluid spacing: adapts to screen width */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: clamp(5rem, 16vw, 20rem) !important; 
 }
-
 .split-option {
     display: flex; flex-direction: column; align-items: center; gap: 2rem;
     cursor: pointer; transition: all 0.4s ease;
 }
 
+/* Shrunk by ~5% */
 .split-icon {
-    height: 42px !important;
+    height: 38px !important; 
     width: auto !important;
-    max-width: 150px !important; 
+    max-width: 140px !important; 
     object-fit: contain;
     mix-blend-mode: screen; 
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     display: block;
 }
 
+/* Shrunk text, and dropped font-weight slightly to kill the harsh glow */
 .split-text {
-    font-size: 0.85rem; 
-    letter-spacing: 7px; 
+    font-size: 0.8rem !important; 
+    letter-spacing: 7px !important; 
     transition: all 0.4s ease;
-    font-weight: 600;
+    font-weight: 500 !important; 
     color: var(--text-primary);
 }
-
 /* Hover Interaction Math */
 .split-container:has(.split-option:hover) .split-option:not(:hover) { 
     opacity: 0.15; 
@@ -509,9 +510,9 @@ a, button, span, .split-option, .hamburger, .social-card {
 
 /* 1. Push Header to the absolute corners (Desktop) */
 @media (min-width: 769px) {
-    .top-nav {
-        padding: 40px 50px !important; /* Fixed optical distance from the edge */
-    }
+/* Pushed significantly closer to the physical edges */
+.top-nav {
+    padding: 25px 35px !important; 
 }
 
 /* 2. Soften the Menu Button (Kill the glare) */
@@ -524,10 +525,6 @@ a, button, span, .split-option, .hamburger, .social-card {
 
 /* 3. Push Clock to the absolute corner & soften (Kill the glare) */
 #console-clock {
-    bottom: 40px !important;
-    left: 50px !important;
-    font-size: 0.7rem !important;
-    letter-spacing: 3px !important;
-    font-weight: 400 !important; /* Thinner font */
-    opacity: 0.5 !important; /* Makes it a subtle detail, not a flashlight */
+    bottom: 25px !important;
+    left: 35px !important;
 }
