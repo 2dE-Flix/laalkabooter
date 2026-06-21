@@ -503,3 +503,31 @@ a, button, span, .split-option, .hamburger, .social-card {
     .social-cards { flex-direction: column; gap: 2.5rem; }
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
 }
+/* =========================================
+   11. PRO ALIGNMENT & GLARE REDUCTION
+   ========================================= */
+
+/* 1. Push Header to the absolute corners (Desktop) */
+@media (min-width: 769px) {
+    .top-nav {
+        padding: 40px 50px !important; /* Fixed optical distance from the edge */
+    }
+}
+
+/* 2. Soften the Menu Button (Kill the glare) */
+.gateway-menu-toggle {
+    font-size: 0.8rem !important; 
+    letter-spacing: 2px !important; 
+    font-weight: 400 !important; /* Thinner font stops the harsh light bleed */
+    opacity: 0.75 !important; /* Dims it so the RAVIE logo is the main focus */
+}
+
+/* 3. Push Clock to the absolute corner & soften (Kill the glare) */
+#console-clock {
+    bottom: 40px !important;
+    left: 50px !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 3px !important;
+    font-weight: 400 !important; /* Thinner font */
+    opacity: 0.5 !important; /* Makes it a subtle detail, not a flashlight */
+}
