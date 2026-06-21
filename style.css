@@ -4,15 +4,15 @@
 
 /* =========================================
    1. CORE RESET & VARIABLES
-   ========================================= */
-@import url('https://api.fontshare.com/v2/css?f[]=general-sans@600,700&display=swap');
+/* Swapped to Inter: Optimized specifically to reduce screen fatigue */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; 
-    font-family: 'General Sans', sans-serif !important;
+    font-family: 'Inter', sans-serif !important; 
 }
 
 :root {
