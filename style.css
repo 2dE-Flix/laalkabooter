@@ -157,11 +157,15 @@ a, button, span, .split-option, .hamburger, .social-card {
     align-items: center !important;
     gap: clamp(5rem, 16vw, 20rem) !important; 
 }
+/* Tighten the vertical lockup between the chevron and the label */
 .split-option {
-    display: flex; flex-direction: column; align-items: center; gap: 2rem;
-    cursor: pointer; transition: all 0.4s ease;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 0.8rem; /* Reduced from 2rem to bond the icon and text into one solid button */
+    cursor: pointer; 
+    transition: all 0.4s ease;
 }
-
 /* Shrunk by ~5% */
 .split-icon {
     height: 38px !important; 
@@ -218,20 +222,24 @@ a, button, span, .split-option, .hamburger, .social-card {
     pointer-events: auto;
 }
 
+/* Shrink the vertical gap between HOME, ABOUT, SOCIALS */
 .glass-nav-links {
-    display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 1.2rem; /* Reduced from 2rem to pull the list together vertically */
 }
 
+/* Shrink the horizontal letter-spacing */
 .glass-nav-links span {
     font-size: 0.85rem; 
-    letter-spacing: 8px;
+    letter-spacing: 4px; /* Reduced from 8px to make words readable as solid units */
     cursor: pointer;
     opacity: 0;
     transform: translateY(20px); 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     font-weight: 600;
 }
-
 .liquid-glass-overlay.active-glass .glass-nav-links span {
     opacity: 1; transform: translateY(0);
 }
