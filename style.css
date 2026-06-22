@@ -5,14 +5,38 @@
 /* =========================================
    1. CORE RESET & TYPOGRAPHY (THE SEN MANDATE)
    ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700&display=swap');
+/* =========================================
+   1. CORE RESET & THE DUAL-FONT MANDATE
+   ========================================= */
+
+/* Imports both heavyweights instantly in one optimized stream */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Sen:wght@400;500;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; 
+    
+    /* THE DEFAULT: Sen captures the soul (All reading paragraphs & timeline text) */
     font-family: 'Sen', sans-serif !important; 
+}
+
+/* THE VIP CLUB: Montserrat captures the ego (Logos, UI, Nav, Buttons, and Big Titles) */
+.text-logo,
+.gateway-menu-toggle,
+.split-text,
+.glass-nav-links span,
+.mobile-nav-links span,
+.page-title,
+.raw-text-block h2,
+.step-name,
+.step-content.raw-text-block h3,
+.social-card h3,
+.terminal-link,
+#console-clock,
+.sidebar-option span {
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 :root {
