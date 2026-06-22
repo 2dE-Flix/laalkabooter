@@ -516,3 +516,42 @@ a, button, span, .split-option, .hamburger, .social-card {
 .glass-nav-links span:hover, .mobile-nav-links span:hover {
     -webkit-text-stroke: 0.6px var(--text-primary); 
 }
+/* =========================================
+   14. THE ALABASTER MANDATE (#E5E3DF)
+   ========================================= */
+
+:root {
+    --text-alabaster: #E5E3DF !important;
+}
+
+/* Force every single Logo, Heading, and Nav Button into the exact same starchy white */
+.text-logo,
+.gateway-menu-toggle,
+.split-text,
+.glass-nav-links span,
+.mobile-nav-links span,
+.page-title,
+.raw-text-block h2,
+.step-name,
+.step-content.raw-text-block h3,
+.social-card h3,
+.terminal-link {
+    color: var(--text-alabaster) !important;
+}
+
+/* Sync the hover outlines to match the Alabaster perfectly */
+.glass-nav-links span, .mobile-nav-links span {
+    -webkit-text-stroke: 0px var(--text-alabaster) !important;
+}
+.glass-nav-links span:hover, .mobile-nav-links span:hover {
+    -webkit-text-stroke: 0.6px var(--text-alabaster) !important; 
+}
+
+/* Sync the button hovers */
+.gateway-menu-toggle:hover, 
+.sidebar-option:hover span, 
+.sidebar-option.active-sidebar span,
+.terminal-link:hover,
+.social-card:hover h3 {
+    color: #FFFFFF !important; /* A pure 100% white pop specifically for the active hover instant */
+}
