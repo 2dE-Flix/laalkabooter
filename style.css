@@ -578,3 +578,30 @@ a, button, span, .split-option, .hamburger, .social-card {
 .social-card:hover h3 {
     color: #FFFFFF !important; /* A pure 100% white pop specifically for the active hover instant */
 }
+/* =========================================
+   13. THE OPTICAL LANDING PAD (GLARE & WEIGHT FIX)
+   ========================================= */
+
+/* 1. RAVIE Logo Text (10% Bigger, Solidified, Dimmed 15%) */
+.text-logo {
+    font-size: 0.9rem !important;      /* Bumped up from 0.8rem */
+    font-weight: 700 !important;       /* Up to True Bold -> creates the solid light track */
+    letter-spacing: 6px !important;
+    opacity: 0.75 !important;          /* Pulled back 15% from 0.9 */
+}
+
+/* 2. MENU / CLOSE Button (10% Bigger, Solidified, Dimmed 15%) */
+.gateway-menu-toggle {
+    font-size: 0.85rem !important;     /* Bumped up from 0.75rem */
+    font-weight: 600 !important;       /* Up to Semi-Bold */
+    letter-spacing: 4px !important;
+    opacity: 0.5 !important;           /* Pulled back 15% from 0.6 */
+}
+
+/* 3. The Console Clock (10% Bigger, Solidified, Dimmed 15%) */
+#console-clock {
+    font-size: 0.75rem !important;     /* Bumped up from 0.65rem */
+    font-weight: 500 !important;       /* Up from 400 -> stops the numbers from flickering */
+    letter-spacing: 4px !important;
+    opacity: 0.35 !important;          /* Pulled back 15% from 0.4 */
+}
