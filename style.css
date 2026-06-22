@@ -1,220 +1,624 @@
 /* =========================================
-   RAVIE.IN - MASTER STYLESHEET (V4.0 - THE GOD BUILD)
+   RAVIE.IN - MASTER STYLESHEET (V3.0 - UNIFIED)
    ========================================= */
 
+/* =========================================
+   1. CORE RESET & TYPOGRAPHY (THE SEN MANDATE)
+   ========================================= */
+/* =========================================
+   1. CORE RESET & THE DUAL-FONT MANDATE
+   ========================================= */
+
+/* Imports both heavyweights instantly in one optimized stream */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Sen:wght@400;500;600;700&display=swap');
 
-:root {
-    --bg-deep: #010a18;
-    --brand-accent: #00E5FF;
-    
-    /* The Swiss Print Alabaster Mandate */
-    --text-alabaster: #E5E3DF; 
-    --text-muted: #9E9C98; 
-    
-    /* Calibrated non-glare studio glows */
-    --glow-core: rgba(229, 227, 223, 0.25);
-    --glow-halo: rgba(100, 180, 255, 0.15);
-}
 
-/* GLOBAL BASELINE: Sen captures the paragraphs & long-form reading */
+
+
+
+
+
+
+
+
+
+
+
+
+
 * {
-    margin: 0; padding: 0; box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; 
+    
+    /* THE DEFAULT: Sen captures the soul (All reading paragraphs & timeline text) */
     font-family: 'Sen', sans-serif !important; 
 }
 
-/* THE EGO: Montserrat strictly captures the UI, Brand Marks, Nav, and Buttons */
-.text-logo, .gateway-menu-toggle, .split-text, 
-.glass-nav-links span, .mobile-nav-links span, 
-.page-title, .raw-text-block h2, .step-name, 
-.step-content.raw-text-block h3, .social-card h3, 
-.terminal-link, #console-clock, .sidebar-option span {
+/* THE VIP CLUB: Montserrat captures the ego (Logos, UI, Nav, Buttons, and Big Titles) */
+.text-logo,
+.gateway-menu-toggle,
+.split-text,
+.glass-nav-links span,
+.mobile-nav-links span,
+.page-title,
+.raw-text-block h2,
+.step-name,
+.step-content.raw-text-block h3,
+.social-card h3,
+.terminal-link,
+#console-clock,
+.sidebar-option span {
     font-family: 'Montserrat', sans-serif !important;
 }
 
+:root {
+    /* Base Background */
+    --bg-deep: #010a18;
+    --brand-accent: #00E5FF;
+    
+    /* Ultra-Low Strain Typography (Dimmed Warm Bone) */
+    --text-primary: #D1CCC0; 
+    --text-muted: #8E8A82; 
+    
+    /* Drastically reduced glow to stop halo/bleeding */
+    --glow-core: rgba(209, 204, 192, 0.15); 
+    --glow-halo: rgba(100, 180, 255, 0.2);
+}
+
 html, body {
-    max-width: 100vw; overflow-x: hidden;
-    background-color: var(--bg-deep); color: var(--text-alabaster);
-    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh; position: relative; z-index: 1;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: var(--bg-deep); 
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh; 
+    position: relative;
+    z-index: 1;
 }
 
 a, button, span, .split-option, .hamburger, .social-card {
-    outline: none; user-select: none; -webkit-user-select: none;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 /* =========================================
-   WEBGL ENVIRONMENT
+   2. ENVIRONMENT & WEBGL BACKGROUND
    ========================================= */
-#webgl-canvas { position: fixed; top: -5vh; left: -5vw; width: 110vw; height: 110vh; background-color: var(--bg-deep); z-index: -3; pointer-events: none; transition: filter 1.2s ease, transform 1.2s ease; }
+#webgl-canvas {
+    position: fixed;
+    top: -5vh; left: -5vw; 
+    width: 110vw; height: 110vh; 
+    background-color: var(--bg-deep); 
+    z-index: -3;
+    pointer-events: none;
+    transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
+}
 #webgl-canvas.depth-surface { filter: blur(35px) brightness(0.32); transform: scale(1.05) translateY(0); }
 #webgl-canvas.depth-deep { filter: blur(48px) brightness(0.55) saturate(1.2); transform: scale(1.18) translateY(-8vh); }
 #webgl-canvas.frozen-blur { filter: blur(80px) brightness(0.15) !important; }
 
-.grain { position: fixed; inset: 0; pointer-events: none; z-index: -2; opacity: 0.85; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: -2; opacity: 0.85; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* =========================================
-   DESKTOP CORNER UI (RAVIE, MENU, CLOCK)
+   3. UNIVERSAL UI (HEADER & CLOCK)
    ========================================= */
 .top-nav {
-    position: fixed; top: 0; left: 0; width: 100vw;
-    padding: 35px 45px; /* True professional corner pinning */
-    display: flex; justify-content: space-between; align-items: baseline; 
-    z-index: 100; pointer-events: none; 
+    position: fixed;
+    top: 0; left: 0; 
+    width: 100vw;
+    padding: 30px 40px; /* Locked to exact optical corners */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    z-index: 100;
+    pointer-events: none; 
 }
+
 .logo-container, .gateway-menu-toggle, .hamburger { pointer-events: auto; }
 
-/* RAVIE Mark: 100% Solid Alabaster, commanding scale */
+/* The Logo Lockup (Icon + Text) */
+.logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+.master-icon {
+    height: 14px; 
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
 .text-logo {
-    font-size: 1.25rem !important; 
-    letter-spacing: 7px !important; 
-    color: var(--text-alabaster) !important;
-    font-weight: 700 !important;
-    text-transform: uppercase; text-decoration: none;
-    opacity: 1 !important; 
+    font-size: 0.8rem; 
+    letter-spacing: 5px; 
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.9;
 }
-.master-icon { display: none !important; } /* Hidden per user experiment */
 
-/* MENU Button: Scaled up, highly legible */
+
+/* The Menu Button */
 .gateway-menu-toggle {
-    font-size: 0.85rem !important; 
-    letter-spacing: 4px !important; 
-    color: var(--text-alabaster) !important;
-    font-weight: 600 !important;
-    opacity: 0.8 !important; /* Brought out of the dark */
-    cursor: pointer; text-transform: uppercase;
+    font-size: 0.75rem; 
+    letter-spacing: 4px; 
+    color: var(--text-primary);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.6;
 }
+.hamburger, .mobile-dropdown { display: none; }
 
-/* CONSOLE CLOCK: Strictly locked to dead-center bottom */
+/* The Center Clock */
 #console-clock {
-    position: fixed !important; 
-    bottom: 30px !important; 
-    left: 50% !important; 
-    transform: translateX(-50%) !important;
-    font-size: 0.75rem !important; 
-    letter-spacing: 4px !important; 
-    color: var(--text-muted) !important; 
-    font-weight: 500 !important;
-    opacity: 0.6 !important;
-    z-index: 10; pointer-events: none;
+    position: fixed; 
+    bottom: 30px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    font-size: 0.65rem; 
+    letter-spacing: 4px; 
+    color: var(--text-primary); 
+    text-transform: uppercase; 
+    z-index: 10; 
+    pointer-events: none; 
+    font-weight: 400;
+    opacity: 0.4;
 }
 
 /* =========================================
-   GATEWAY CENTER SPLIT LOCKUP
+   4. GATEWAY (MAIN SPLIT SCREEN)
    ========================================= */
-#app-container { height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; }
-.view { display: none; opacity: 0; transition: opacity 0.6s ease; }
+#app-container {
+    height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center;
+}
+.view { display: none; opacity: 0; transition: opacity 0.6s ease-in-out; }
 .view.active-view { display: flex; opacity: 1; }
 
 .split-container {
-    display: flex; justify-content: center; align-items: center;
-    gap: clamp(6rem, 16vw, 22rem); /* Breathable wide frame */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: clamp(6rem, 18vw, 22rem); /* Massive breathing room */
 }
+
 .split-option {
-    display: flex; flex-direction: column; align-items: center; 
-    gap: 1.2rem; cursor: pointer; transition: all 0.4s ease;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+    cursor: pointer; transition: all 0.4s ease;
 }
 
 .split-icon {
-    height: 40px; width: auto; max-width: 140px; object-fit: contain; 
-    mix-blend-mode: screen; transition: all 0.4s ease; display: block;
-    opacity: 0.9; filter: drop-shadow(0 0 10px rgba(229, 227, 223, 0.15));
-}
-.split-text {
-    font-size: 0.9rem !important; 
-    letter-spacing: 6px !important; 
-    font-weight: 600 !important;
-    color: var(--text-alabaster) !important;
-    opacity: 1 !important;
+    height: 38px; width: auto; max-width: 140px; 
+    object-fit: contain; mix-blend-mode: screen; 
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
+    opacity: 1; filter: brightness(1.15); /* Artificially brightens the image */
 }
 
-.split-container:has(.split-option:hover) .split-option:not(:hover) { opacity: 0.2; }
+.split-text {
+    font-size: 0.8rem; 
+    letter-spacing: 7px; 
+    transition: all 0.4s ease;
+    font-weight: 500;
+    color: #FFFFFF; /* High contrast white specifically for center */
+    opacity: 0.95;
+}
+
+/* Hover Interaction */
+.split-container:has(.split-option:hover) .split-option:not(:hover) { opacity: 0.15; }
+.split-option:hover { opacity: 1; }
 .split-option:hover .split-icon {
-    opacity: 1; transform: scale(1.08) translateY(-5px);
-    filter: drop-shadow(0 0 15px var(--glow-core)) drop-shadow(0 0 35px var(--glow-halo));
+    filter: brightness(1.3) drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
+    transform: scale(1.08) translateY(-5px);
 }
 .split-option:hover .split-text {
-    color: #FFFFFF !important;
-    text-shadow: 0 0 12px var(--glow-core);
+    text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
+
 }
 
 /* =========================================
-   GLASS MENU OVERLAY
+   5. OVERLAYS (MENU GLASS)
    ========================================= */
 .liquid-glass-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0, 2, 8, 0.85); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); 
+    background: rgba(0, 2, 8, 0.75); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); 
     z-index: 90; display: flex; justify-content: center; align-items: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .liquid-glass-overlay.active-glass { opacity: 1; pointer-events: auto; }
-.glass-nav-links { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+
+.glass-nav-links {
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+}
 .glass-nav-links span {
-    font-size: 1.1rem !important; letter-spacing: 6px !important; font-weight: 600 !important;
-    color: var(--text-alabaster) !important; opacity: 0; transform: translateY(20px); transition: all 0.3s ease;
+    font-size: 0.85rem; letter-spacing: 4px; cursor: pointer; opacity: 0;
+    transform: translateY(20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: 500; color: var(--text-primary);
 }
 .liquid-glass-overlay.active-glass .glass-nav-links span { opacity: 1; transform: translateY(0); }
-.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(1) { transition-delay: 0.05s; }
-.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(2) { transition-delay: 0.1s; }
-.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(3) { transition-delay: 0.15s; }
-.glass-nav-links span:hover { color: #FFFFFF !important; transform: scale(1.05); text-shadow: 0 0 15px var(--glow-core); }
+.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(1) { transition-delay: 0.1s; }
+.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(2) { transition-delay: 0.2s; }
+.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(3) { transition-delay: 0.3s; }
+
 
 /* =========================================
-   PLATFORM LEDGER CONTENT
+   6. INNER PLATFORM (Y-AXIS LEDGER)
    ========================================= */
-#platform-view { position: absolute; top: 0; left: 0; width: 100vw; height: 100dvh; display: none; opacity: 0; pointer-events: none; transform: translateX(40px); transition: opacity 0.8s ease, transform 0.8s ease; z-index: 50; }
+#platform-view {
+    position: absolute; top: 0; left: 0; width: 100vw; height: 100dvh;
+    display: none; opacity: 0; pointer-events: none; transform: translateX(40px); 
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); z-index: 50;
+}
 #platform-view.active-platform { opacity: 1; pointer-events: auto; transform: translateX(0); }
 
-.platform-sidebar { position: fixed; left: 3rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.4rem; z-index: 100; }
-.sidebar-option { cursor: pointer; opacity: 0.5; padding: 0.7rem 1rem; border-radius: 0 8px 8px 0; border-left: 2px solid transparent; }
-.sidebar-option span { font-size: 0.75rem; letter-spacing: 5px; color: var(--text-muted); pointer-events: none; font-weight: 600; }
-.sidebar-option.active-sidebar { opacity: 1; background: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%); border-left: 2px solid var(--brand-accent); transform: translateX(5px); }
-.sidebar-option.active-sidebar span { color: var(--text-alabaster); }
+/* Micro Compass */
+.platform-sidebar {
+    position: fixed; left: 3rem; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 0.3rem; z-index: 100;
+}
+.sidebar-option {
+    cursor: pointer; opacity: 0.55; padding: 0.7rem 1rem; 
+    border-radius: 0 8px 8px 0; border-left: 2px solid transparent; background: rgba(0, 2, 8, 0.0); 
+}
+.sidebar-option span {
+    font-size: 0.75rem; letter-spacing: 5px; color: var(--text-primary); pointer-events: none; font-weight: 500;
+}
+.sidebar-option.active-sidebar {
+    opacity: 1; background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
+    border-left: 2px solid var(--brand-accent); transform: translateX(5px); 
+}
 
-.platform-content { display: flex; justify-content: center; align-items: center; height: 100dvh; width: 100%; padding: 0 4rem 0 12rem; }
+/* Content Blocks */
+.platform-content {
+    display: flex; justify-content: center; align-items: center;
+    height: 100dvh; width: 100%; padding: 0 4rem 0 12rem; 
+}
 .ledger-stream { display: none; opacity: 0; transition: opacity 0.6s ease; }
 .ledger-stream.active-stream { display: block; opacity: 1; animation: textFadeIn 0.8s ease forwards; }
 
 .raw-text-block { max-width: 640px; text-align: left; }
-.raw-text-block h2 { font-size: 1.6rem; letter-spacing: 5px; color: var(--text-alabaster); text-transform: uppercase; margin-bottom: 2.5rem; position: relative; padding-bottom: 15px; font-weight: 700; }
-.raw-text-block h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--brand-accent); box-shadow: 0 0 10px rgba(0, 229, 255, 0.6); }
-.raw-text-block p { font-size: 1.05rem; line-height: 1.85; color: var(--text-alabaster); opacity: 0.85; margin-bottom: 2rem; font-weight: 400; }
+.raw-text-block h2 {
+    font-size: 1.55rem; letter-spacing: 5px; color: var(--text-primary); text-transform: uppercase;
+    margin-bottom: 2.5rem; position: relative; padding-bottom: 15px; font-weight: 600;
+}
+.raw-text-block h2::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px;
+    background: var(--brand-accent); box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+.raw-text-block p { font-size: 1rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 2rem; font-weight: 400; }
 .raw-text-block strong { color: var(--brand-accent); font-weight: 600; }
 
-.terminal-link { display: inline-block; font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-alabaster); text-decoration: none; margin-top: 1.5rem; padding-bottom: 6px; border-bottom: 2px solid rgba(229, 227, 223, 0.3); transition: all 0.3s ease; pointer-events: auto; font-weight: 600; }
-    .terminal-link:hover { color: #FFFFFF; border-bottom-color: #FFFFFF; text-shadow: 0 0 10px var(--glow-core); }
+.terminal-link {
+    display: inline-block; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-primary); text-decoration: none; margin-top: 1.5rem; padding-bottom: 6px;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.3); transition: all 0.3s ease; pointer-events: auto; font-weight: 600;
+}
+.terminal-link:hover { color: var(--brand-accent); border-bottom-color: var(--brand-accent); }
 
 @keyframes textFadeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
 
-/* HOVER ZERO-LATENCY OVERRIDE */
-.gateway-menu-toggle:hover, .sidebar-option:hover span { color: #FFFFFF !important; opacity: 1 !important; text-shadow: 0 0 12px var(--glow-core) !important; transition: none !important; }
+/* =========================================
+   7. ABOUT & SOCIALS PAGES
+   ========================================= */
+.page-container { padding: 120px 5vw 100px 5vw; max-width: 1000px; margin: 0 auto; position: relative; z-index: 5; }
+
+.page-title {
+    font-size: 2.2rem; letter-spacing: 8px; text-align: center; margin-bottom: 80px;
+    color: var(--text-primary); text-transform: uppercase; position: relative; padding-bottom: 25px; font-weight: 600;
+}
+.page-title::after {
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 2px; background: var(--brand-accent); box-shadow: 0 0 12px rgba(0, 229, 255, 0.6); 
+}
+
+.timeline-wrapper { position: relative; padding-left: 180px; }
+.timeline-wrapper::before { content: ''; position: absolute; top: 5px; bottom: 0; left: 140px; width: 1px; background: rgba(0, 229, 255, 0.2); }
+.timeline-step { position: relative; margin-bottom: 90px; }
+.timeline-step:last-child { margin-bottom: 0; }
+.step-indicator { position: absolute; left: -180px; width: 140px; display: flex; align-items: center; justify-content: flex-end; top: 5px; }
+.step-name { font-family: 'Inter', monospace; color: var(--brand-accent); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; padding-right: 18px; font-weight: 500; }
+.step-node { position: absolute; right: -4px; width: 8px; height: 8px; background: var(--brand-accent); border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9); }
+.step-content { padding-left: 0; }
+.step-content.raw-text-block h3 { font-size: 1.1rem; letter-spacing: 3px; color: var(--text-primary); margin-top: 2.5rem; margin-bottom: 0.8rem; text-transform: uppercase; font-weight: 600; }
+.step-content.raw-text-block h3:first-child { margin-top: 0; }
+
+.socials-container { padding: 12rem 2rem 4rem; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
+.social-cards { display: flex; gap: 8vw; margin-top: 2rem; }
+.social-card {
+    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 3.5rem 3rem; 
+    width: 360px; text-decoration: none; border-radius: 4px; backdrop-filter: blur(12px); 
+    transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
+}
+.social-card h3 { color: var(--text-primary); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 1.2rem; transition: color 0.3s ease; font-weight: 600; }
+.social-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; transition: color 0.3s ease; font-weight: 400; }
+.social-card:hover { transform: translateY(-12px); border-color: rgba(0, 229, 255, 0.4); box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15); background: rgba(0, 2, 8, 0.8); }
+.social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
 
 /* =========================================
-   MOBILE ARCHITECTURE
+   8. HOVER CALIBRATIONS
+   ========================================= */
+.gateway-menu-toggle:hover, .sidebar-option:hover span, .sidebar-option.active-sidebar span {
+    color: var(--brand-accent) !important; 
+    text-shadow: none !important; transform: none !important; transition: all 0s !important; 
+}
+.glass-nav-links span, .mobile-nav-links span {
+    transition: -webkit-text-stroke 0.3s ease, color 0.3s ease;
+    -webkit-text-stroke: 0px var(--text-primary);
+}
+.glass-nav-links span:hover, .mobile-nav-links span:hover {
+    -webkit-text-stroke: 0.6px var(--text-primary); 
+}
+
+/* =========================================
+   9. MOBILE ARCHITECTURE
    ========================================= */
 @media (max-width: 768px) {
-    body { background-image: radial-gradient(circle at 50% 30%, #001233 0%, transparent 60%), radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%), radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%); background-size: 100% 100%; }
-    .top-nav { position: fixed; top: 15px !important; left: 5% !important; width: 90% !important; height: 60px !important; min-height: 60px !important; padding: 0 1.5rem !important; border-radius: 50px; background: rgba(1, 10, 24, 0.75) !important; backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); display: flex !important; align-items: center !important; justify-content: space-between !important; z-index: 300 !important; }
+    body {
+        background-image: 
+            radial-gradient(circle at 50% 30%, #001233 0%, transparent 60%),
+            radial-gradient(circle at 50% 80%, #000d26 0%, transparent 65%),
+            radial-gradient(circle at 50% 50%, #01030a 0%, transparent 80%);
+        background-size: 100% 100%;
+    }
+
+    /* Floating Pill */
+    .top-nav { 
+        position: fixed; top: 15px !important; left: 5% !important; width: 90% !important; 
+        height: 60px !important; min-height: 60px !important; padding: 0 1.2rem !important; 
+        border-radius: 50px; background: rgba(1, 10, 24, 0.65) !important;
+        backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        display: flex !important; align-items: center !important; justify-content: space-between !important; z-index: 300 !important;
+    }
     .top-nav::before { display: none !important; }
-    .text-logo { font-size: 1.05rem !important; letter-spacing: 5px !important; font-weight: 700 !important; opacity: 1 !important; }
-    .hamburger { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; z-index: 105; pointer-events: auto; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.05); }
-    .hamburger .bar { width: 16px; height: 2px; background-color: var(--text-alabaster); transition: all 0.3s ease; }
+    
+    .logo-lockup { gap: 8px; }
+    .text-logo { font-size: 0.9rem !important; letter-spacing: 4px !important; font-weight: 600 !important; }
+    .master-icon { height: 16px !important; }
+
+    /* Hamburger */
+    .hamburger { 
+        display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; z-index: 105; pointer-events: auto;
+        width: 42px; height: 42px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;
+    }
+    .hamburger .bar { width: 16px; height: 2px; background-color: var(--text-primary); transition: all 0.3s ease; }
+    .hamburger.active { background: rgba(255, 255, 255, 0.1); }
     .hamburger.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: var(--brand-accent); }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
-    .mobile-dropdown { display: flex !important; position: fixed; top: 85px; left: 5%; width: 90%; background: rgba(0, 2, 8, 0.45); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%); border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); border-radius: 24px; padding: 1.5rem 1rem; flex-direction: column; z-index: 250; opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s ease; }
+
+    /* Mobile Menu Dropdown */
+    .mobile-dropdown {
+        display: flex !important; position: fixed; top: 85px; left: 5%; width: 90%;
+        background: rgba(0, 2, 8, 0.35); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border-radius: 24px; padding: 1.2rem 1rem; flex-direction: column; z-index: 250; 
+        opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
     .mobile-dropdown.active-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
-    .mobile-nav-links { display: flex; flex-direction: column; gap: 0.5rem; }
-    .mobile-nav-links span { font-size: 1.1rem !important; letter-spacing: 4px; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 600; color: var(--text-alabaster) !important; }
+    .mobile-nav-links { display: flex; flex-direction: column; width: 100%; gap: 0.3rem; }
+    .mobile-nav-links span { font-size: 0.95rem !important; letter-spacing: 3px; padding: 0.8rem 1.5rem; border-radius: 12px; text-align: left; font-weight: 500; }
+
+    /* Gateway */
     .split-container { flex-direction: column !important; gap: 4.5rem !important; }
-    .split-icon { height: 36px !important; }
-    .split-text { font-size: 0.85rem !important; letter-spacing: 5px !important; }
-    .gateway-menu-toggle, .liquid-glass-overlay, #console-clock { display: none !important; }
+    .split-icon { height: 36px !important; max-width: 120px !important; }
+    .split-text { font-size: 0.75rem !important; letter-spacing: 5px !important; }
+    .gateway-menu-toggle, .liquid-glass-overlay { display: none !important; }
+    #console-clock { display: none !important; }
+
+    /* Platform */
     .platform-content { padding: 11rem 5vw 4rem 5vw !important; height: auto !important; min-height: 100vh; }
     #platform-view { height: auto; min-height: 100dvh; }
-    .platform-sidebar { position: fixed; left: 0; top: 7rem; width: 100vw; flex-direction: row; justify-content: center; gap: 3rem; padding: 0; z-index: 40; }
-    .sidebar-option { padding: 0.5rem; border: none !important; background: transparent !important; }
-    .sidebar-option span { font-size: 0.7rem; letter-spacing: 4px; opacity: 0.6; }
-    .sidebar-option.active-sidebar span { opacity: 1; color: var(--text-alabaster); }
+    .platform-sidebar {
+        position: fixed; left: 0; top: 7rem; width: 100vw; flex-direction: row; justify-content: center; gap: 3rem; border-left: none; padding-left: 0; z-index: 40; transform: none;
+    }
+    .sidebar-option { padding: 0.5rem; border-left: none !important; border-radius: 0; background: transparent !important; position: relative; }
+    .sidebar-option span { font-size: 0.65rem; letter-spacing: 4px; opacity: 0.6; }
+    .sidebar-option.active-sidebar span { opacity: 1; }
+    .sidebar-option::after {
+        content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0%; height: 2px;
+        background: var(--brand-accent); box-shadow: 0 0 10px rgba(0, 229, 255, 0.8); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
+    }
+    .sidebar-option.active-sidebar::after { width: 100%; opacity: 1; }
+
+    /* Pages */
+    .about-container { padding-top: 8rem; }
+    .page-title { margin-bottom: 60px; font-size: 1.8rem; }
+    .timeline-wrapper { padding-left: 30px; }
+    .timeline-wrapper::before { left: 5px; }
+    .step-indicator { left: 0; width: auto; top: -30px; justify-content: flex-start; }
+    .step-name { margin-right: 0; margin-left: 20px; text-align: left; }
+    .step-node { left: 1px; right: auto; top: 2px; }
+    .step-content { margin-top: 40px; margin-bottom: 60px; }
+    .socials-container { padding-top: 9rem; }
+    .social-cards { flex-direction: column; gap: 2.5rem; }
+    .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
+}
+/* =========================================
+   11. THE "ANTI-GLARE & BOLD LOGO" EXPERIMENT
+   ========================================= */
+
+/* 1. Push the entire top and bottom frame closer to the left/right edges */
+.top-nav {
+    padding: 30px 25px !important; /* Reduced from 40px to push it wider */
+}
+#console-clock {
+    left: 25px !important; /* Matches the top navigation's new left padding */
+}
+
+/* 2. Hide the icon and beef up the RAVIE text */
+.master-icon {
+    display: none !important; /* Hides the image */
+}
+.text-logo {
+    font-size: 1.15rem !important; /* Scaled up for PC */
+    font-weight: 700 !important; /* Bolded */
+    letter-spacing: 7px !important;
+    opacity: 1 !important; 
+}
+
+/* 3. Bring the Menu and Clock out of the shadows */
+.gateway-menu-toggle {
+    opacity: 0.9 !important; /* Brought up from 0.6 */
+    font-weight: 600 !important;
+}
+#console-clock {
+    opacity: 0.7 !important; /* Brought up from 0.4 */
+    font-weight: 500 !important;
+}
+
+/* 4. Kill the center glare (Soften the Talents/Brands lockup) */
+.split-text {
+    color: var(--text-primary) !important; /* Swaps harsh white for the soft bone color */
+    opacity: 0.9 !important;
+    font-weight: 500 !important;
+}
+.split-icon {
+    filter: none !important; /* Removes the artificial 1.15x brightness boost */
+    opacity: 0.85 !important; /* Softens the pure white of the PNG image */
+}
+
+/* Optional: Make the hover effect smooth without blinding the user */
+.split-option:hover .split-icon {
+    opacity: 1 !important;
+    filter: drop-shadow(0px 0px 12px rgba(209, 204, 192, 0.25)) !important; /* Soft, warm glow */
+}
+/* =========================================
+   12. THE CUSTOM COLOR SYSTEM (ULTIMATE CONSISTENCY)
+   ========================================= */
+
+:root {
+    --text-hero: #E4CAA5;      /* Warm/Gold - Brand Marks & Structural Titles */
+    --text-primary: #D8DADF;   /* Cool White - UI Controls & Central Buttons */
+    --text-secondary: #A8AFB8; /* Mid Grey - Reading Paragraphs & Subtext */
+    --text-muted: #7E8894;     /* Slate - Background Data & Inactive UI */
+    
+    /* Adjusted the interaction glow to match your new primary UI white */
+    --glow-core: rgba(216, 218, 223, 0.15); 
+}
+
+/* 1. HERO HEADING (#E4CAA5) 
+   Used for: The RAVIE Logo, Page Titles, and Main Section Headers */
+.text-logo,
+.page-title,
+.raw-text-block h2,
+.step-name {
+    color: var(--text-hero) !important;
+}
+
+/* 2. PRIMARY TEXT (#D8DADF) 
+   Used for: The Split Icons, Menu Button, Glass Nav, and Sub-headers */
+.split-text,
+.gateway-menu-toggle,
+.glass-nav-links span,
+.mobile-nav-links span,
+.terminal-link,
+.step-content.raw-text-block h3,
+.social-card h3 {
+    color: var(--text-primary) !important;
+}
+
+/* 3. SECONDARY TEXT (#A8AFB8) 
+   Used for: All long-form reading paragraphs to eliminate glare */
+.raw-text-block p,
+.social-card p,
+.step-content.raw-text-block p,
+.sidebar-option.active-sidebar span {
+    color: var(--text-secondary) !important;
+}
+
+/* 4. MUTED TEXT (#7E8894) 
+   Used for: The Clock and inactive compass elements */
+#console-clock,
+.sidebar-option span {
+    color: var(--text-muted) !important;
+}
+
+/* OPTICAL IMAGE BLENDING 
+   Dims the pure-white PNG images so they match the softness of the Primary Text */
+.split-icon, 
+.master-icon {
+    opacity: 0.85 !important;
+}
+
+/* FAKE BOLD HOVER FIX (Matches the new primary color) */
+.glass-nav-links span, .mobile-nav-links span {
+    -webkit-text-stroke: 0px var(--text-primary);
+}
+.glass-nav-links span:hover, .mobile-nav-links span:hover {
+    -webkit-text-stroke: 0.6px var(--text-primary); 
+}
+/* =========================================
+   14. THE ALABASTER MANDATE (#E5E3DF)
+   ========================================= */
+
+:root {
+    --text-alabaster: #E5E3DF !important;
+}
+
+/* Force every single Logo, Heading, and Nav Button into the exact same starchy white */
+.text-logo,
+.gateway-menu-toggle,
+.split-text,
+.glass-nav-links span,
+.mobile-nav-links span,
+.page-title,
+.raw-text-block h2,
+.step-name,
+.step-content.raw-text-block h3,
+.social-card h3,
+.terminal-link {
+    color: var(--text-alabaster) !important;
+}
+
+/* Sync the hover outlines to match the Alabaster perfectly */
+.glass-nav-links span, .mobile-nav-links span {
+    -webkit-text-stroke: 0px var(--text-alabaster) !important;
+}
+.glass-nav-links span:hover, .mobile-nav-links span:hover {
+    -webkit-text-stroke: 0.6px var(--text-alabaster) !important; 
+}
+
+/* Sync the button hovers */
+.gateway-menu-toggle:hover, 
+.sidebar-option:hover span, 
+.sidebar-option.active-sidebar span,
+.terminal-link:hover,
+.social-card:hover h3 {
+    color: #FFFFFF !important; /* A pure 100% white pop specifically for the active hover instant */
+}
+/* =========================================
+   13. THE OPTICAL LANDING PAD (GLARE & WEIGHT FIX)
+   ========================================= */
+
+/* 1. RAVIE Logo Text (10% Bigger, Solidified, Dimmed 15%) */
+.text-logo {
+    font-size: 0.9rem !important;      /* Bumped up from 0.8rem */
+    font-weight: 700 !important;       /* Up to True Bold -> creates the solid light track */
+    letter-spacing: 6px !important;
+    opacity: 0.75 !important;          /* Pulled back 15% from 0.9 */
+}
+
+/* 2. MENU / CLOSE Button (10% Bigger, Solidified, Dimmed 15%) */
+.gateway-menu-toggle {
+    font-size: 0.85rem !important;     /* Bumped up from 0.75rem */
+    font-weight: 600 !important;       /* Up to Semi-Bold */
+    letter-spacing: 4px !important;
+    opacity: 0.5 !important;           /* Pulled back 15% from 0.6 */
+}
+
+/* 3. The Console Clock (10% Bigger, Solidified, Dimmed 15%) */
+#console-clock {
+    font-size: 0.75rem !important;     /* Bumped up from 0.65rem */
+    font-weight: 500 !important;       /* Up from 400 -> stops the numbers from flickering */
+    letter-spacing: 4px !important;
+    opacity: 0.35 !important;          /* Pulled back 15% from 0.4 */
 }
