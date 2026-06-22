@@ -402,3 +402,52 @@ a, button, span, .split-option, .hamburger, .social-card {
     .social-cards { flex-direction: column; gap: 2.5rem; }
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
 }
+/* =========================================
+   11. THE "ANTI-GLARE & BOLD LOGO" EXPERIMENT
+   ========================================= */
+
+/* 1. Push the entire top and bottom frame closer to the left/right edges */
+.top-nav {
+    padding: 30px 25px !important; /* Reduced from 40px to push it wider */
+}
+#console-clock {
+    left: 25px !important; /* Matches the top navigation's new left padding */
+}
+
+/* 2. Hide the icon and beef up the RAVIE text */
+.master-icon {
+    display: none !important; /* Hides the image */
+}
+.text-logo {
+    font-size: 1.15rem !important; /* Scaled up for PC */
+    font-weight: 700 !important; /* Bolded */
+    letter-spacing: 7px !important;
+    opacity: 1 !important; 
+}
+
+/* 3. Bring the Menu and Clock out of the shadows */
+.gateway-menu-toggle {
+    opacity: 0.9 !important; /* Brought up from 0.6 */
+    font-weight: 600 !important;
+}
+#console-clock {
+    opacity: 0.7 !important; /* Brought up from 0.4 */
+    font-weight: 500 !important;
+}
+
+/* 4. Kill the center glare (Soften the Talents/Brands lockup) */
+.split-text {
+    color: var(--text-primary) !important; /* Swaps harsh white for the soft bone color */
+    opacity: 0.9 !important;
+    font-weight: 500 !important;
+}
+.split-icon {
+    filter: none !important; /* Removes the artificial 1.15x brightness boost */
+    opacity: 0.85 !important; /* Softens the pure white of the PNG image */
+}
+
+/* Optional: Make the hover effect smooth without blinding the user */
+.split-option:hover .split-icon {
+    opacity: 1 !important;
+    filter: drop-shadow(0px 0px 12px rgba(209, 204, 192, 0.25)) !important; /* Soft, warm glow */
+}
