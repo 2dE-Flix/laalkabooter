@@ -1,30 +1,33 @@
 /* =========================================
-   RAVIE.IN - MASTER STYLESHEET (V2.0)
+   RAVIE.IN - MASTER STYLESHEET (V3.0 - UNIFIED)
    ========================================= */
 
 /* =========================================
-   1. CORE RESET & VARIABLES
+   1. CORE RESET & TYPOGRAPHY
    ========================================= */
-@import url('https://api.fontshare.com/v2/css?f[]=general-sans@600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent; 
-    font-family: 'General Sans', sans-serif !important;
+    /* Strict global enforcement of Inter */
+    font-family: 'Inter', sans-serif !important; 
 }
 
 :root {
-    /* Base Colors */
+    /* Base Background */
     --bg-deep: #010a18;
     --brand-accent: #00E5FF;
     
-    /* Anti-Glare Typography Calibration */
-    --text-primary: #F4F4F2; 
-    --text-muted: #A1A1AA; 
-    --glow-core: rgba(244, 244, 242, 0.4);
-    --glow-halo: rgba(100, 180, 255, 0.4);
+    /* Ultra-Low Strain Typography (Dimmed Warm Bone) */
+    --text-primary: #D1CCC0; 
+    --text-muted: #8E8A82; 
+    
+    /* Drastically reduced glow to stop halo/bleeding */
+    --glow-core: rgba(209, 204, 192, 0.15); 
+    --glow-halo: rgba(100, 180, 255, 0.2);
 }
 
 html, body {
@@ -40,7 +43,7 @@ html, body {
 }
 
 a, button, span, .split-option, .hamburger, .social-card {
-    outline: none !important;
+    outline: none;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -57,38 +60,23 @@ a, button, span, .split-option, .hamburger, .social-card {
     pointer-events: none;
     transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
 }
-
-#webgl-canvas.depth-surface {
-    filter: blur(35px) brightness(0.32);
-    transform: scale(1.05) translateY(0); 
-}
-
-#webgl-canvas.depth-deep {
-    filter: blur(48px) brightness(0.55) saturate(1.2); 
-    transform: scale(1.18) translateY(-8vh); 
-}
-
-#webgl-canvas.frozen-blur {
-    filter: blur(80px) brightness(0.15) !important; 
-}
+#webgl-canvas.depth-surface { filter: blur(35px) brightness(0.32); transform: scale(1.05) translateY(0); }
+#webgl-canvas.depth-deep { filter: blur(48px) brightness(0.55) saturate(1.2); transform: scale(1.18) translateY(-8vh); }
+#webgl-canvas.frozen-blur { filter: blur(80px) brightness(0.15) !important; }
 
 .grain {
-    position: fixed; inset: 0; 
-    pointer-events: none; 
-    z-index: -2; 
-    opacity: 0.85; 
-    mix-blend-mode: overlay;
+    position: fixed; inset: 0; pointer-events: none; z-index: -2; opacity: 0.85; mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* =========================================
-   3. UNIVERSAL FLOATING HEADER (DESKTOP)
+   3. UNIVERSAL UI (HEADER & CLOCK)
    ========================================= */
 .top-nav {
     position: fixed;
     top: 0; left: 0; 
     width: 100vw;
-    padding: 1.5rem 2vw; /* Pinned to corners */
+    padding: 30px 40px; /* Locked to exact optical corners */
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
@@ -96,95 +84,101 @@ a, button, span, .split-option, .hamburger, .social-card {
     pointer-events: none; 
 }
 
-.logo-container, .gateway-menu-toggle, .hamburger {
-    pointer-events: auto; 
-}
+.logo-container, .gateway-menu-toggle, .hamburger { pointer-events: auto; }
 
-/* Master Text Logo */
-.text-logo {
-    font-size: 1.55rem; 
-    letter-spacing: 8px; 
-    color: var(--text-primary);
-    text-transform: uppercase;
-    text-decoration: none; 
-    display: inline-block;
-    font-weight: 700;
+/* The Logo Lockup (Icon + Text) */
+.logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
 }
-
-/* Master Image Logo (Fixes About/Socials Bug) */
-.master-logo {
-    height: 24px; 
+.master-icon {
+    height: 14px; 
     width: auto;
     object-fit: contain;
     display: block;
 }
-
-.gateway-menu-toggle {
-    font-size: 0.85rem; 
+.text-logo {
+    font-size: 0.8rem; 
     letter-spacing: 5px; 
+    color: var(--text-primary);
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* The Menu Button */
+.gateway-menu-toggle {
+    font-size: 0.75rem; 
+    letter-spacing: 4px; 
     color: var(--text-primary);
     cursor: pointer;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
+    opacity: 0.6;
 }
-
 .hamburger, .mobile-dropdown { display: none; }
 
-/* =========================================
-   4. GATEWAY (MAIN SCREEN) LAYOUT
-   ========================================= */
-#app-container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
+/* The Center Clock */
+#console-clock {
+    position: fixed; 
+    bottom: 30px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    font-size: 0.65rem; 
+    letter-spacing: 4px; 
+    color: var(--text-primary); 
+    text-transform: uppercase; 
+    z-index: 10; 
+    pointer-events: none; 
+    font-weight: 400;
+    opacity: 0.4;
 }
 
-.view {
-    display: none; opacity: 0; transition: opacity 0.6s ease-in-out;
+/* =========================================
+   4. GATEWAY (MAIN SPLIT SCREEN)
+   ========================================= */
+#app-container {
+    height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center;
 }
-.view.active-view {
-    display: flex; opacity: 1;
-}
+.view { display: none; opacity: 0; transition: opacity 0.6s ease-in-out; }
+.view.active-view { display: flex; opacity: 1; }
 
 .split-container {
     display: flex; 
     justify-content: center; 
     align-items: center;
-    gap: clamp(4rem, 12vw, 16rem); /* Fluid spacing: adapts to screen width */
+    gap: clamp(6rem, 18vw, 22rem); /* Massive breathing room */
 }
 
 .split-option {
-    display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
     cursor: pointer; transition: all 0.4s ease;
 }
 
 .split-icon {
-    height: 42px !important;
-    width: auto !important;
-    max-width: 150px !important; 
-    object-fit: contain;
-    mix-blend-mode: screen; 
+    height: 38px; width: auto; max-width: 140px; 
+    object-fit: contain; mix-blend-mode: screen; 
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     display: block;
+    opacity: 1; filter: brightness(1.15); /* Artificially brightens the image */
 }
 
 .split-text {
-    font-size: 0.85rem; 
+    font-size: 0.8rem; 
     letter-spacing: 7px; 
     transition: all 0.4s ease;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: 500;
+    color: #FFFFFF; /* High contrast white specifically for center */
+    opacity: 0.95;
 }
 
-/* Hover Interaction Math */
-.split-container:has(.split-option:hover) .split-option:not(:hover) { 
-    opacity: 0.15; 
-}
+/* Hover Interaction */
+.split-container:has(.split-option:hover) .split-option:not(:hover) { opacity: 0.15; }
 .split-option:hover { opacity: 1; }
 .split-option:hover .split-icon {
-    filter: drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
+    filter: brightness(1.3) drop-shadow(0px 0px 8px var(--glow-core)) drop-shadow(0px 0px 35px var(--glow-halo));
     transform: scale(1.08) translateY(-5px);
 }
 .split-option:hover .split-text {
@@ -192,138 +186,93 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 /* =========================================
-   5. LIQUID GLASS OVERLAY (MENU)
+   5. OVERLAYS (MENU GLASS)
    ========================================= */
 .liquid-glass-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0, 2, 8, 0.75); 
-    backdrop-filter: blur(35px); 
-    -webkit-backdrop-filter: blur(35px); 
-    z-index: 90; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none; 
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 2, 8, 0.75); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); 
+    z-index: 90; display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.liquid-glass-overlay.active-glass {
-    opacity: 1;
-    pointer-events: auto;
-}
+.liquid-glass-overlay.active-glass { opacity: 1; pointer-events: auto; }
 
 .glass-nav-links {
-    display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
 }
-
 .glass-nav-links span {
-    font-size: 0.85rem; 
-    letter-spacing: 8px;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(20px); 
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 4px; cursor: pointer; opacity: 0;
+    transform: translateY(20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: 500; color: var(--text-primary);
 }
-
-.liquid-glass-overlay.active-glass .glass-nav-links span {
-    opacity: 1; transform: translateY(0);
-}
-
+.liquid-glass-overlay.active-glass .glass-nav-links span { opacity: 1; transform: translateY(0); }
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(1) { transition-delay: 0.1s; }
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(2) { transition-delay: 0.2s; }
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(3) { transition-delay: 0.3s; }
 
 /* =========================================
-   6. INNER PLATFORM (THE Y-AXIS LEDGER)
+   6. INNER PLATFORM (Y-AXIS LEDGER)
    ========================================= */
 #platform-view {
     position: absolute; top: 0; left: 0; width: 100vw; height: 100dvh;
     display: none; opacity: 0; pointer-events: none; transform: translateX(40px); 
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 50;
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); z-index: 50;
 }
+#platform-view.active-platform { opacity: 1; pointer-events: auto; transform: translateX(0); }
 
-#platform-view.active-platform {
-    opacity: 1; pointer-events: auto; transform: translateX(0); 
-}
-
-/* Micro Compass (Desktop) */
+/* Micro Compass */
 .platform-sidebar {
     position: fixed; left: 3rem; top: 50%; transform: translateY(-50%);
     display: flex; flex-direction: column; gap: 0.3rem; z-index: 100;
 }
-
 .sidebar-option {
     cursor: pointer; opacity: 0.55; padding: 0.7rem 1rem; 
-    border-radius: 0 8px 8px 0; border-left: 2px solid transparent; 
-    background: rgba(0, 2, 8, 0.0); 
+    border-radius: 0 8px 8px 0; border-left: 2px solid transparent; background: rgba(0, 2, 8, 0.0); 
 }
-
 .sidebar-option span {
-    font-size: 0.75rem; letter-spacing: 5px; color: var(--text-primary); pointer-events: none; font-weight: 600;
+    font-size: 0.75rem; letter-spacing: 5px; color: var(--text-primary); pointer-events: none; font-weight: 500;
 }
-
 .sidebar-option.active-sidebar {
-    opacity: 1;
-    background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
-    border-left: 2px solid var(--brand-accent);
-    transform: translateX(5px); 
+    opacity: 1; background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
+    border-left: 2px solid var(--brand-accent); transform: translateX(5px); 
 }
 
-/* Ledger Data Streams */
+/* Content Blocks */
 .platform-content {
     display: flex; justify-content: center; align-items: center;
     height: 100dvh; width: 100%; padding: 0 4rem 0 12rem; 
 }
-
-/* Hide inactive streams to fix overlap bug */
 .ledger-stream { display: none; opacity: 0; transition: opacity 0.6s ease; }
 .ledger-stream.active-stream { display: block; opacity: 1; animation: textFadeIn 0.8s ease forwards; }
 
 .raw-text-block { max-width: 640px; text-align: left; }
-
 .raw-text-block h2 {
     font-size: 1.55rem; letter-spacing: 5px; color: var(--text-primary); text-transform: uppercase;
-    margin-bottom: 2.5rem; position: relative; padding-bottom: 15px; font-weight: 700;
+    margin-bottom: 2.5rem; position: relative; padding-bottom: 15px; font-weight: 600;
 }
 .raw-text-block h2::after {
     content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px;
     background: var(--brand-accent); box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
 }
-
-.raw-text-block p {
-    font-size: 1rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 2rem; font-weight: 600;
-}
-
-.raw-text-block strong { color: var(--brand-accent); font-weight: 700; }
+.raw-text-block p { font-size: 1rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 2rem; font-weight: 400; }
+.raw-text-block strong { color: var(--brand-accent); font-weight: 600; }
 
 .terminal-link {
-    display: inline-block; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+    display: inline-block; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
     color: var(--text-primary); text-decoration: none; margin-top: 1.5rem; padding-bottom: 6px;
-    border-bottom: 2px solid rgba(0, 229, 255, 0.3); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: auto; font-weight: 700;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.3); transition: all 0.3s ease; pointer-events: auto; font-weight: 600;
 }
 .terminal-link:hover { color: var(--brand-accent); border-bottom-color: var(--brand-accent); }
 
-@keyframes textFadeIn {
-    0% { opacity: 0; transform: translateY(15px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
+@keyframes textFadeIn { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
 
 /* =========================================
    7. ABOUT & SOCIALS PAGES
    ========================================= */
-.page-container {
-    padding: 120px 5vw 100px 5vw; max-width: 1000px; margin: 0 auto; position: relative; z-index: 5;
-}
+.page-container { padding: 120px 5vw 100px 5vw; max-width: 1000px; margin: 0 auto; position: relative; z-index: 5; }
 
 .page-title {
     font-size: 2.2rem; letter-spacing: 8px; text-align: center; margin-bottom: 80px;
-    color: var(--text-primary); text-transform: uppercase; position: relative; padding-bottom: 25px; font-weight: 700;
+    color: var(--text-primary); text-transform: uppercase; position: relative; padding-bottom: 25px; font-weight: 600;
 }
 .page-title::after {
     content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -331,32 +280,14 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 .timeline-wrapper { position: relative; padding-left: 180px; }
-.timeline-wrapper::before {
-    content: ''; position: absolute; top: 5px; bottom: 0; left: 140px; width: 1px; background: rgba(0, 229, 255, 0.2); 
-}
-
+.timeline-wrapper::before { content: ''; position: absolute; top: 5px; bottom: 0; left: 140px; width: 1px; background: rgba(0, 229, 255, 0.2); }
 .timeline-step { position: relative; margin-bottom: 90px; }
 .timeline-step:last-child { margin-bottom: 0; }
-
-.step-indicator {
-    position: absolute; left: -180px; width: 140px; display: flex; align-items: center; justify-content: flex-end; top: 5px; 
-}
-
-.step-name {
-    font-family: monospace; color: var(--brand-accent); font-size: 0.9rem; letter-spacing: 2px; 
-    text-transform: uppercase; padding-right: 18px; font-weight: 600;
-}
-
-.step-node {
-    position: absolute; right: -4px; width: 8px; height: 8px; background: var(--brand-accent); 
-    border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
-}
-
+.step-indicator { position: absolute; left: -180px; width: 140px; display: flex; align-items: center; justify-content: flex-end; top: 5px; }
+.step-name { font-family: 'Inter', monospace; color: var(--brand-accent); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; padding-right: 18px; font-weight: 500; }
+.step-node { position: absolute; right: -4px; width: 8px; height: 8px; background: var(--brand-accent); border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9); }
 .step-content { padding-left: 0; }
-.step-content.raw-text-block h3 {
-    font-size: 1.1rem; letter-spacing: 3px; color: var(--text-primary); margin-top: 2.5rem; 
-    margin-bottom: 0.8rem; text-transform: uppercase; font-weight: 700;
-}
+.step-content.raw-text-block h3 { font-size: 1.1rem; letter-spacing: 3px; color: var(--text-primary); margin-top: 2.5rem; margin-bottom: 0.8rem; text-transform: uppercase; font-weight: 600; }
 .step-content.raw-text-block h3:first-child { margin-top: 0; }
 
 .socials-container { padding: 12rem 2rem 4rem; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
@@ -366,45 +297,28 @@ a, button, span, .split-option, .hamburger, .social-card {
     width: 360px; text-decoration: none; border-radius: 4px; backdrop-filter: blur(12px); 
     transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
 }
-.social-card h3 { color: var(--text-primary); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 1.2rem; transition: color 0.3s ease; }
-.social-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; transition: color 0.3s ease; }
+.social-card h3 { color: var(--text-primary); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 1.2rem; transition: color 0.3s ease; font-weight: 600; }
+.social-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; transition: color 0.3s ease; font-weight: 400; }
 .social-card:hover { transform: translateY(-12px); border-color: rgba(0, 229, 255, 0.4); box-shadow: 0px 15px 40px rgba(0, 229, 255, 0.15); background: rgba(0, 2, 8, 0.8); }
 .social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
 
 /* =========================================
-   8. CONSOLE CLOCK
+   8. HOVER CALIBRATIONS
    ========================================= */
-#console-clock {
-    position: fixed; bottom: 1.5rem; left: 2vw; /* Pinned to corners */
-    font-size: 0.75rem; letter-spacing: 4px; color: var(--text-primary); 
-    text-transform: uppercase; z-index: 10; pointer-events: none; font-weight: 600;
-}
-
-/* =========================================
-   9. INTERACTION CALIBRATION
-   ========================================= */
-
-/* ZERO-LATENCY UI (Instant snap for controls) */
-.gateway-menu-toggle:hover,
-.sidebar-option:hover span,
-.sidebar-option.active-sidebar span {
+.gateway-menu-toggle:hover, .sidebar-option:hover span, .sidebar-option.active-sidebar span {
     color: var(--brand-accent) !important; 
-    text-shadow: none !important; 
-    transform: none !important; 
-    transition: all 0s !important; 
+    text-shadow: none !important; transform: none !important; transition: all 0s !important; 
 }
-
-/* FAKE BOLD FOR NAV LINKS (Smooth interpolation) */
 .glass-nav-links span, .mobile-nav-links span {
     transition: -webkit-text-stroke 0.3s ease, color 0.3s ease;
     -webkit-text-stroke: 0px var(--text-primary);
 }
 .glass-nav-links span:hover, .mobile-nav-links span:hover {
-    -webkit-text-stroke: 0.8px var(--text-primary); 
+    -webkit-text-stroke: 0.6px var(--text-primary); 
 }
 
 /* =========================================
-   10. MOBILE RE-ARCHITECTURE 
+   9. MOBILE ARCHITECTURE
    ========================================= */
 @media (max-width: 768px) {
     body {
@@ -415,29 +329,20 @@ a, button, span, .split-option, .hamburger, .social-card {
         background-size: 100% 100%;
     }
 
-    /* THE CLEAN FLOATING PILL */
+    /* Floating Pill */
     .top-nav { 
-        position: fixed;
-        top: 15px !important; 
-        left: 5% !important; 
-        width: 90% !important; 
-        height: 60px !important; 
-        min-height: 60px !important;
-        padding: 0 1.2rem !important; 
-        border-radius: 50px;
-        background: rgba(1, 10, 24, 0.65) !important;
-        backdrop-filter: blur(20px) saturate(120%); 
-        -webkit-backdrop-filter: blur(20px) saturate(120%);
-        border: 1px solid rgba(255, 255, 255, 0.08); 
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        z-index: 300 !important;
+        position: fixed; top: 15px !important; left: 5% !important; width: 90% !important; 
+        height: 60px !important; min-height: 60px !important; padding: 0 1.2rem !important; 
+        border-radius: 50px; background: rgba(1, 10, 24, 0.65) !important;
+        backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        display: flex !important; align-items: center !important; justify-content: space-between !important; z-index: 300 !important;
     }
     .top-nav::before { display: none !important; }
     
-    .text-logo { font-size: 1.1rem !important; letter-spacing: 6px; }
+    .logo-lockup { gap: 8px; }
+    .text-logo { font-size: 0.9rem !important; letter-spacing: 4px !important; font-weight: 600 !important; }
+    .master-icon { height: 16px !important; }
 
     /* Hamburger */
     .hamburger { 
@@ -450,10 +355,9 @@ a, button, span, .split-option, .hamburger, .social-card {
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
 
-    /* Floating Dropdown */
+    /* Mobile Menu Dropdown */
     .mobile-dropdown {
-        display: flex !important; /* Forces visibility */
-        position: fixed; top: 85px; left: 5%; width: 90%;
+        display: flex !important; position: fixed; top: 85px; left: 5%; width: 90%;
         background: rgba(0, 2, 8, 0.35); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
         border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         border-radius: 24px; padding: 1.2rem 1rem; flex-direction: column; z-index: 250; 
@@ -461,20 +365,18 @@ a, button, span, .split-option, .hamburger, .social-card {
     }
     .mobile-dropdown.active-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .mobile-nav-links { display: flex; flex-direction: column; width: 100%; gap: 0.3rem; }
-    .mobile-nav-links span { font-size: 1.05rem !important; letter-spacing: 3px; padding: 0.8rem 1.5rem; border-radius: 12px; text-align: left; }
+    .mobile-nav-links span { font-size: 0.95rem !important; letter-spacing: 3px; padding: 0.8rem 1.5rem; border-radius: 12px; text-align: left; font-weight: 500; }
 
-    /* Gateway & Components */
+    /* Gateway */
     .split-container { flex-direction: column !important; gap: 4.5rem !important; }
     .split-icon { height: 36px !important; max-width: 120px !important; }
-    .split-text { font-size: 0.7rem; letter-spacing: 5px; }
+    .split-text { font-size: 0.75rem !important; letter-spacing: 5px !important; }
     .gateway-menu-toggle, .liquid-glass-overlay { display: none !important; }
     #console-clock { display: none !important; }
 
-    /* Inner Platform Mobile Reset */
+    /* Platform */
     .platform-content { padding: 11rem 5vw 4rem 5vw !important; height: auto !important; min-height: 100vh; }
     #platform-view { height: auto; min-height: 100dvh; }
-
-    /* Mobile Compass Slider */
     .platform-sidebar {
         position: fixed; left: 0; top: 7rem; width: 100vw; flex-direction: row; justify-content: center; gap: 3rem; border-left: none; padding-left: 0; z-index: 40; transform: none;
     }
@@ -487,16 +389,15 @@ a, button, span, .split-option, .hamburger, .social-card {
     }
     .sidebar-option.active-sidebar::after { width: 100%; opacity: 1; }
 
-    /* Page Overrides */
+    /* Pages */
     .about-container { padding-top: 8rem; }
-    .page-title { margin-bottom: 60px; }
+    .page-title { margin-bottom: 60px; font-size: 1.8rem; }
     .timeline-wrapper { padding-left: 30px; }
     .timeline-wrapper::before { left: 5px; }
     .step-indicator { left: 0; width: auto; top: -30px; justify-content: flex-start; }
     .step-name { margin-right: 0; margin-left: 20px; text-align: left; }
     .step-node { left: 1px; right: auto; top: 2px; }
     .step-content { margin-top: 40px; margin-bottom: 60px; }
-
     .socials-container { padding-top: 9rem; }
     .social-cards { flex-direction: column; gap: 2.5rem; }
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
