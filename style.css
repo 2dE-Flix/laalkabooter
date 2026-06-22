@@ -451,3 +451,68 @@ a, button, span, .split-option, .hamburger, .social-card {
     opacity: 1 !important;
     filter: drop-shadow(0px 0px 12px rgba(209, 204, 192, 0.25)) !important; /* Soft, warm glow */
 }
+/* =========================================
+   12. THE CUSTOM COLOR SYSTEM (ULTIMATE CONSISTENCY)
+   ========================================= */
+
+:root {
+    --text-hero: #E4CAA5;      /* Warm/Gold - Brand Marks & Structural Titles */
+    --text-primary: #D8DADF;   /* Cool White - UI Controls & Central Buttons */
+    --text-secondary: #A8AFB8; /* Mid Grey - Reading Paragraphs & Subtext */
+    --text-muted: #7E8894;     /* Slate - Background Data & Inactive UI */
+    
+    /* Adjusted the interaction glow to match your new primary UI white */
+    --glow-core: rgba(216, 218, 223, 0.15); 
+}
+
+/* 1. HERO HEADING (#E4CAA5) 
+   Used for: The RAVIE Logo, Page Titles, and Main Section Headers */
+.text-logo,
+.page-title,
+.raw-text-block h2,
+.step-name {
+    color: var(--text-hero) !important;
+}
+
+/* 2. PRIMARY TEXT (#D8DADF) 
+   Used for: The Split Icons, Menu Button, Glass Nav, and Sub-headers */
+.split-text,
+.gateway-menu-toggle,
+.glass-nav-links span,
+.mobile-nav-links span,
+.terminal-link,
+.step-content.raw-text-block h3,
+.social-card h3 {
+    color: var(--text-primary) !important;
+}
+
+/* 3. SECONDARY TEXT (#A8AFB8) 
+   Used for: All long-form reading paragraphs to eliminate glare */
+.raw-text-block p,
+.social-card p,
+.step-content.raw-text-block p,
+.sidebar-option.active-sidebar span {
+    color: var(--text-secondary) !important;
+}
+
+/* 4. MUTED TEXT (#7E8894) 
+   Used for: The Clock and inactive compass elements */
+#console-clock,
+.sidebar-option span {
+    color: var(--text-muted) !important;
+}
+
+/* OPTICAL IMAGE BLENDING 
+   Dims the pure-white PNG images so they match the softness of the Primary Text */
+.split-icon, 
+.master-icon {
+    opacity: 0.85 !important;
+}
+
+/* FAKE BOLD HOVER FIX (Matches the new primary color) */
+.glass-nav-links span, .mobile-nav-links span {
+    -webkit-text-stroke: 0px var(--text-primary);
+}
+.glass-nav-links span:hover, .mobile-nav-links span:hover {
+    -webkit-text-stroke: 0.6px var(--text-primary); 
+}
