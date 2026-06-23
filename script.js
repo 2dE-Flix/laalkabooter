@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lastTime = ts;
 
             if (!isBackgroundFrozen) {
-                shaderTime += deltaTime * 0.006; 
+                shaderTime += deltaTime * 0.0035; 
             }
 
             currentDepth += (targetDepth - currentDepth) * Math.min(1, deltaTime * 0.0025);
