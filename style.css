@@ -200,7 +200,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 .liquid-glass-overlay.active-glass {
-   display: flex
+   display: flex;
     opacity: 1; visibility: visible; pointer-events: auto;
 }
 
