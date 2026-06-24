@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         vec2 curlFBM(vec2 p,float t){
           vec2 v=vec2(0);float a=0.6,f=1.0;
-          for(int i=0;i<4;i++){v+=a*curl(p*f+v*0.5,t+float(i)*1.7);f*=1.85;a*=0.50;}
+       for(int i=0;i<3;i++){v+=a*curl(p*f+v*0.5,t+float(i)*1.7);f*=1.85;a*=0.50;}
           return v;
         }
         vec3 pal(float n,float angle,float spd){
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
           vec2 uv=gl_FragCoord.xy/u_res; vec2 st=(uv*2.0-1.0)*vec2(u_res.x/u_res.y,1.0);
           vec2 p=st*1.0; vec2 pos=p;vec3 col=vec3(0);float wsum=0.0;
           float drift=1.0-0.35*u_depth;
-          for(int step=0;step<5;step++){
+          for(int step=0;step<3;step++){
             vec2 flow=curlFBM(pos,u_t); pos-=flow*0.28*drift; float n=gn(pos*0.85+u_t*0.012);
             float angle=atan(flow.y,flow.x); float spd=length(flow); float w=1.0/(float(step)+1.0);
             col+=pal(n,angle,spd)*w;wsum+=w;
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const uDepth=gl.getUniformLocation(prog,'u_depth');
         
   /* Render at 25% resolution to save 75% of GPU power. The CSS blur completely hides the downscale. */
-const DOWNSCALE = 0.25; 
+const DOWNSCALE = 0.15; 
 function resize() {
     canvas.width = window.innerWidth * DOWNSCALE;
     canvas.height = window.innerHeight * DOWNSCALE;
