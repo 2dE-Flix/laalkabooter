@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const uDepth=gl.getUniformLocation(prog,'u_depth');
         
   /* Render at 25% resolution to save 75% of GPU power. The CSS blur completely hides the downscale. */
-const DOWNSCALE = 0.15; 
+const DOWNSCALE = 0.08; 
 function resize() {
     canvas.width = window.innerWidth * DOWNSCALE;
     canvas.height = window.innerHeight * DOWNSCALE;
@@ -198,12 +198,24 @@ function resize() {
 }
         resize(); window.addEventListener('resize',resize);
         
-        let lastTime = 0;
+  let lastTime = 0;
         let shaderTime = 0;
+        
+        /* The FPS Limiter */
+        const FPS_LIMIT = 60;
+        const FRAME_DURATION = 1000 / FPS_LIMIT;
+        let lastRenderTime = 0;
 
         function render(ts){
+            /* Queue next frame immediately, but we might skip the math below */
+            requestAnimationFrame(render);
+
             let deltaTime = ts - lastTime;
             lastTime = ts;
+
+            /* THROTTLE CHECK: If 33ms haven't passed yet, abort render and save GPU */
+            if (ts - lastRenderTime < FRAME_DURATION) return; 
+            lastRenderTime = ts;
 
             if (!isBackgroundFrozen) {
                 shaderTime += deltaTime * 0.0035; 
@@ -215,11 +227,8 @@ function resize() {
             gl.uniform1f(uDepth, currentDepth);
             gl.uniform2f(uR, canvas.width, canvas.height);
             gl.drawArrays(gl.TRIANGLES, 0, 6);
-            requestAnimationFrame(render);
         }
         requestAnimationFrame(render);
-    }
-
     // ==========================================
     // 5. REAL-TIME CONSOLE CLOCK ENGINE
     // ==========================================
