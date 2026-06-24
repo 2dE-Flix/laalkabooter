@@ -580,8 +580,9 @@ a, button, span, .split-option, .hamburger, .social-card {
     #console-clock        { font-size: 0.75rem !important; }  /* Up from 0.6rem  */
 
     /* 3. Transform the dark navy WebGL fluid into a pale whitish-blue arctic mist */
+ /* Voltage dropped 58%, white peaks crushed, injected #365b91 steel-blue pocket */
     #webgl-canvas.depth-surface {
-        filter: blur(32px) brightness(3.2) saturate(0.18) contrast(0.85) hue-rotate(5deg) !important;
+        filter: blur(35px) brightness(1.35) contrast(0.70) saturate(1.6) hue-rotate(2deg) !important;
     }
     
     #webgl-canvas.depth-deep {
