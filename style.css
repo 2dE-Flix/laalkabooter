@@ -581,14 +581,15 @@ a, button, span, .split-option, .hamburger, .social-card {
 
     /* 3. Transform the dark navy WebGL fluid into a pale whitish-blue arctic mist */
  /* Voltage dropped 58%, white peaks crushed, injected #365b91 steel-blue pocket */
+   /* Homescreen: White glare choked 60%, deep cobalt blue locked in */
     #webgl-canvas.depth-surface {
-        filter: blur(35px) brightness(1.35) contrast(0.70) saturate(1.6) hue-rotate(2deg) !important;
+        filter: blur(35px) brightness(0.55) contrast(0.85) saturate(2.0) hue-rotate(2deg) !important;
     }
     
+    /* Brands View: Concrete drained, deep midnight teal-ocean injected */
     #webgl-canvas.depth-deep {
-        filter: blur(42px) brightness(3.5) saturate(0.25) contrast(0.9) hue-rotate(0deg) !important;
+        filter: blur(42px) brightness(0.45) contrast(0.90) saturate(2.2) hue-rotate(-8deg) !important;
     }
-    
     #webgl-canvas.frozen-blur {
         /* Un-choked from 0.10 up to a luminous 2.2 brightness for the open menu */
         filter: blur(60px) brightness(2.2) saturate(0.12) contrast(0.8) !important;
