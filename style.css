@@ -579,28 +579,25 @@ a, button, span, .split-option, .hamburger, .social-card {
     .glass-nav-links span { font-size: 1.05rem !important; }  /* Up from 0.85rem */
     #console-clock        { font-size: 0.75rem !important; }  /* Up from 0.6rem  */
 
-    /* 3. Transform the dark navy WebGL fluid into a pale whitish-blue arctic mist */
- /* Voltage dropped 58%, white peaks crushed, injected #365b91 steel-blue pocket */
-   /* Homescreen: White glare choked 60%, deep cobalt blue locked in */
-/* Homescreen: Whites dimmed another 40%, contrast smoothed */
-/* Homescreen V1.0 Base: Brightness -10% (0.29), White peaks +20% (contrast 1.2) */
+/* 1. Homescreen: Brightness lifted to 0.65, icy white peaks restored via contrast */
     #webgl-canvas.depth-surface {
-        filter: blur(35px) brightness(0.29) contrast(1.2) !important;
+        filter: blur(32px) brightness(0.65) contrast(1.15) saturate(1.3) !important;
     }
     
-    /* Brands V1.0 Base: Brightness -10% (0.50), White peaks +20%, Original Saturation restored */
+    /* 2. Brands View: Black abyss lifted to a visible, rich deep ocean */
     #webgl-canvas.depth-deep {
-        filter: blur(48px) brightness(0.50) contrast(1.2) saturate(1.2) !important;
+        filter: blur(42px) brightness(1.8) contrast(1.1) saturate(1.4) hue-rotate(-5deg) !important;
     }
-    /* Menu: Saturation restored to match background, brightness dimmed 20% */
+    
+    /* 3. Menu: Stripped fake colors. Now it purely blurs the active background */
     #webgl-canvas.frozen-blur {
-        filter: blur(60px) brightness(1.75) saturate(1.8) contrast(0.85) !important;
+        filter: blur(75px) brightness(0.4) !important;
     }
-    /* Soften the liquid glass overlay so it blends over the pale fog */
+
+    /* 4. Let the CSS blur do the work, make the overlay highly transparent */
     .liquid-glass-overlay {
-        background: rgba(12, 20, 32, 0.65) !important;
+        background: rgba(8, 15, 26, 0.3) !important;
     }
-}
 /* =========================================
    MASTER OVERRIDE: WEIGHT HIERARCHY
    ========================================= */
