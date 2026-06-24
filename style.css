@@ -566,38 +566,58 @@ a, button, span, .split-option, .hamburger, .social-card {
    8. DESKTOP-ONLY VISUAL SHIELD (PC OPTIMIZATION)
    ========================================= */
 @media (min-width: 769px) {
-    /* 1. Exterminate eye-burn: Dim all PC text to a soft frosted ice-slate */
+    /* --- TYPOGRAPHY & ALIGNMENT (Target #07) --- */
+    
+    /* Soften all header/UI text to reduce eye strain */
     body, .text-logo, .gateway-menu-toggle, .glass-nav-links span, 
     .raw-text-block h2, .page-title, #console-clock, .sidebar-option span, 
     .step-content.raw-text-block h3, .social-card h3, .terminal-link {
         color: #C3D3E2 !important; 
     }
 
-    /* 2. Scale up PC Navigation elements by exactly 20% */
-    .text-logo            { font-size: 1.7rem !important; }   /* Up from 1.4rem  */
-    .gateway-menu-toggle  { font-size: 0.85rem !important; }  /* Up from 0.7rem  */
-    .glass-nav-links span { font-size: 1.05rem !important; }  /* Up from 0.85rem */
-    #console-clock        { font-size: 0.75rem !important; }  /* Up from 0.6rem  */
+    /* Scale up UI Elements by 20% */
+    .text-logo            { font-size: 1.7rem !important; }   
+    .gateway-menu-toggle  { font-size: 0.85rem !important; }  
+    .glass-nav-links span { font-size: 1.05rem !important; }  
+    #console-clock        { font-size: 0.75rem !important; }  
 
-/* 1. Homescreen: Brightness lifted to 0.65, icy white peaks restored via contrast */
+    /* Fix the Ledger Content: Larger, thinner, wider, centered */
+    .platform-content {
+        padding-top: 5vh; /* Pushes content slightly down for perfect optical centering */
+    }
+    
+    .raw-text-block {
+        max-width: 800px !important; /* Expanded from 640px to fill PC monitors better */
+    }
+    
+    .raw-text-block p {
+        font-size: 1.15rem !important; /* Scaled up for readability */
+        line-height: 2.1 !important;   /* More breathing room between lines */
+        font-weight: 400 !important;   /* Forces the thin, clean weight */
+        color: rgba(238, 244, 250, 0.85) !important; /* Softer white */
+    }
+
+    /* --- THE UNIFIED WEBGL FILTERS --- */
+    
+    /* Homescreen: Blur +10%, Brightness -10%, contrast softened to kill sharpness */
     #webgl-canvas.depth-surface {
-        filter: blur(32px) brightness(0.65) contrast(1.15) saturate(1.3) !important;
+        filter: blur(35px) brightness(0.58) contrast(1.05) saturate(1.3) !important;
     }
     
-    /* 2. Brands View: Black abyss lifted to a visible, rich deep ocean */
+    /* Brands View: Brought closer to Homescreen math to kill the flash and lift the dark */
     #webgl-canvas.depth-deep {
-        filter: blur(42px) brightness(1.8) contrast(1.1) saturate(1.4) hue-rotate(-5deg) !important;
+        filter: blur(46px) brightness(1.2) contrast(1.05) saturate(1.2) !important;
     }
     
-    /* 3. Menu: Stripped fake colors. Now it purely blurs the active background */
+    /* Menu: Pure blur overlay */
     #webgl-canvas.frozen-blur {
         filter: blur(75px) brightness(0.4) !important;
     }
 
-    /* 4. Let the CSS blur do the work, make the overlay highly transparent */
     .liquid-glass-overlay {
         background: rgba(8, 15, 26, 0.3) !important;
     }
+}
 /* =========================================
    MASTER OVERRIDE: WEIGHT HIERARCHY
    ========================================= */
