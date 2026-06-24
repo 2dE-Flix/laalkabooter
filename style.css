@@ -461,9 +461,11 @@ a, button, span, .split-option, .hamburger, .social-card {
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
-    .top-nav::before {
-        content: ''; position: absolute; top: -15px; left: -10vw; width: 120vw; height: 120px; 
-        background: linear-gradient(to bottom, #010a18 45%, transparent 100%); z-index: -1; pointer-events: none;
+ /* Detached the curtain from the nav and pinned it to the viewport roof */
+    body::before {
+        content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 50px; 
+        background: linear-gradient(to bottom, var(--bg-deep) 45%, transparent 100%); 
+        z-index: 95; pointer-events: none;
     }
     
     .text-logo { font-size: 1.1rem; letter-spacing: 6px; }
@@ -565,7 +567,15 @@ a, button, span, .split-option, .hamburger, .social-card {
    MASTER OVERRIDE: WEIGHT HIERARCHY
    ========================================= */
 /* SEMI-BOLD (600): UI Controls & Standard Text */
-.raw-text-block p, 
+/* =========================================
+   MASTER OVERRIDE: WEIGHT HIERARCHY
+   ========================================= */
+/* Content text - Normal/Thin */
+.raw-text-block p {
+    font-weight: 400 !important;
+}
+
+/* UI Controls - Semi-Bold */
 .gateway-menu-toggle,
 .desktop-menu span,
 .sidebar-option span,
@@ -574,10 +584,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 #console-clock,
 .glass-nav-links span, 
 .mobile-nav-links span 
-{
-    font-weight: 600 !important;
-}
-
+{ font-weight: 600 !important; }
 /* BOLD (700): Anchors & Headers */
 .page-title,
 .raw-text-block h2,
