@@ -91,14 +91,14 @@ a, button, span, .split-option, .hamburger, .social-card {
     top: 0; 
     left: 0; 
     width: 100vw;
-    padding: 3rem 4rem; 
+    /* Pushed to the extreme corners like DIA */
+    padding: 2rem 2.5rem; 
     display: flex; 
-    justify-content: space-between; /* Pushes Logo left, Menu right */
-    align-items: center; /* Perfect horizontal baseline */
+    justify-content: space-between;
+    align-items: center;
     z-index: 100;
     pointer-events: none; 
 }
-
 .logo-container, .gateway-menu-toggle, .hamburger {
     pointer-events: auto; 
 }
@@ -543,7 +543,8 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 #console-clock {
-    position: fixed; bottom: 3rem; left: 4rem; 
+    /* Matched the exact 2.5rem X-axis of the top Logo for perfect vertical alignment */
+    position: fixed; bottom: 2rem; left: 2.5rem; 
     font-size: 0.6rem; letter-spacing: 3px; color: var(--text-primary); text-transform: uppercase; z-index: 10; pointer-events: none;
 }
 
