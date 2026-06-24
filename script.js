@@ -7,26 +7,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 1. GLOBAL STATE & DOM ELEMENTS
     // ==========================================
-    let targetDepth = 0;   // 0 = surface (Talents), 1 = deep ocean (Brands)
-    let currentDepth = 0;  // smoothed value sent to shader
-    let isBackgroundFrozen = false; // The Kill Switch for blur effects
+    let targetDepth = 0;   
+    let currentDepth = 0;  
+    let isBackgroundFrozen = false; 
 
-    // Background
     const canvas = document.getElementById('webgl-canvas');
-    
-    // Menus & Overlays
     const hamburger = document.getElementById('hamburger-menu');
     const mobileDropdown = document.getElementById('mobile-dropdown');
     const gatewayMenuBtn = document.getElementById('gateway-menu-btn');
     const liquidGlassOverlay = document.getElementById('liquid-glass-overlay');
     
-    // Platform Views
     const gatewayView = document.getElementById("gateway-view");
     const platformView = document.getElementById("platform-view");
     const btnCreators = document.getElementById("btn-creators");
     const btnBrands = document.getElementById("btn-brands");
     
-    // Ledger Streams
     const sideTalents = document.getElementById("side-talents");
     const sideBrands = document.getElementById("side-brands");
     const streamTalents = document.getElementById("ledger-talents");
@@ -35,23 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 2. UI NAVIGATION ENGINE
     // ==========================================
-    
-    // Mobile Hamburger Toggle
     if (hamburger && mobileDropdown) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             mobileDropdown.classList.toggle('active-menu');
-            
             isBackgroundFrozen = !isBackgroundFrozen;
             if (canvas) canvas.classList.toggle('frozen-blur');
         });
     }
 
-    // Desktop Gateway Glass Menu Toggle
     if (gatewayMenuBtn && liquidGlassOverlay) {
         gatewayMenuBtn.addEventListener('click', () => {
             const isActive = liquidGlassOverlay.classList.contains('active-glass');
-            
             if (isActive) {
                 liquidGlassOverlay.classList.remove('active-glass');
                 gatewayMenuBtn.textContent = 'MENU';
@@ -69,17 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 3. PLATFORM ROUTING ENGINE
     // ==========================================
-
     function transitionToPlatform(targetStream) {
         if (gatewayView && platformView) {
             gatewayView.style.opacity = '0';
             gatewayView.style.pointerEvents = 'none';
-            
             setTimeout(() => {
                 gatewayView.classList.remove('active-view');
                 gatewayView.style.display = 'none';
                 platformView.style.display = 'block';
-                
                 setTimeout(() => {
                     platformView.classList.add('active-platform');
                     switchStream(targetStream);
@@ -89,20 +76,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function switchStream(target) {
-        // Safely reset Compass (Left Axis)
         if (sideTalents) sideTalents.classList.remove('active-sidebar');
         if (sideBrands) sideBrands.classList.remove('active-sidebar');
-        
-        // Safely hide Streams (Right Axis)
         if (streamTalents) streamTalents.classList.remove('active-stream');
         if (streamBrands) streamBrands.classList.remove('active-stream');
 
-        // Activate the target streams and trigger Depth Physics
         if (target === 'talents') {
             if (sideTalents) sideTalents.classList.add('active-sidebar');
             if (streamTalents) streamTalents.classList.add('active-stream');
             targetDepth = 0;
-            
             if (canvas) {
                 canvas.classList.remove('depth-deep');
                 canvas.classList.add('depth-surface');
@@ -111,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (sideBrands) sideBrands.classList.add('active-sidebar');
             if (streamBrands) streamBrands.classList.add('active-stream');
             targetDepth = 1;
-            
             if (canvas) {
                 canvas.classList.remove('depth-surface');
                 canvas.classList.add('depth-deep');
@@ -119,19 +100,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Attach Gateway Listeners
     if (btnCreators) btnCreators.addEventListener("click", () => transitionToPlatform("talents"));
     if (btnBrands) btnBrands.addEventListener("click", () => transitionToPlatform("brands"));
     if (sideTalents) sideTalents.addEventListener("click", () => switchStream("talents"));
     if (sideBrands) sideBrands.addEventListener("click", () => switchStream("brands"));
 
     // ==========================================
-    // 4. WEBGL FLUID BACKGROUND ENGINE
+    // 4. WEBGL ENGINE (ULTRA-LIGHTWEIGHT BUILD)
     // ==========================================
-    
     if (canvas) {
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        
         const VERT = `attribute vec2 pos;void main(){gl_Position=vec4(pos,0,1);}`;
         const FRAG = `
         precision highp float;
@@ -149,7 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         vec2 curlFBM(vec2 p,float t){
           vec2 v=vec2(0);float a=0.6,f=1.0;
-       for(int i=0;i<3;i++){v+=a*curl(p*f+v*0.5,t+float(i)*1.7);f*=1.85;a*=0.50;}
+          /* OPTIMIZATION 1: Pruned octaves from 4 to 3 */
+          for(int i=0;i<3;i++){v+=a*curl(p*f+v*0.5,t+float(i)*1.7);f*=1.85;a*=0.50;}
           return v;
         }
         vec3 pal(float n,float angle,float spd){
@@ -168,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
           vec2 uv=gl_FragCoord.xy/u_res; vec2 st=(uv*2.0-1.0)*vec2(u_res.x/u_res.y,1.0);
           vec2 p=st*1.0; vec2 pos=p;vec3 col=vec3(0);float wsum=0.0;
           float drift=1.0-0.35*u_depth;
+          /* OPTIMIZATION 2: Pruned rendering steps from 5 to 3 */
           for(int step=0;step<3;step++){
             vec2 flow=curlFBM(pos,u_t); pos-=flow*0.28*drift; float n=gn(pos*0.85+u_t*0.012);
             float angle=atan(flow.y,flow.x); float spd=length(flow); float w=1.0/(float(step)+1.0);
@@ -189,33 +169,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const uT=gl.getUniformLocation(prog,'u_t'); const uR=gl.getUniformLocation(prog,'u_res');
         const uDepth=gl.getUniformLocation(prog,'u_depth');
         
-  /* Render at 25% resolution to save 75% of GPU power. The CSS blur completely hides the downscale. */
-const DOWNSCALE = 0.08; 
-function resize() {
-    canvas.width = window.innerWidth * DOWNSCALE;
-    canvas.height = window.innerHeight * DOWNSCALE;
-    gl.viewport(0, 0, canvas.width, canvas.height);
-}
+        /* OPTIMIZATION 3: Render at 15% physical resolution. Blur handles the rest. */
+        const DOWNSCALE = 0.15;
+        function resize(){
+            canvas.width = window.innerWidth * DOWNSCALE;
+            canvas.height = window.innerHeight * DOWNSCALE;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        }
         resize(); window.addEventListener('resize',resize);
         
-  let lastTime = 0;
+        let lastTime = 0;
         let shaderTime = 0;
-        
-        /* The FPS Limiter */
-        const FPS_LIMIT = 60;
-        const FRAME_DURATION = 1000 / FPS_LIMIT;
-        let lastRenderTime = 0;
 
+        /* Clean, unthrottled loop. The Downscale + Math prune fully handles the GPU load. */
         function render(ts){
-            /* Queue next frame immediately, but we might skip the math below */
-            requestAnimationFrame(render);
-
             let deltaTime = ts - lastTime;
             lastTime = ts;
-
-            /* THROTTLE CHECK: If 33ms haven't passed yet, abort render and save GPU */
-            if (ts - lastRenderTime < FRAME_DURATION) return; 
-            lastRenderTime = ts;
 
             if (!isBackgroundFrozen) {
                 shaderTime += deltaTime * 0.0035; 
@@ -227,19 +196,21 @@ function resize() {
             gl.uniform1f(uDepth, currentDepth);
             gl.uniform2f(uR, canvas.width, canvas.height);
             gl.drawArrays(gl.TRIANGLES, 0, 6);
+            
+            requestAnimationFrame(render);
         }
         requestAnimationFrame(render);
+    }
+
     // ==========================================
     // 5. REAL-TIME CONSOLE CLOCK ENGINE
     // ==========================================
-    
     function startConsoleClock() {
         const clockElement = document.getElementById('console-clock');
         if (!clockElement) return;
 
         setInterval(() => {
             const now = new Date();
-            
             const options = {
                 timeZone: 'Asia/Kolkata',
                 hour: '2-digit',
@@ -247,11 +218,9 @@ function resize() {
                 second: '2-digit',
                 hour12: false
             };
-
             clockElement.textContent = now.toLocaleTimeString('en-US', options);
         }, 1000);
     }
 
     startConsoleClock();
-
 });
