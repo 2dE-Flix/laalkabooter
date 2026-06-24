@@ -576,12 +576,21 @@ a, button, span, .split-option, .hamburger, .social-card {
         color: #C3D3E2 !important; 
     }
 
-    /* Scale up UI Elements by 20% */
-    .text-logo            { font-size: 1.7rem !important; }   
-    .gateway-menu-toggle  { font-size: 0.85rem !important; }  
-    .glass-nav-links span { font-size: 1.05rem !important; }  
-    #console-clock        { font-size: 0.75rem !important; }  
+/* 1. Force the extreme 24px Bezel Hug (Matched DIA pixel-for-pixel) */
+    .top-nav {
+        padding: 24px 32px !important; /* 24px top, slightly extra on right to clear scrollbar */
+    }
 
+    #console-clock {
+        bottom: 24px !important;
+        left: 32px !important; /* Laser-aligned to the RAVIE text logo above it */
+    }
+
+    /* 2. Permanent 75% Zoom Look: Crisper, highly refined UI markings */
+    .text-logo            { font-size: 1.25rem !important; letter-spacing: 10px !important; }   
+    .gateway-menu-toggle  { font-size: 0.65rem !important; letter-spacing: 5px !important; }  
+    .glass-nav-links span { font-size: 0.9rem !important; }  
+    #console-clock        { font-size: 0.55rem !important; letter-spacing: 4px !important; }
     /* Fix the Ledger Content: Larger, thinner, wider, centered */
     .platform-content {
         padding-top: 5vh; /* Pushes content slightly down for perfect optical centering */
