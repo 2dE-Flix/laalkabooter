@@ -189,7 +189,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const uT=gl.getUniformLocation(prog,'u_t'); const uR=gl.getUniformLocation(prog,'u_res');
         const uDepth=gl.getUniformLocation(prog,'u_depth');
         
-        function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;gl.viewport(0,0,canvas.width,canvas.height);}
+  /* Render at 25% resolution to save 75% of GPU power. The CSS blur completely hides the downscale. */
+const DOWNSCALE = 0.25; 
+function resize() {
+    canvas.width = window.innerWidth * DOWNSCALE;
+    canvas.height = window.innerHeight * DOWNSCALE;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+}
         resize(); window.addEventListener('resize',resize);
         
         let lastTime = 0;
