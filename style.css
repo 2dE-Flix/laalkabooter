@@ -562,7 +562,42 @@ a, button, span, .split-option, .hamburger, .social-card {
     transform: none !important; /* Stops all scaling/movement */
     transition: all 0s !important; /* ZERO MILLISECOND REACTION */
 }
+/* =========================================
+   8. DESKTOP-ONLY VISUAL SHIELD (PC OPTIMIZATION)
+   ========================================= */
+@media (min-width: 769px) {
+    /* 1. Exterminate eye-burn: Dim all PC text to a soft frosted ice-slate */
+    body, .text-logo, .gateway-menu-toggle, .glass-nav-links span, 
+    .raw-text-block h2, .page-title, #console-clock, .sidebar-option span, 
+    .step-content.raw-text-block h3, .social-card h3, .terminal-link {
+        color: #C3D3E2 !important; 
+    }
 
+    /* 2. Scale up PC Navigation elements by exactly 20% */
+    .text-logo            { font-size: 1.7rem !important; }   /* Up from 1.4rem  */
+    .gateway-menu-toggle  { font-size: 0.85rem !important; }  /* Up from 0.7rem  */
+    .glass-nav-links span { font-size: 1.05rem !important; }  /* Up from 0.85rem */
+    #console-clock        { font-size: 0.75rem !important; }  /* Up from 0.6rem  */
+
+    /* 3. Transform the dark navy WebGL fluid into a pale whitish-blue arctic mist */
+    #webgl-canvas.depth-surface {
+        filter: blur(32px) brightness(3.2) saturate(0.18) contrast(0.85) hue-rotate(5deg) !important;
+    }
+    
+    #webgl-canvas.depth-deep {
+        filter: blur(42px) brightness(3.5) saturate(0.25) contrast(0.9) hue-rotate(0deg) !important;
+    }
+    
+    #webgl-canvas.frozen-blur {
+        /* Un-choked from 0.10 up to a luminous 2.2 brightness for the open menu */
+        filter: blur(60px) brightness(2.2) saturate(0.12) contrast(0.8) !important;
+    }
+
+    /* Soften the liquid glass overlay so it blends over the pale fog */
+    .liquid-glass-overlay {
+        background: rgba(12, 20, 32, 0.65) !important;
+    }
+}
 /* =========================================
    MASTER OVERRIDE: WEIGHT HIERARCHY
    ========================================= */
