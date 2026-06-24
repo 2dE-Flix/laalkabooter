@@ -106,7 +106,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 .text-logo {
     font-size: 1.4rem; 
     letter-spacing: 8px; 
-    color: #ffffff; 
+    color: var(--text-primary); 
     text-transform: uppercase;
     text-decoration: none; 
     display: inline-block;
@@ -115,7 +115,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 .gateway-menu-toggle {
     font-size: 0.7rem; 
     letter-spacing: 4px; 
-    color: #ffffff;
+    color: var(--text-primary);
     cursor: pointer;
     text-transform: uppercase;
 }
@@ -176,7 +176,7 @@ a, button, span, .split-option, .hamburger, .social-card {
     transform: scale(1.08) translateY(-5px);
 }
 .split-option:hover .split-text {
-    color: #ffffff; 
+    color: var(--text-primary); 
     text-shadow: 0px 0px 8px var(--glow-core), 0px 0px 20px var(--glow-halo);
 }
 
@@ -275,7 +275,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 .sidebar-option span {
     font-size: 0.6rem; 
     letter-spacing: 5px; 
-    color: #ffffff;
+    color: var(--text-primary);
     pointer-events: none; 
 }
 
@@ -316,7 +316,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 .raw-text-block h2 {
     font-size: 1.4rem;
     letter-spacing: 5px; 
-    color: #ffffff;
+    color: var(--text-primary);
     text-transform: uppercase;
     margin-bottom: 2.5rem; 
     position: relative;
@@ -337,7 +337,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 .raw-text-block p {
     font-size: 1.05rem;
     line-height: 1.85; 
-    color: rgba(255, 255, 255, 0.75); 
+    color: rgba(238, 244, 250, 0.75); 
     margin-bottom: 2rem; 
 }
 
@@ -348,7 +348,7 @@ a, button, span, .split-option, .hamburger, .social-card {
     font-size: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--text-primary);
     text-decoration: none;
     margin-top: 1.5rem;
     padding-bottom: 6px;
@@ -383,7 +383,7 @@ a, button, span, .split-option, .hamburger, .social-card {
     letter-spacing: 8px;
     text-align: center;
     margin-bottom: 80px;
-    color: #ffffff;
+    color: var(--text-primary);
     text-transform: uppercase;
     position: relative;
     padding-bottom: 25px; 
@@ -420,14 +420,14 @@ a, button, span, .split-option, .hamburger, .social-card {
 .step-content { padding-left: 0; }
 .step-content.raw-text-block, .step-content.raw-text-block p { text-align: left !important; }
 .step-content.raw-text-block h3 {
-    font-size: 1.1rem; letter-spacing: 3px; color: #fff; margin-top: 2.5rem; margin-bottom: 0.8rem; text-transform: uppercase;
+    font-size: 1.1rem; letter-spacing: 3px; color: var(--text-primary); margin-top: 2.5rem; margin-bottom: 0.8rem; text-transform: uppercase;
 }
 .step-content.raw-text-block h3:first-child { margin-top: 0; }
 
 .socials-container { padding: 12rem 2rem 4rem; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 10; }
 .social-cards { display: flex; gap: 8vw; margin-top: 2rem; }
 .social-card {
-    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 3.5rem 3rem; width: 360px; text-decoration: none; border-radius: 4px; backdrop-filter: blur(12px); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
+    background: rgba(0, 2, 8, 0.4); border: 1px solid rgba(238, 244, 250, 0.05); padding: 3.5rem 3rem; width: 360px; text-decoration: none; border-radius: 4px; backdrop-filter: blur(12px); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;
 }
 .social-card h3 { color: var(--text-primary); font-size: 1.1rem; letter-spacing: 6px; margin-bottom: 1.2rem; transition: color 0.3s ease; }
 .social-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.8; transition: color 0.3s ease; }
@@ -457,7 +457,7 @@ a, button, span, .split-option, .hamburger, .social-card {
         background: rgba(2, 16, 36, 0.4); 
         backdrop-filter: blur(20px) saturate(120%); 
         -webkit-backdrop-filter: blur(20px) saturate(120%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(238, 244, 250, 0.08);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
@@ -473,10 +473,10 @@ a, button, span, .split-option, .hamburger, .social-card {
     /* HAMBURGER */
     .hamburger { 
         display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; z-index: 105; pointer-events: auto;
-        width: 42px; height: 42px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;
+        width: 42px; height: 42px; background: rgba(238, 244, 250, 0.05); border-radius: 50%; border: 1px solid rgba(238, 244, 250, 0.05); transition: all 0.3s ease;
     }
     .hamburger .bar { width: 16px; height: 2px; background-color: var(--text-primary); transition: all 0.3s ease; }
-    .hamburger.active { background: rgba(255, 255, 255, 0.1); }
+    .hamburger.active { background: rgba(238, 244, 250, 0.1); }
     .hamburger.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: var(--brand-accent); }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
@@ -485,7 +485,7 @@ a, button, span, .split-option, .hamburger, .social-card {
     .mobile-dropdown {
         position: fixed; top: 85px; left: 5%; width: 90%;
         background: rgba(0, 2, 8, 0.35); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
-        border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(238, 244, 250, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(238, 244, 250, 0.1);
         border-radius: 24px; padding: 1.2rem 1rem; display: flex; flex-direction: column; z-index: 250; 
         opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -544,7 +544,7 @@ a, button, span, .split-option, .hamburger, .social-card {
 
 #console-clock {
     position: fixed; bottom: 3rem; left: 4rem; 
-    font-size: 0.6rem; letter-spacing: 3px; color: #ffffff; text-transform: uppercase; z-index: 10; pointer-events: none;
+    font-size: 0.6rem; letter-spacing: 3px; color: var(--text-primary); text-transform: uppercase; z-index: 10; pointer-events: none;
 }
 
 /* =========================================
