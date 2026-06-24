@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (target === 'brands') {
             if (sideBrands) sideBrands.classList.add('active-sidebar');
             if (streamBrands) streamBrands.classList.add('active-stream');
-            targetDepth = 1;
+            targetDepth = 0;
             if (canvas) {
                 canvas.classList.remove('depth-surface');
                 canvas.classList.add('depth-deep');
