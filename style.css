@@ -582,19 +582,20 @@ a, button, span, .split-option, .hamburger, .social-card {
     /* 3. Transform the dark navy WebGL fluid into a pale whitish-blue arctic mist */
  /* Voltage dropped 58%, white peaks crushed, injected #365b91 steel-blue pocket */
    /* Homescreen: White glare choked 60%, deep cobalt blue locked in */
+/* Homescreen: Whites dimmed another 40%, contrast smoothed */
     #webgl-canvas.depth-surface {
-        filter: blur(35px) brightness(0.55) contrast(0.85) saturate(2.0) hue-rotate(2deg) !important;
+        filter: blur(35px) brightness(0.33) contrast(0.75) saturate(2.0) hue-rotate(2deg) !important;
     }
     
-    /* Brands View: Concrete drained, deep midnight teal-ocean injected */
+    /* Brands View: Waves ironed flat via 0.55 contrast, whites dimmed, deep abyss locked */
     #webgl-canvas.depth-deep {
-        filter: blur(42px) brightness(0.45) contrast(0.90) saturate(2.2) hue-rotate(-8deg) !important;
+        filter: blur(48px) brightness(0.27) contrast(0.55) saturate(2.2) hue-rotate(-8deg) !important;
     }
+    
+    /* Menu: Saturation restored to match background, brightness dimmed 20% */
     #webgl-canvas.frozen-blur {
-        /* Un-choked from 0.10 up to a luminous 2.2 brightness for the open menu */
-        filter: blur(60px) brightness(2.2) saturate(0.12) contrast(0.8) !important;
+        filter: blur(60px) brightness(1.75) saturate(1.8) contrast(0.85) !important;
     }
-
     /* Soften the liquid glass overlay so it blends over the pale fog */
     .liquid-glass-overlay {
         background: rgba(12, 20, 32, 0.65) !important;
