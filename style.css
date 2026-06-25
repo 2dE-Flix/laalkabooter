@@ -435,6 +435,9 @@ a, button, span, .split-option, .hamburger, .social-card {
 .social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
 .social-card:hover p { color: #e5e7eb; }
 
+
+/* Conceal data stream on mobile */
+.micro-data-stream { display: none; }
 /* =========================================
    7. MOBILE RE-ARCHITECTURE 
    ========================================= */
