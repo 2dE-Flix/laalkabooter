@@ -577,19 +577,26 @@ a, button, span, .split-option, .hamburger, .social-card {
     }
 
 /* 1. Force the extreme 24px Bezel Hug (Matched DIA pixel-for-pixel) */
+/* 1. The 90% Bezel Frame */
     .top-nav {
-        padding: 24px 32px !important; /* 24px top, slightly extra on right to clear scrollbar */
+        padding: 28px 36px !important; 
     }
 
     #console-clock {
-        bottom: 24px !important;
-        left: 32px !important; /* Laser-aligned to the RAVIE text logo above it */
+        bottom: 28px !important;
+        left: 36px !important; 
     }
 
-    /* 2. Permanent 75% Zoom Look: Crisper, highly refined UI markings */
-    .text-logo            { font-size: 1.25rem !important; letter-spacing: 10px !important; }   
-    .gateway-menu-toggle  { font-size: 0.65rem !important; letter-spacing: 5px !important; }  
-    .glass-nav-links span { font-size: 0.9rem !important; }  
+    /* 2. The 90% Optical Shrink (Expands the background void) */
+    .text-logo            { font-size: 1.2rem !important; letter-spacing: 9px !important; }   
+    .gateway-menu-toggle  { font-size: 0.63rem !important; letter-spacing: 5px !important; }  
+    .glass-nav-links span { font-size: 0.85rem !important; }  
+    
+    /* Shrinking the central gravity well to create the cinematic ocean */
+    .split-icon           { height: 38px !important; } 
+    .split-text           { font-size: 0.65rem !important; letter-spacing: 5px !important; }
+
+    /* PER USER COMMAND: Clock size is under lockdown */
     #console-clock        { font-size: 0.55rem !important; letter-spacing: 4px !important; }
     /* Fix the Ledger Content: Larger, thinner, wider, centered */
     .platform-content {
