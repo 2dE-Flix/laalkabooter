@@ -599,21 +599,36 @@ a, button, span, .split-option, .hamburger, .social-card {
     /* PER USER COMMAND: Clock size is under lockdown */
     #console-clock        { font-size: 0.55rem !important; letter-spacing: 4px !important; }
     /* Fix the Ledger Content: Larger, thinner, wider, centered */
+    /* 3. Syncing the Ledger Content to the 90% Scale */
     .platform-content {
-        padding-top: 5vh; /* Pushes content slightly down for perfect optical centering */
-    }
-    
-    .raw-text-block {
-        max-width: 800px !important; /* Expanded from 640px to fill PC monitors better */
-    }
-    
-    .raw-text-block p {
-        font-size: 1.15rem !important; /* Scaled up for readability */
-        line-height: 2.1 !important;   /* More breathing room between lines */
-        font-weight: 400 !important;   /* Forces the thin, clean weight */
-        color: rgba(238, 244, 250, 0.85) !important; /* Softer white */
+        padding-top: 5vh; 
     }
 
+    .sidebar-option span {
+        font-size: 0.55rem !important; /* Matched exactly to the Clock's size */
+    }
+
+    .raw-text-block {
+        max-width: 680px !important; /* Shrunk from 800px to maintain reading rhythm with smaller text */
+    }
+
+    .raw-text-block h2 {
+        font-size: 1.15rem !important; /* Down from 1.4rem */
+        letter-spacing: 6px !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .raw-text-block p {
+        font-size: 0.95rem !important; /* The 90% optical shrink */
+        line-height: 2.1 !important;   
+        font-weight: 400 !important;   
+        color: rgba(238, 244, 250, 0.85) !important; 
+    }
+
+    .terminal-link {
+        font-size: 0.85rem !important; /* Down from 1.0rem */
+        letter-spacing: 3px !important;
+    }
     /* --- THE UNIFIED WEBGL FILTERS --- */
     
   /* 1. Homescreen: The master cobalt fluid */
