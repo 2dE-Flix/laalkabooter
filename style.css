@@ -652,41 +652,55 @@ a, button, span, .split-option, .hamburger, .social-card {
         background: rgba(8, 15, 26, 0.3) !important;
     }
 /* =========================================
-       THE MICRO-DATA STREAM (TALENTS RIGHT-SIDE)
+       THE MICRO-DATA STREAM (3-TIER TERMINAL)
        ========================================= */
        
-    /* 1. Ensure the parent container allows absolute positioning */
     #ledger-talents {
         position: relative; 
+        padding-bottom: 8rem !important; /* Forces the canvas open so scrolling unlocks */
+        overflow-y: visible !important;
     }
 
-    /* 2. The Liquid Glass Card */
+    /* TIER 2: TABLET & SMALL LAPTOP DEFAULT (769px to 1249px) 
+       Card unhooks from orbit and stacks cleanly beneath the text */
     .micro-data-stream {
         display: flex;
         flex-direction: column;
-        position: absolute;
-        right: 4rem; /* Snaps to the right void */
-        top: 50%;
-        transform: translateY(-50%);
-        width: 320px;
+        position: relative; /* Normal document flow restores scroll physics */
+        width: 100%;
+        max-width: 380px;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
         
-        /* The Dark Liquid Glass Effect */
-        background: rgba(8, 14, 24, 0.45); /* Deep dark tint */
+        /* Liquid Glass Aesthetics */
+        background: rgba(8, 14, 24, 0.45); 
         backdrop-filter: blur(24px);
         -webkit-backdrop-filter: blur(24px);
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-        
-        /* Soft Edges & Micro-Borders */
         border-radius: 20px; 
-        border: 1px solid rgba(195, 211, 226, 0.08); /* Faint icy rim light */
+        border: 1px solid rgba(195, 211, 226, 0.08); 
         padding: 28px;
         
-        /* Tech Typography */
-        font-family: 'Courier New', Courier, monospace; /* Forces the terminal look */
+        font-family: 'Courier New', Courier, monospace; 
         color: rgba(195, 211, 226, 0.7);
         font-size: 0.75rem;
         letter-spacing: 1px;
     }
+
+    /* TIER 3: WIDESCREEN PC ONLY (1250px and wider)
+       Card snaps to the right void and floats beside the text */
+    @media (min-width: 1250px) {
+        .micro-data-stream {
+            position: absolute;
+            right: 4rem; 
+            top: 50%;
+            transform: translateY(-50%);
+            width: 320px;
+            margin: 0; /* Clears the vertical flow margins */
+        }
+    }
+
+    /* --- INNER TERMINAL ELEMENTS (Shared across Tiers 2 & 3) --- */
 
     .data-header {
         display: flex;
@@ -699,11 +713,10 @@ a, button, span, .split-option, .hamburger, .social-card {
         font-weight: 600;
     }
 
-    /* The glowing active status dot */
     .data-pulse {
         width: 6px;
         height: 6px;
-        background: #00E5FF; /* Cyan */
+        background: #00E5FF; 
         border-radius: 50%;
         box-shadow: 0 0 10px #00E5FF;
         animation: pulse-glow 2s infinite;
@@ -736,7 +749,6 @@ a, button, span, .split-option, .hamburger, .social-card {
         50% { opacity: 1; box-shadow: 0 0 12px #00E5FF; }
         100% { opacity: 0.4; }
     }
-}
 /* =========================================
    MASTER OVERRIDE: WEIGHT HIERARCHY
    ========================================= */
