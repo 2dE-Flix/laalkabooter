@@ -652,130 +652,47 @@ a, button, span, .split-option, .hamburger, .social-card {
         background: rgba(8, 15, 26, 0.3) !important;
     }
 /* =========================================
-       THE MICRO-DATA STREAM (ORDER-LOCKED BUILD)
+       THE MICRO-DATA STREAM (STRICT WIDESCREEN ONLY)
        ========================================= */
        
-    #ledger-talents {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        align-items: flex-start !important;
-        position: relative !important; 
-        padding-bottom: 10rem !important; 
-        overflow-y: visible !important;
-        width: 100% !important;
-    }
-
-    /* Force strict vertical hierarchy */
-    #ledger-talents .raw-text-block {
-        order: 1 !important;
-        position: relative !important;
-        z-index: 2 !important;
-    }
-
-    /* TIER 2: TABLET & SMALL LAPTOP (769px to 1249px) 
-       Purges ghost coordinates and forces card directly below text */
+    /* 1. Global Lockdown: Hidden on Mobile, Tablets, and Small Laptops (< 1250px) */
     .micro-data-stream {
-        order: 2 !important;
-        display: flex;
-        flex-direction: column;
-        position: relative !important; 
-        
-        /* Coordinate Purge (Kills the upward ceiling drift) */
-        top: auto !important;
-        right: auto !important;
-        left: 0 !important;
-        transform: none !important; 
-        
-        width: 100%;
-        max-width: 380px;
-        margin-top: 4rem !important;
-        margin-bottom: 4rem !important;
-        z-index: 1 !important;
-        
-        /* Liquid Glass Aesthetics */
-        background: rgba(8, 14, 24, 0.45); 
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-        border-radius: 20px; 
-        border: 1px solid rgba(195, 211, 226, 0.08); 
-        padding: 28px;
-        
-        font-family: 'Courier New', Courier, monospace; 
-        color: rgba(195, 211, 226, 0.7);
-        font-size: 0.75rem;
-        letter-spacing: 1px;
+        display: none !important;
     }
 
-    /* TIER 3: WIDESCREEN PC ONLY (1250px+)
-       Unhooks from flex stack and resumes right-side orbital flight */
+    /* 2. Widescreen PC Only (1250px+): Uncloak in the right void */
     @media (min-width: 1250px) {
         #ledger-talents {
-            display: block !important; /* Restores standard block flow for absolute orbit */
+            position: relative !important; 
         }
 
         .micro-data-stream {
+            display: flex !important;
+            flex-direction: column;
             position: absolute !important;
             right: 4rem !important; 
-            left: auto !important;
             top: 50% !important;
             transform: translateY(-50%) !important;
             width: 320px;
-            margin: 0 !important; 
+            z-index: 10 !important;
+            
+            /* Liquid Glass Aesthetics */
+            background: rgba(8, 14, 24, 0.45); 
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 20px; 
+            border: 1px solid rgba(195, 211, 226, 0.08); 
+            padding: 28px;
+            
+            font-family: 'Courier New', Courier, monospace; 
+            color: rgba(195, 211, 226, 0.7);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
         }
     }
 
     /* --- INNER TERMINAL ELEMENTS --- */
-
-    .data-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: rgba(238, 244, 250, 0.95);
-        margin-bottom: 16px;
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-        font-weight: 600;
-    }
-
-    .data-pulse {
-        width: 6px;
-        height: 6px;
-        background: #00E5FF; 
-        border-radius: 50%;
-        box-shadow: 0 0 10px #00E5FF;
-        animation: pulse-glow 2s infinite;
-    }
-
-    .data-divider {
-        width: 100%;
-        height: 1px;
-        background: rgba(195, 211, 226, 0.1);
-        margin: 16px 0;
-    }
-
-    .data-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-
-    .data-row span:last-child {
-        color: rgba(238, 244, 250, 0.9);
-    }
-
-    .data-footer {
-        line-height: 2.0;
-        color: rgba(195, 211, 226, 0.5);
-    }
-
-    @keyframes pulse-glow {
-        0% { opacity: 0.4; }
-        50% { opacity: 1; box-shadow: 0 0 12px #00E5FF; }
-        100% { opacity: 0.4; }
-    }
-    /* --- INNER TERMINAL ELEMENTS (Shared across Tiers 2 & 3) --- */
 
     .data-header {
         display: flex;
