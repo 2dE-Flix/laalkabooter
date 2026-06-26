@@ -749,6 +749,33 @@ a, button, span, .split-option, .hamburger, .social-card {
         50% { opacity: 1; box-shadow: 0 0 12px #00E5FF; }
         100% { opacity: 0.4; }
     }
+   /* =========================================
+   9. MOBILE DROPDOWN VOID EXTERMINATOR
+   ========================================= */
+@media (max-width: 768px) {
+    /* 1. Keep the WebGL Ocean alive and softly visible behind the menu */
+    #webgl-canvas.frozen-blur {
+        opacity: 1 !important;
+        visibility: visible !important;
+        filter: blur(18px) brightness(0.65) saturate(1.2) !important; 
+    }
+
+    /* 2. Prevent the dropdown container from stretching a black blanket down the phone */
+    #mobile-dropdown.active-menu {
+        height: auto !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+        /* Replaces infinite screen-blackout shadows with a clean, localized card shadow */
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45) !important; 
+    }
+
+    /* 3. Assassinate any hidden pseudo-element "blackout curtains" attached to the menu */
+    #mobile-dropdown::before,
+    #mobile-dropdown::after {
+        display: none !important;
+        content: none !important;
+    }
+}
 /* =========================================
    MASTER OVERRIDE: WEIGHT HIERARCHY
    ========================================= */
