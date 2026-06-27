@@ -1,5 +1,5 @@
 // ==========================================
-// RAVIE.IN - UNIVERSAL CORE ENGINE (v1.26)
+// RAVIE.IN - UNIVERSAL CORE ENGINE (v1.28)
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let targetDepth = 0;   
     let currentDepth = 0;  
     let isBackgroundFrozen = false; 
+
+    /* LEGAL FREEZE HOOK: Detects <body class="legal-page"> and freezes fluid motion */
+    if (document.body.classList.contains('legal-page')) {
+        isBackgroundFrozen = true;
+    }
 
     const canvas = document.getElementById('webgl-canvas');
     const hamburger = document.getElementById('hamburger-menu');
@@ -45,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (isActive) {
                 liquidGlassOverlay.classList.remove('active-glass');
                 gatewayMenuBtn.textContent = 'MENU';
-                isBackgroundFrozen = false;
+                isBackgroundFrozen = document.body.classList.contains('legal-page'); /* Resumes freeze if on legal */
                 if (canvas) canvas.classList.remove('frozen-blur');
             } else {
                 liquidGlassOverlay.classList.add('active-glass');
@@ -57,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 3. PLATFORM ROUTING ENGINE
+    // 3. PLATFORM ROUTING ENGINE (TALENTS / BRANDS)
     // ==========================================
     function transitionToPlatform(targetStream) {
         if (gatewayView && platformView) {
@@ -92,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (target === 'brands') {
             if (sideBrands) sideBrands.classList.add('active-sidebar');
             if (streamBrands) streamBrands.classList.add('active-stream');
-            targetDepth = 0; /* LOCKED TO 0: Stops the fluid from mutating */
+            targetDepth = 0;
             if (canvas) {
                 canvas.classList.remove('depth-surface');
                 canvas.classList.add('depth-deep');
@@ -106,26 +111,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sideBrands) sideBrands.addEventListener("click", () => switchStream("brands"));
 
     // ==========================================
-    // 3.5 LEGAL & POLICIES SIDEBAR ROUTER
+    // 3.5 LEGAL SIDEBAR ROUTER (MULTI-PAGE DIRECT DEEP-LINKING)
     // ==========================================
-    const legalOptions = document.querySelectorAll('.sidebar-option');
-    if (legalOptions.length > 0) {
-        legalOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                if(option.id === 'side-privacy') window.location.href = 'policy.html';
-                if(option.id === 'side-terms-talents') window.location.href = 'tterms.html';
-                if(option.id === 'side-terms-brands') window.location.href = 'bterms.html';
+    const legalNavLinks = document.querySelectorAll('.sidebar-option, .sidebar-sub-option');
+    if (legalNavLinks.length > 0) {
+        legalNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(link.id === 'side-privacy') window.location.href = 'policy.html';
+                if(link.id === 'side-terms-talents') window.location.href = 'tterms.html';
+                if(link.id === 'side-terms-brands') window.location.href = 'bterms.html';
             });
         });
     }
 
     // ==========================================
     // 4. WEBGL ENGINE (ULTRA-LIGHTWEIGHT BUILD)
- // ==========================================
- 
-    /* FREEZE HOOK: Locks shader time at 0 on all legal URLs */
-    if (document.body.classList.contains('legal-page')) {
-        isBackgroundFrozen = true; 
+    // ==========================================
     if (canvas) {
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         const VERT = `attribute vec2 pos;void main(){gl_Position=vec4(pos,0,1);}`;
@@ -145,7 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         vec2 curlFBM(vec2 p,float t){
           vec2 v=vec2(0);float a=0.6,f=1.0;
-          /* OPTIMIZATION 1: Pruned octaves from 4 to 3 */
           for(int i=0;i<3;i++){v+=a*curl(p*f+v*0.5,t+float(i)*1.7);f*=1.85;a*=0.50;}
           return v;
         }
@@ -165,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
           vec2 uv=gl_FragCoord.xy/u_res; vec2 st=(uv*2.0-1.0)*vec2(u_res.x/u_res.y,1.0);
           vec2 p=st*1.0; vec2 pos=p;vec3 col=vec3(0);float wsum=0.0;
           float drift=1.0-0.35*u_depth;
-          /* OPTIMIZATION 2: Pruned rendering steps from 5 to 3 */
           for(int step=0;step<3;step++){
             vec2 flow=curlFBM(pos,u_t); pos-=flow*0.28*drift; float n=gn(pos*0.85+u_t*0.012);
             float angle=atan(flow.y,flow.x); float spd=length(flow); float w=1.0/(float(step)+1.0);
@@ -187,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const uT=gl.getUniformLocation(prog,'u_t'); const uR=gl.getUniformLocation(prog,'u_res');
         const uDepth=gl.getUniformLocation(prog,'u_depth');
         
-        /* OPTIMIZATION 3: Render at 15% physical resolution. Blur handles the rest. */
         const DOWNSCALE = 0.15;
         function resize(){
             canvas.width = window.innerWidth * DOWNSCALE;
@@ -199,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let lastTime = 0;
         let shaderTime = 0;
 
-        /* Clean, unthrottled loop. The Downscale + Math prune fully handles the GPU load. */
         function render(ts){
             let deltaTime = ts - lastTime;
             lastTime = ts;
