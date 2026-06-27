@@ -121,7 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
     // 4. WEBGL ENGINE (ULTRA-LIGHTWEIGHT BUILD)
-    // ==========================================
+ // ==========================================
+ 
+    /* FREEZE HOOK: Locks shader time at 0 on all legal URLs */
+    if (document.body.classList.contains('legal-page')) {
+        isBackgroundFrozen = true; 
     if (canvas) {
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         const VERT = `attribute vec2 pos;void main(){gl_Position=vec4(pos,0,1);}`;
