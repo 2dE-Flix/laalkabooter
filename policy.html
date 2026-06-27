@@ -3,47 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAVIE - Legal</title>
+    <title>RAVIE - Privacy Policy</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body class="legal-page">
     <canvas id="webgl-canvas" class="depth-surface"></canvas>
     <div class="grain"></div>
 
-<div id="platform-view" class="active-platform" style="display: block;">
-  <div class="sidebar-compass">
-        <a href="policy.html" class="sidebar-option active-sidebar" style="text-decoration: none;">
-            <span>PRIVACY POLICY</span>
-        </a>
-        <a href="tterms.html" class="sidebar-option" style="text-decoration: none;">
-            <span>TERMS OF SERVICE</span>
-        </a>
+    <header class="top-nav">
+        <a href="index.html" class="text-logo" style="text-decoration: none;">RAVIE</a>
+        <div class="gateway-menu-toggle" id="gateway-menu-btn">MENU</div>
+    </header>
+
+    <div class="liquid-glass-overlay" id="liquid-glass-overlay">
+        <nav class="glass-nav-links">
+            <span onclick="window.location.href='index.html'">HOME</span>
+            <span onclick="window.location.href='about.html'">ABOUT</span>
+            <span onclick="window.location.href='socials.html'">SOCIALS</span>
+            <span onclick="window.location.href='policy.html'">TERMS & POLICIES</span>
+        </nav>
+    </div>
+
+    <div class="mobile-dropdown" id="mobile-dropdown">
+        <nav class="mobile-nav-links">
+            <span onclick="window.location.href='index.html'">HOME</span>
+            <span onclick="window.location.href='about.html'">ABOUT</span>
+            <span onclick="window.location.href='socials.html'">SOCIALS</span>
+            <span onclick="window.location.href='policy.html'">TERMS & POLICIES</span>
+        </nav>
+    </div>
+
+    <div id="platform-view" class="active-platform" style="display: block;">
         
-        <div class="compass-secondary submenu-closed">
-            <a href="tterms.html" class="sidebar-sub-option" style="text-decoration: none;">
-                <span>FOR TALENTS</span>
+        <div class="sidebar-compass">
+            <a href="policy.html" class="sidebar-option active-sidebar" style="text-decoration: none;">
+                <span>PRIVACY POLICY</span>
             </a>
-            <a href="bterms.html" class="sidebar-sub-option" style="text-decoration: none;">
-                <span>FOR BRANDS</span>
+            <a href="tterms.html" class="sidebar-option" style="text-decoration: none;">
+                <span>TERMS OF SERVICE</span>
             </a>
+            
+            <div class="compass-secondary submenu-closed">
+                <a href="tterms.html" class="sidebar-sub-option" style="text-decoration: none;">
+                    <span>FOR TALENTS</span>
+                </a>
+                <a href="bterms.html" class="sidebar-sub-option" style="text-decoration: none;">
+                    <span>FOR BRANDS</span>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="platform-content active-stream">
-        <div class="raw-text-block">
-            <h2>PRIVACY POLICY</h2>
-            <p>
-                At RAVIE, we protect your digital footprint with the same architectural rigor we apply to our creative systems. We collect only the essential telemetry required to decentralize opportunities and match emerging creators with visionary brands.
-            </p>
-            <p>
-                Your personal details, audience analytics, and platform metrics are secured behind industry-standard encryption protocols. We do not broker, syndicate, or sell creator or brand data to third-party data conglomerates.
-            </p>
-            <div class="terminal-link">INQUIRIES — PRIVACY@RAVIE.IN</div>
+
+        <div class="platform-content active-stream">
+            <div class="raw-text-block">
+                <h2>PRIVACY POLICY</h2>
+                <p>
+                    At RAVIE, we protect your digital footprint with the same architectural rigor we apply to our creative systems. We collect only the essential telemetry required to decentralize opportunities and match emerging creators with visionary brands.
+                </p>
+                <p>
+                    Your personal details, audience analytics, and platform metrics are secured behind industry-standard encryption protocols. We do not broker, syndicate, or sell creator or brand data to third-party data conglomerates.
+                </p>
+                <div class="terminal-link">INQUIRIES — PRIVACY@RAVIE.IN</div>
+            </div>
         </div>
+
     </div>
-    <div id="console-clock">--:--:--</div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-</div>
