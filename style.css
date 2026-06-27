@@ -817,6 +817,18 @@ a, button, span, .split-option, .hamburger, .social-card {
         100% { opacity: 0.4; }
     }
 }
+/* =========================================
+       DESKTOP MASTER MENU: BOTTOM CENTER ALIGNMENT
+       ========================================= */
+    .liquid-glass-overlay {
+        align-items: flex-end !important; /* Drops the menu container to the floor */
+        padding-bottom: 4.5rem !important; /* Distance from the bottom bezel */
+    }
+
+    .glass-nav-links {
+        flex-direction: row !important; /* Converts the vertical stack into a sleek horizontal line */
+        gap: 4rem !important; /* Wide, breathable spacing between links */
+    }
    /* =========================================
    9. MOBILE DROPDOWN VOID EXTERMINATOR
    ========================================= */
