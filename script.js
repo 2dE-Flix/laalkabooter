@@ -1,5 +1,5 @@
 // ==========================================
-// RAVIE.IN - UNIVERSAL CORE ENGINE
+// RAVIE.IN - UNIVERSAL CORE ENGINE (v1.26)
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (target === 'brands') {
             if (sideBrands) sideBrands.classList.add('active-sidebar');
             if (streamBrands) streamBrands.classList.add('active-stream');
-            targetDepth = 0;
+            targetDepth = 0; /* LOCKED TO 0: Stops the fluid from mutating */
             if (canvas) {
                 canvas.classList.remove('depth-surface');
                 canvas.classList.add('depth-deep');
@@ -104,6 +104,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnBrands) btnBrands.addEventListener("click", () => transitionToPlatform("brands"));
     if (sideTalents) sideTalents.addEventListener("click", () => switchStream("talents"));
     if (sideBrands) sideBrands.addEventListener("click", () => switchStream("brands"));
+
+    // ==========================================
+    // 3.5 LEGAL & POLICIES SIDEBAR ROUTER
+    // ==========================================
+    const legalOptions = document.querySelectorAll('.sidebar-option');
+    if (legalOptions.length > 0) {
+        legalOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                if(option.id === 'side-privacy') window.location.href = 'policy.html';
+                if(option.id === 'side-terms-talents') window.location.href = 'tterms.html';
+                if(option.id === 'side-terms-brands') window.location.href = 'bterms.html';
+            });
+        });
+    }
 
     // ==========================================
     // 4. WEBGL ENGINE (ULTRA-LIGHTWEIGHT BUILD)
