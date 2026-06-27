@@ -604,11 +604,10 @@ a, button, span, .split-option, .hamburger, .social-card {
     /* PER USER COMMAND: Clock size is under lockdown */
     #console-clock        { font-size: 0.55rem !important; letter-spacing: 4px !important; }
     /* Fix the Ledger Content: Larger, thinner, wider, centered */
-    /* 3. Syncing the Ledger Content to the 90% Scale */
-    .platform-content {
-        padding-top: 5vh; 
-    }
-
+   /* 1. Widen the center void by replacing rigid padding with fluid viewport units */
+.platform-content {
+    padding: 0 6vw 0 12vw !important; 
+}
     .sidebar-option span {
         font-size: 0.55rem !important; /* Matched exactly to the Clock's size */
     }
@@ -739,11 +738,12 @@ a, button, span, .split-option, .hamburger, .social-card {
             position: relative !important; 
         }
 
-        .micro-data-stream {
-            display: flex !important;
-            flex-direction: column;
-            position: absolute !important;
-            
+  .micro-data-stream {
+        display: flex !important;
+        right: 40px !important; /* Snug to right bezel */
+        width: 310px !important; /* Trimmed 10px for visual breathing room */
+    }
+}
             /* Laser-aligned to the right bezel, matching your MENU button padding */
             right: 36px !important; 
             top: 50% !important;
