@@ -1,5 +1,5 @@
 /* =========================================
-   RAVIE.IN - MASTER STYLESHEET (BUG-FREE BUILD)
+   RAVIE.IN - MASTER STYLESHEET (v1.30 UNIFIED)
    ========================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Sen:wght@400;500;600;700&display=swap');
@@ -20,7 +20,7 @@
 
     --glow-core:      rgba(0, 212, 255, 0.14);
     --glow-halo:      rgba(127, 211, 247, 0.10);
-    --cursor-glow:    var(--accent-glow); /* Safe-bridge for Mobile */
+    --cursor-glow:    var(--accent-glow);
 }
 
 * {
@@ -33,7 +33,8 @@
 .glass-nav-links span, .mobile-nav-links span,
 .page-title, .raw-text-block h2, .step-name,
 .step-content.raw-text-block h3, .social-card h3,
-.terminal-link, #console-clock, .sidebar-option span {
+.terminal-link, #console-clock, .sidebar-option span,
+.sidebar-sub-option span {
     font-family: 'Montserrat', sans-serif !important;
 }
 
@@ -83,41 +84,30 @@ a, button, span, .split-option, .hamburger, .social-card {
     z-index: -2; opacity: 0.88; mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
 /* =========================================
-   3. UNIVERSAL FLOATING HEADER (PC DESIGN)
+   3. UNIVERSAL FLOATING HEADER
    ========================================= */
 .top-nav {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100vw;
-    /* Pushed to the extreme corners like DIA */
+    top: 0; left: 0; width: 100vw;
     padding: 2rem 2.5rem; 
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    pointer-events: none; 
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100; pointer-events: none; 
 }
+
 .logo-container, .gateway-menu-toggle, .hamburger {
     pointer-events: auto; 
 }
 
 .text-logo {
-    font-size: 1.4rem; 
-    letter-spacing: 8px; 
-    color: var(--text-primary); 
-    text-transform: uppercase;
-    text-decoration: none; 
-    display: inline-block;
+    font-size: 1.4rem; letter-spacing: 8px; color: var(--text-primary); 
+    text-transform: uppercase; text-decoration: none; display: inline-block;
 }
 
 .gateway-menu-toggle {
-    font-size: 0.7rem; 
-    letter-spacing: 4px; 
-    color: var(--text-primary);
-    cursor: pointer;
-    text-transform: uppercase;
+    font-size: 0.7rem; letter-spacing: 4px; color: var(--text-primary);
+    cursor: pointer; text-transform: uppercase;
 }
 
 .desktop-menu { display: none !important; }
@@ -127,10 +117,8 @@ a, button, span, .split-option, .hamburger, .social-card {
    4. GATEWAY (MAIN SCREEN) LAYOUT
    ========================================= */
 #app-container {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center; align-items: center;
+    height: 100vh; width: 100vw;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .view {
@@ -151,22 +139,15 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 .split-icon {
-    height: 42px !important;
-    width: auto !important;
-    max-width: 150px !important; 
-    object-fit: contain;
-    mix-blend-mode: screen; 
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    display: block;
+    height: 42px !important; width: auto !important; max-width: 150px !important; 
+    object-fit: contain; mix-blend-mode: screen; 
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); display: block;
 }
 
 .split-text {
-    font-size: 0.75rem; 
-    letter-spacing: 6px; 
-    transition: all 0.4s ease;
+    font-size: 0.75rem; letter-spacing: 6px; transition: all 0.4s ease;
 }
 
-/* Hover Math - FIXED DEADZONE */
 .split-container:has(.split-option:hover) .split-option:not(:hover) { 
     opacity: 0.15; 
 }
@@ -181,188 +162,117 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 /* =========================================
-   LIQUID GLASS OVERLAY (MENU)
+   5. GLOBAL LIQUID GLASS OVERLAY (BASE)
    ========================================= */
 .liquid-glass-overlay {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; inset: 0;
     width: 100vw; height: 100vh;
     background: rgba(0, 2, 8, 0.75); 
-    backdrop-filter: blur(35px); 
-    -webkit-backdrop-filter: blur(35px); 
-    z-index: 90; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none; 
+    backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); 
+    z-index: 90; display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; 
     transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liquid-glass-overlay.active-glass {
-    opacity: 1;
-    pointer-events: auto;
+    opacity: 1; pointer-events: auto;
 }
 
 .glass-nav-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: 2rem;
 }
 
 .glass-nav-links span {
-    font-size: 0.85rem; 
-    letter-spacing: 8px;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(20px); 
+    font-size: 0.85rem; letter-spacing: 8px; cursor: pointer;
+    opacity: 0; transform: translateY(20px); 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liquid-glass-overlay.active-glass .glass-nav-links span {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; transform: translateY(0);
 }
 
 .liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(1) { transition-delay: 0.1s; }
-.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(2) { transition-delay: 0.2s; }
-.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(3) { transition-delay: 0.3s; }
+.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(2) { transition-delay: 0.15s; }
+.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(3) { transition-delay: 0.2s; }
+.liquid-glass-overlay.active-glass .glass-nav-links span:nth-child(4) { transition-delay: 0.25s; }
 
 /* =========================================
-   INNER PLATFORM: THE Y-AXIS LEDGER
+   6. INNER PLATFORM & LEDGERS
    ========================================= */
 #platform-view {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100vw; height: 100dvh;
-    display: none; 
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(40px); 
+    position: absolute; top: 0; left: 0;
+    width: 100vw; height: 100dvh; display: none; opacity: 0;
+    pointer-events: none; transform: translateX(40px); 
     transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 50;
 }
 
 #platform-view.active-platform {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0); 
+    opacity: 1; pointer-events: auto; transform: translateX(0); 
 }
 
-/* MICRO COMPASS (DESKTOP) */
-/* MICRO COMPASS (DESKTOP) */
-.platform-sidebar,
-.sidebar-compass {
-    position: fixed;
-    left: 3rem; 
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem; 
-    padding-left: 0; 
-    z-index: 100;
+.platform-sidebar, .sidebar-compass {
+    position: fixed; left: 3rem; top: 50%;
+    transform: translateY(-50%); display: flex; flex-direction: column;
+    gap: 0.3rem; padding-left: 0; z-index: 100;
 }
 
 .sidebar-option {
-    cursor: pointer;
-    opacity: 0.55; 
-    padding: 0.7rem 1rem; 
-    border-radius: 0 8px 8px 0; 
-    border-left: 2px solid transparent; 
-    background: rgba(0, 2, 8, 0.0); 
+    cursor: pointer; opacity: 0.55; padding: 0.7rem 1rem; 
+    border-radius: 0 8px 8px 0; border-left: 2px solid transparent; 
+    background: transparent;
 }
 
 .sidebar-option span {
-    font-size: 0.6rem; 
-    letter-spacing: 5px; 
-    color: var(--text-primary);
-    pointer-events: none; 
+    font-size: 0.6rem; letter-spacing: 5px; color: var(--text-primary); pointer-events: none;
 }
 
 .sidebar-option.active-sidebar {
     opacity: 1;
     background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
-    border-left: 2px solid #00E5FF;
-    transform: translateX(5px); 
+    border-left: 2px solid #00E5FF; transform: translateX(5px);
 }
 
-/* LEDGER DATA STREAM (LEFT-ALIGNED + BUG FIXES) */
 .platform-content {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    height: 100dvh;
-    width: 100%;
-    padding: 0 10vw 0 18rem; /* Clears the micro sidebar on PC */
+    display: flex; justify-content: flex-start; align-items: center;
+    height: 100dvh; width: 100%; padding: 0 10vw 0 18rem; 
 }
 
 .ledger-stream {
-    display: none !important; /* CRITICAL FIX: Forces inactive streams to vanish */
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+    display: none !important; width: 100%;
+    flex-direction: column; align-items: flex-start;
 }
 
 .ledger-stream.active-stream {
-    display: flex !important; /* CRITICAL FIX: Only allows clicked stream to show */
+    display: flex !important;
     animation: textFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.raw-text-block {
-    max-width: 640px; 
-    text-align: left; 
-}
-
+.raw-text-block { max-width: 640px; text-align: left; }
 .raw-text-block h2 {
-    font-size: 1.4rem;
-    letter-spacing: 5px; 
-    color: var(--text-primary);
-    text-transform: uppercase;
-    margin-bottom: 2.5rem; 
-    position: relative;
-    padding-bottom: 15px;
+    font-size: 1.4rem; letter-spacing: 5px; color: var(--text-primary);
+    text-transform: uppercase; margin-bottom: 2.5rem; position: relative; padding-bottom: 15px;
 }
 
 .raw-text-block h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0; 
-    width: 40px; 
-    height: 2px;
-    background: #00E5FF;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+    content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px;
+    background: #00E5FF; box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
 }
 
 .raw-text-block p {
-    font-size: 1.05rem;
-    line-height: 1.85; 
-    color: rgba(238, 244, 250, 0.75); 
-    margin-bottom: 2rem; 
+    font-size: 1.05rem; line-height: 1.85; color: rgba(238, 244, 250, 0.75); margin-bottom: 2rem;
 }
 
 .raw-text-block strong { color: #00E5FF; }
 
 .terminal-link {
-    display: inline-block;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-primary);
-    text-decoration: none;
-    margin-top: 1.5rem;
-    padding-bottom: 6px;
-    border-bottom: 2px solid rgba(0, 229, 255, 0.3); 
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: auto;
+    display: inline-block; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-primary); text-decoration: none; margin-top: 1.5rem; padding-bottom: 6px;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.3); transition: all 0.3s ease; pointer-events: auto;
 }
 
-.terminal-link:hover {
-    color: #00E5FF;
-    border-bottom-color: #00E5FF;
-}
+.terminal-link:hover { color: #00E5FF; border-bottom-color: #00E5FF; }
 
 @keyframes textFadeIn {
     0% { opacity: 0; transform: translateY(15px); }
@@ -370,25 +280,15 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 /* =========================================
-   ABOUT & SOCIALS PAGES
+   7. ABOUT & CONTACT PAGES
    ========================================= */
 .page-container {
-    padding: 120px 5vw 100px 5vw; 
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 5;
+    padding: 120px 5vw 100px 5vw; max-width: 1000px; margin: 0 auto; position: relative; z-index: 5;
 }
 
 .page-title {
-    font-size: 2.2rem; 
-    letter-spacing: 8px;
-    text-align: center;
-    margin-bottom: 80px;
-    color: var(--text-primary);
-    text-transform: uppercase;
-    position: relative;
-    padding-bottom: 25px; 
+    font-size: 2.2rem; letter-spacing: 8px; text-align: center; margin-bottom: 80px;
+    color: var(--text-primary); text-transform: uppercase; position: relative; padding-bottom: 25px; 
 }
 
 .page-title::after {
@@ -405,18 +305,15 @@ a, button, span, .split-option, .hamburger, .social-card {
 .timeline-step:last-child { margin-bottom: 0; }
 
 .step-indicator {
-    position: absolute; left: -180px; width: 140px; 
-    display: flex; align-items: center; justify-content: flex-end; top: 5px; 
+    position: absolute; left: -180px; width: 140px; display: flex; align-items: center; justify-content: flex-end; top: 5px; 
 }
 
 .step-name {
-    font-family: monospace; color: #00E5FF; font-size: 0.9rem;
-    letter-spacing: 2px; text-transform: uppercase; padding-right: 18px; 
+    font-family: monospace; color: #00E5FF; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; padding-right: 18px; 
 }
 
 .step-node {
-    position: absolute; right: -4px; width: 8px; height: 8px;
-    background: #00E5FF; border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
+    position: absolute; right: -4px; width: 8px; height: 8px; background: #00E5FF; border-radius: 50%; box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);
 }
 
 .step-content { padding-left: 0; }
@@ -437,11 +334,125 @@ a, button, span, .split-option, .hamburger, .social-card {
 .social-card:hover h3 { color: var(--brand-accent); text-shadow: 0px 0px 15px rgba(0, 229, 255, 0.5); }
 .social-card:hover p { color: #e5e7eb; }
 
-
 /* Conceal data stream on mobile */
 .micro-data-stream { display: none; }
+
 /* =========================================
-   7. MOBILE RE-ARCHITECTURE 
+   8. LEGAL ZONE & NESTED COMPASS
+   ========================================= */
+body.legal-page #webgl-canvas {
+    filter: blur(32px) brightness(0.45) contrast(1.15) saturate(1.3) !important;
+    transform: scale(1.05) translateY(0) !important;
+}
+
+.compass-secondary {
+    display: flex; flex-direction: column; gap: 1.2rem;
+    margin-top: 1.2rem; margin-left: 1.2rem; padding-left: 1rem;
+    border-left: 1px solid rgba(195, 211, 226, 0.15); 
+}
+
+.sidebar-sub-option span {
+    font-size: 0.55rem !important; letter-spacing: 4px;
+    color: rgba(195, 211, 226, 0.4); text-transform: uppercase;
+    transition: color 0.3s ease; cursor: pointer; display: block;
+}
+
+.sidebar-sub-option:hover span { color: rgba(238, 244, 250, 0.85); }
+.sidebar-sub-option.active-sub span { color: #00E5FF !important; font-weight: 600; }
+
+.submenu-closed { display: none !important; }
+.submenu-open {
+    display: flex !important;
+    animation: slideSubMenuRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideSubMenuRight {
+    0% { opacity: 0; transform: translateX(-15px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* =========================================
+   9. ZERO-LATENCY UI OVERRIDE
+   ========================================= */
+.glass-nav-links span:hover, .mobile-nav-links span:hover,
+.mobile-nav-links span:active, .gateway-menu-toggle:hover,
+.text-logo:hover, .sidebar-option:hover span,
+.sidebar-option.active-sidebar span {
+    color: #00E5FF !important; text-shadow: none !important; 
+    transform: none !important; transition: all 0s !important; 
+}
+
+/* =========================================
+   10. DESKTOP SHIELD (min-width: 769px)
+   ========================================= */
+@media (min-width: 769px) {
+    body, .text-logo, .gateway-menu-toggle, .glass-nav-links span, 
+    .raw-text-block h2, .page-title, #console-clock, .sidebar-option span, 
+    .step-content.raw-text-block h3, .social-card h3, .terminal-link {
+        color: #C3D3E2 !important; 
+    }
+
+    /* DIA Extreme Bezel Hug */
+    .top-nav { padding: 28px 36px !important; }
+    #console-clock { bottom: 28px !important; left: 36px !important; }
+
+    /* 90% Optical Shrink */
+    .text-logo            { font-size: 1.2rem !important; letter-spacing: 9px !important; }   
+    .gateway-menu-toggle  { font-size: 0.63rem !important; letter-spacing: 5px !important; }  
+    .split-icon           { height: 38px !important; } 
+    .split-text           { font-size: 0.65rem !important; letter-spacing: 5px !important; }
+    #console-clock        { font-size: 0.55rem !important; letter-spacing: 4px !important; }
+    .sidebar-option span  { font-size: 0.55rem !important; }
+
+    /* CRITICAL UPGRADE: Bottom-Docked Horizontal PC Menu (Your Red Line) */
+    .liquid-glass-overlay {
+        align-items: flex-end !important;
+        padding-bottom: 5.5rem !important; /* Locks navigation to the bottom floor void */
+        background: rgba(8, 15, 26, 0.45) !important;
+    }
+
+    .glass-nav-links {
+        flex-direction: row !important;
+        gap: 5vw !important; /* Perfectly balanced widescreen horizon spacing */
+    }
+
+    .glass-nav-links span {
+        font-size: 0.8rem !important;
+        letter-spacing: 6px !important;
+    }
+
+    /* CRITICAL UPGRADE: Widened 380px Void & Floating Glass Card */
+    .platform-content {
+        padding: 0 380px 0 14rem !important; /* Guarantees zero text collision */
+    }
+
+    .raw-text-block { max-width: 680px !important; }
+    .raw-text-block h2 { font-size: 1.15rem !important; letter-spacing: 6px !important; margin-bottom: 2rem !important; }
+    .raw-text-block p  { font-size: 0.95rem !important; line-height: 2.1 !important; font-weight: 400 !important; color: rgba(238, 244, 250, 0.85) !important; }
+    .terminal-link     { font-size: 0.85rem !important; letter-spacing: 3px !important; }
+
+    /* Floating Liquid Card Engine (1250px+) */
+    @media (min-width: 1250px) {
+        .micro-data-stream {
+            display: flex !important; flex-direction: column;
+            position: absolute !important; right: 36px !important; 
+            top: 50% !important; transform: translateY(-50%) !important;
+            width: 310px !important; z-index: 10 !important;
+            background: rgba(16, 26, 42, 0.45); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25); border-radius: 20px; 
+            border: 1px solid rgba(195, 211, 226, 0.12); padding: 28px;
+            font-family: 'Courier New', Courier, monospace; color: rgba(195, 211, 226, 0.75); font-size: 0.75rem; letter-spacing: 1px;
+        }
+    }
+
+    /* Unified WebGL Filters */
+    #webgl-canvas.depth-surface { filter: blur(32px) brightness(0.55) contrast(1.15) saturate(1.3) !important; }
+    #webgl-canvas.depth-deep    { filter: blur(32px) brightness(0.35) contrast(1.15) saturate(1.3) !important; }
+    #webgl-canvas.frozen-blur   { filter: blur(75px) brightness(0.25) !important; }
+}
+
+/* =========================================
+   11. MOBILE RE-ARCHITECTURE (max-width: 768px)
    ========================================= */
 @media (max-width: 768px) {
     body {
@@ -452,30 +463,21 @@ a, button, span, .split-option, .hamburger, .social-card {
         background-size: 100% 100%;
     }
 
-    /* THE PILL HEADER */
     .top-nav { 
-        top: 15px !important; 
-        left: 5% !important;
-        width: 90% !important; 
-        padding: 0.6rem 1.2rem !important; 
-        border-radius: 50px;
-        background: rgba(2, 16, 36, 0.4); 
-        backdrop-filter: blur(20px) saturate(120%); 
-        -webkit-backdrop-filter: blur(20px) saturate(120%);
-        border: 1px solid rgba(238, 244, 250, 0.08);
+        top: 15px !important; left: 5% !important; width: 90% !important; 
+        padding: 0.6rem 1.2rem !important; border-radius: 50px;
+        background: rgba(2, 16, 36, 0.4); backdrop-filter: blur(20px) saturate(120%); 
+        -webkit-backdrop-filter: blur(20px) saturate(120%); border: 1px solid rgba(238, 244, 250, 0.08);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
- /* Detached the curtain from the nav and pinned it to the viewport roof */
     body::before {
         content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 50px; 
-        background: linear-gradient(to bottom, var(--bg-deep) 45%, transparent 100%); 
-        z-index: 95; pointer-events: none;
+        background: linear-gradient(to bottom, var(--bg-deep) 45%, transparent 100%); z-index: 95; pointer-events: none;
     }
     
     .text-logo { font-size: 1.1rem; letter-spacing: 6px; }
 
-    /* HAMBURGER */
     .hamburger { 
         display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; z-index: 105; pointer-events: auto;
         width: 42px; height: 42px; background: rgba(238, 244, 250, 0.05); border-radius: 50%; border: 1px solid rgba(238, 244, 250, 0.05); transition: all 0.3s ease;
@@ -486,57 +488,44 @@ a, button, span, .split-option, .hamburger, .social-card {
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: var(--brand-accent); }
 
-    /* FLOATING DROPDOWN */
     .mobile-dropdown {
-        position: fixed; top: 85px; left: 5%; width: 90%;
+        position: fixed; top: 85px; left: 5%; width: 90%; height: auto !important; max-height: 80vh !important; overflow-y: auto !important;
         background: rgba(0, 2, 8, 0.35); backdrop-filter: blur(40px) saturate(150%); -webkit-backdrop-filter: blur(40px) saturate(150%);
-        border: 1px solid rgba(238, 244, 250, 0.15); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(238, 244, 250, 0.1);
+        border: 1px solid rgba(238, 244, 250, 0.15); box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45) !important;
         border-radius: 24px; padding: 1.2rem 1rem; display: flex; flex-direction: column; z-index: 250; 
         opacity: 0; pointer-events: none; transform: translateY(-20px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .mobile-dropdown.active-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .mobile-dropdown::before, .mobile-dropdown::after { display: none !important; content: none !important; }
+    
     .mobile-nav-links { display: flex; flex-direction: column; width: 100%; gap: 0.3rem; }
     .mobile-nav-links span { font-size: 0.9rem; letter-spacing: 3px; padding: 0.8rem 1.5rem; border-radius: 12px; text-align: left; }
 
-    /* INNER PLATFORM MOBILE RESET (FIXED OFF-SCREEN BUG) */
-    .platform-content {
-        padding: 11rem 5vw 4rem 5vw !important; 
-        height: auto !important;
-        min-height: 100vh;
-    }
-    #platform-view { height: auto; min-height: 100dvh; }
+    .platform-content { padding: 11rem 5vw 4rem 5vw !important; height: auto !important; min-height: 100vh; }
+    #platform-view    { height: auto; min-height: 100dvh; }
 
-    /* MOBILE COMPASS SLIDER */
-    .platform-sidebar {
+    .platform-sidebar, .sidebar-compass {
         position: fixed; left: 0; top: 7rem; width: 100vw; flex-direction: row; justify-content: center; gap: 3rem; border-left: none; padding-left: 0; z-index: 40;
     }
-    .sidebar-option {
-        padding: 0.5rem; border-left: none !important; border-radius: 0; background: transparent !important; position: relative;
-    }
+    .sidebar-option { padding: 0.5rem; border-left: none !important; border-radius: 0; background: transparent !important; position: relative; }
     .sidebar-option span { font-size: 0.65rem; letter-spacing: 4px; opacity: 0.6; }
     .sidebar-option.active-sidebar span { opacity: 1; }
     .sidebar-option::after {
         content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0%; height: 2px;
-        background: #00E5FF; box-shadow: 0 0 10px rgba(0, 229, 255, 0.8); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0;
+        background: #00E5FF; box-shadow: 0 0 10px rgba(0, 229, 255, 0.8); transition: width 0.4s ease; opacity: 0;
     }
     .sidebar-option.active-sidebar::after { width: 100%; opacity: 1; }
 
-    /* GATEWAY & COMPONENT HIDES */
     .split-container { flex-direction: column; gap: 4.5rem; }
     .split-icon { height: 36px !important; max-width: 120px !important; }
     .split-text { font-size: 0.7rem; letter-spacing: 5px; }
-    .gateway-menu-toggle, .liquid-glass-overlay { display: none !important; }
-    #console-clock { display: none !important; }
+    .gateway-menu-toggle, .liquid-glass-overlay, #console-clock { display: none !important; }
 
-    /* PAGE OVERRIDES */
     .about-container { padding-top: 8rem; }
     .page-title { margin-bottom: 60px; }
     .timeline-wrapper { padding-left: 30px; }
     .timeline-wrapper::before { left: 5px; }
-    .timeline-item { flex-direction: column; margin-bottom: 3rem; }
-    .timeline-node { width: 100%; text-align: left; padding-left: 40px; padding-top: 0; margin-bottom: 1.5rem; }
-    .timeline-node::after { right: auto; left: 10px; top: 2px; }
-    .timeline-content { margin-left: 15px; padding: 2rem 1.5rem; }
+    .timeline-step { flex-direction: column; margin-bottom: 3rem; }
     .step-indicator { left: 0; width: auto; top: -30px; justify-content: flex-start; }
     .step-name { margin-right: 0; margin-left: 20px; text-align: left; }
     .step-node { left: 1px; right: auto; top: 2px; }
@@ -545,346 +534,27 @@ a, button, span, .split-option, .hamburger, .social-card {
     .socials-container { padding-top: 9rem; }
     .social-cards { flex-direction: column; gap: 2.5rem; }
     .social-card { width: 100%; max-width: 380px; padding: 2.5rem 2rem; }
+    
+    #webgl-canvas.frozen-blur { opacity: 1 !important; visibility: visible !important; filter: blur(18px) brightness(0.65) saturate(1.2) !important; }
 }
 
 #console-clock {
-    /* Matched the exact 2.5rem X-axis of the top Logo for perfect vertical alignment */
     position: fixed; bottom: 2rem; left: 2.5rem; 
     font-size: 0.6rem; letter-spacing: 3px; color: var(--text-primary); text-transform: uppercase; z-index: 10; pointer-events: none;
 }
 
 /* =========================================
-   ZERO-LATENCY / NO GLOW UI OVERRIDE
+   12. MASTER TYPOGRAPHIC HIERARCHY
    ========================================= */
-.glass-nav-links span:hover,
-.mobile-nav-links span:hover,
-.mobile-nav-links span:active,
-.gateway-menu-toggle:hover,
-.text-logo:hover,
-.sidebar-option:hover span,
-.sidebar-option.active-sidebar span {
-    color: #00E5FF !important; 
-    text-shadow: none !important; /* Kills all glow */
-    transform: none !important; /* Stops all scaling/movement */
-    transition: all 0s !important; /* ZERO MILLISECOND REACTION */
-}
-/* =========================================
-   8. DESKTOP-ONLY VISUAL SHIELD (PC OPTIMIZATION)
-   ========================================= */
-@media (min-width: 769px) {
-    /* --- TYPOGRAPHY & ALIGNMENT (Target #07) --- */
-    
-    /* Soften all header/UI text to reduce eye strain */
-    body, .text-logo, .gateway-menu-toggle, .glass-nav-links span, 
-    .raw-text-block h2, .page-title, #console-clock, .sidebar-option span, 
-    .step-content.raw-text-block h3, .social-card h3, .terminal-link {
-        color: #C3D3E2 !important; 
-    }
+.raw-text-block p { font-weight: 400 !important; }
 
-/* 1. Force the extreme 24px Bezel Hug (Matched DIA pixel-for-pixel) */
-/* 1. The 90% Bezel Frame */
-    .top-nav {
-        padding: 28px 36px !important; 
-    }
-
-    #console-clock {
-        bottom: 28px !important;
-        left: 36px !important; 
-    }
-
-    /* 2. The 90% Optical Shrink (Expands the background void) */
-    .text-logo            { font-size: 1.2rem !important; letter-spacing: 9px !important; }   
-    .gateway-menu-toggle  { font-size: 0.63rem !important; letter-spacing: 5px !important; }  
-    .glass-nav-links span { font-size: 0.85rem !important; }  
-    
-    /* Shrinking the central gravity well to create the cinematic ocean */
-    .split-icon           { height: 38px !important; } 
-    .split-text           { font-size: 0.65rem !important; letter-spacing: 5px !important; }
-
-    /* PER USER COMMAND: Clock size is under lockdown */
-    #console-clock        { font-size: 0.55rem !important; letter-spacing: 4px !important; }
-    /* Fix the Ledger Content: Larger, thinner, wider, centered */
-   /* 1. Widen the center void by replacing rigid padding with fluid viewport units */
-.platform-content {
-    padding: 0 6vw 0 12vw !important; 
-}
-    .sidebar-option span {
-        font-size: 0.55rem !important; /* Matched exactly to the Clock's size */
-    }
-
-    .raw-text-block {
-        max-width: 680px !important; /* Shrunk from 800px to maintain reading rhythm with smaller text */
-    }
-
-    .raw-text-block h2 {
-        font-size: 1.15rem !important; /* Down from 1.4rem */
-        letter-spacing: 6px !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .raw-text-block p {
-        font-size: 0.95rem !important; /* The 90% optical shrink */
-        line-height: 2.1 !important;   
-        font-weight: 400 !important;   
-        color: rgba(238, 244, 250, 0.85) !important; 
-    }
-
-    .terminal-link {
-        font-size: 0.85rem !important; /* Down from 1.0rem */
-        letter-spacing: 3px !important;
-    }
-   /* =========================================
-       LEGAL & POLICIES NESTED COMPASS
-       ========================================= */
-
-    /* The Sub-Menu Container */
-    .compass-secondary {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem; /* Matches your spacing */
-        margin-top: 1.5rem;
-        
-        /* Pushes it right and creates a tech-styled bracket line */
-        margin-left: 1.5rem; 
-        padding-left: 1rem;
-        border-left: 1px solid rgba(195, 211, 226, 0.15); 
-    }
-
-    /* Sub-menu typography (Shrunk to 90% scale to maintain hierarchy) */
-    .sidebar-sub-option span {
-        font-size: 0.45rem !important; 
-        letter-spacing: 4px;
-        color: rgba(195, 211, 226, 0.4); /* Faded grey default */
-        text-transform: uppercase;
-        transition: color 0.3s ease;
-        cursor: pointer;
-    }
-
-    .sidebar-sub-option:hover span {
-        color: rgba(238, 244, 250, 0.85); /* White on hover */
-    }
-
-    /* The Active Sub-Option (Cyan) */
-    .sidebar-sub-option.active-sub span {
-        color: #00E5FF !important; /* Cyan active state */
-        font-weight: 600;
-    }
-
-    /* --- THE SLIDE-RIGHT ANIMATION STATE --- */
-    .submenu-closed {
-        display: none !important;
-    }
-
-    .submenu-open {
-        display: flex !important;
-        animation: slideSubMenuRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes slideSubMenuRight {
-        0% {
-            opacity: 0;
-            transform: translateX(-15px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    /* --- THE UNIFIED WEBGL FILTERS --- */
-    
-  /* 1. Homescreen: The master cobalt fluid */
-    #webgl-canvas.depth-surface {
-        filter: blur(32px) brightness(0.55) contrast(1.15) saturate(1.3) !important;
-    }
-    
-    /* 2. Brands View: The exact same fluid, just smoothly dimmed down */
-    #webgl-canvas.depth-deep {
-        filter: blur(32px) brightness(0.35) contrast(1.15) saturate(1.3) !important;
-    }
-    /* Menu: Pure blur overlay */
-    #webgl-canvas.frozen-blur {
-        filter: blur(75px) brightness(0.4) !important;
-    }
-
-    .liquid-glass-overlay {
-        background: rgba(8, 15, 26, 0.3) !important;
-    }
-   /* =========================================
-       LEGAL STATIC BACKGROUND (+10% DARKER)
-       ========================================= */
-    body.legal-page #webgl-canvas {
-        filter: blur(32px) brightness(0.45) contrast(1.15) saturate(1.3) !important;
-        transform: scale(1.05) translateY(0) !important;
-    }
-
-    /* Sub-menu typography bumped for rapid readability */
-    body.legal-page .sidebar-sub-option span {
-        font-size: 0.6rem !important; 
-        letter-spacing: 4px;
-    }
-/* =========================================
-       THE MICRO-DATA STREAM (DUAL-LEDGER & 10% LIGHTER)
-       ========================================= */
-       
-    /* 1. Global Lockdown: Completely dead on Mobile, Tablet & Small Laptops (< 1250px) */
-    .micro-data-stream {
-        display: none !important;
-    }
-
-    /* 2. Widescreen PC Only (1250px+): Uncloak on both Talents & Brands */
-    @media (min-width: 1250px) {
-        #ledger-talents,
-        #ledger-brands {
-            position: relative !important; 
-        }
-
-  .micro-data-stream {
-        display: flex !important;
-        right: 40px !important; /* Snug to right bezel */
-        width: 310px !important; /* Trimmed 10px for visual breathing room */
-    }
-}
-            /* Laser-aligned to the right bezel, matching your MENU button padding */
-            right: 36px !important; 
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-            width: 320px;
-            z-index: 10 !important;
-            
-            /* Lighter Liquid Glass (+10% lightness lift) */
-            background: rgba(16, 26, 42, 0.45); /* Lifted from dark navy to an airy frosted slate */
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-            border-radius: 20px; 
-            border: 1px solid rgba(195, 211, 226, 0.12); /* Slightly brighter icy rim light */
-            padding: 28px;
-            
-            font-family: 'Courier New', Courier, monospace; 
-            color: rgba(195, 211, 226, 0.75);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-    }
-
-    /* --- INNER TERMINAL ELEMENTS --- */
-
-    .data-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: rgba(238, 244, 250, 0.95);
-        margin-bottom: 16px;
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-        font-weight: 600;
-    }
-
-    .data-pulse {
-        width: 6px;
-        height: 6px;
-        background: #00E5FF; 
-        border-radius: 50%;
-        box-shadow: 0 0 10px #00E5FF;
-        animation: pulse-glow 2s infinite;
-    }
-
-    .data-divider {
-        width: 100%;
-        height: 1px;
-        background: rgba(195, 211, 226, 0.12);
-        margin: 16px 0;
-    }
-
-    .data-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-
-    .data-row span:last-child {
-        color: rgba(238, 244, 250, 0.9);
-    }
-
-    .data-footer {
-        line-height: 2.0;
-        color: rgba(195, 211, 226, 0.5);
-    }
-
-    @keyframes pulse-glow {
-        0% { opacity: 0.4; }
-        50% { opacity: 1; box-shadow: 0 0 12px #00E5FF; }
-        100% { opacity: 0.4; }
-    }
-}
-/* =========================================
-       DESKTOP MASTER MENU: BOTTOM CENTER ALIGNMENT
-       ========================================= */
-    .liquid-glass-overlay {
-        align-items: flex-end !important; /* Drops the menu container to the floor */
-        padding-bottom: 4.5rem !important; /* Distance from the bottom bezel */
-    }
-
-    .glass-nav-links {
-        flex-direction: row !important; /* Converts the vertical stack into a sleek horizontal line */
-        gap: 4rem !important; /* Wide, breathable spacing between links */
-    }
-   /* =========================================
-   9. MOBILE DROPDOWN VOID EXTERMINATOR
-   ========================================= */
-@media (max-width: 768px) {
-    /* 1. Keep the WebGL Ocean alive and softly visible behind the menu */
-    #webgl-canvas.frozen-blur {
-        opacity: 1 !important;
-        visibility: visible !important;
-        filter: blur(18px) brightness(0.65) saturate(1.2) !important; 
-    }
-
-    /* 2. Prevent the dropdown container from stretching a black blanket down the phone */
-    #mobile-dropdown.active-menu {
-        height: auto !important;
-        max-height: 80vh !important;
-        overflow-y: auto !important;
-        /* Replaces infinite screen-blackout shadows with a clean, localized card shadow */
-        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45) !important; 
-    }
-
-    /* 3. Assassinate any hidden pseudo-element "blackout curtains" attached to the menu */
-    #mobile-dropdown::before,
-    #mobile-dropdown::after {
-        display: none !important;
-        content: none !important;
-    }
-}
-/* =========================================
-   MASTER OVERRIDE: WEIGHT HIERARCHY
-   ========================================= */
-/* SEMI-BOLD (600): UI Controls & Standard Text */
-/* =========================================
-   MASTER OVERRIDE: WEIGHT HIERARCHY
-   ========================================= */
-/* Content text - Normal/Thin */
-.raw-text-block p {
-    font-weight: 400 !important;
+.gateway-menu-toggle, .desktop-menu span, .sidebar-option span,
+.sidebar-sub-option span, .step-name, .split-text, #console-clock,
+.glass-nav-links span, .mobile-nav-links span { 
+    font-weight: 600 !important; 
 }
 
-/* UI Controls - Semi-Bold */
-.gateway-menu-toggle,
-.desktop-menu span,
-.sidebar-option span,
-.step-name,
-.split-text,
-#console-clock,
-.glass-nav-links span, 
-.mobile-nav-links span 
-{ font-weight: 600 !important; }
-/* BOLD (700): Anchors & Headers */
-.page-title,
-.raw-text-block h2,
-.step-content.raw-text-block h3,
-.raw-text-block strong,
-.terminal-link,
-.text-logo
-{
+.page-title, .raw-text-block h2, .step-content.raw-text-block h3,
+.raw-text-block strong, .terminal-link, .text-logo {
     font-weight: 700 !important;
 }
