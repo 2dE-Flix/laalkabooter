@@ -632,6 +632,63 @@ a, button, span, .split-option, .hamburger, .social-card {
         font-size: 0.85rem !important; /* Down from 1.0rem */
         letter-spacing: 3px !important;
     }
+   /* =========================================
+       LEGAL & POLICIES NESTED COMPASS
+       ========================================= */
+
+    /* The Sub-Menu Container */
+    .compass-secondary {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem; /* Matches your spacing */
+        margin-top: 1.5rem;
+        
+        /* Pushes it right and creates a tech-styled bracket line */
+        margin-left: 1.5rem; 
+        padding-left: 1rem;
+        border-left: 1px solid rgba(195, 211, 226, 0.15); 
+    }
+
+    /* Sub-menu typography (Shrunk to 90% scale to maintain hierarchy) */
+    .sidebar-sub-option span {
+        font-size: 0.45rem !important; 
+        letter-spacing: 4px;
+        color: rgba(195, 211, 226, 0.4); /* Faded grey default */
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+        cursor: pointer;
+    }
+
+    .sidebar-sub-option:hover span {
+        color: rgba(238, 244, 250, 0.85); /* White on hover */
+    }
+
+    /* The Active Sub-Option (Cyan) */
+    .sidebar-sub-option.active-sub span {
+        color: #00E5FF !important; /* Cyan active state */
+        font-weight: 600;
+    }
+
+    /* --- THE SLIDE-RIGHT ANIMATION STATE --- */
+    .submenu-closed {
+        display: none !important;
+    }
+
+    .submenu-open {
+        display: flex !important;
+        animation: slideSubMenuRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideSubMenuRight {
+        0% {
+            opacity: 0;
+            transform: translateX(-15px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
     /* --- THE UNIFIED WEBGL FILTERS --- */
     
   /* 1. Homescreen: The master cobalt fluid */
