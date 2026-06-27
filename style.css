@@ -251,9 +251,9 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 /* MICRO COMPASS (DESKTOP) */
-/* MICRO COMPASS (DESKTOP) */
-.platform-sidebar,
-.sidebar-compass {
+.platform-sidebar {
+
+
     position: fixed;
     left: 3rem; 
     top: 50%;
@@ -710,19 +710,6 @@ a, button, span, .split-option, .hamburger, .social-card {
     .liquid-glass-overlay {
         background: rgba(8, 15, 26, 0.3) !important;
     }
-   /* =========================================
-       LEGAL STATIC BACKGROUND (+10% DARKER)
-       ========================================= */
-    body.legal-page #webgl-canvas {
-        filter: blur(32px) brightness(0.45) contrast(1.15) saturate(1.3) !important;
-        transform: scale(1.05) translateY(0) !important;
-    }
-
-    /* Sub-menu typography bumped for rapid readability */
-    body.legal-page .sidebar-sub-option span {
-        font-size: 0.6rem !important; 
-        letter-spacing: 4px;
-    }
 /* =========================================
        THE MICRO-DATA STREAM (DUAL-LEDGER & 10% LIGHTER)
        ========================================= */
@@ -816,7 +803,7 @@ a, button, span, .split-option, .hamburger, .social-card {
         50% { opacity: 1; box-shadow: 0 0 12px #00E5FF; }
         100% { opacity: 0.4; }
     }
-}
+
    /* =========================================
    9. MOBILE DROPDOWN VOID EXTERMINATOR
    ========================================= */
