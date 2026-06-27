@@ -251,7 +251,9 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 /* MICRO COMPASS (DESKTOP) */
-.platform-sidebar {
+/* MICRO COMPASS (DESKTOP) */
+.platform-sidebar,
+.sidebar-compass {
     position: fixed;
     left: 3rem; 
     top: 50%;
@@ -801,6 +803,7 @@ a, button, span, .split-option, .hamburger, .social-card {
         50% { opacity: 1; box-shadow: 0 0 12px #00E5FF; }
         100% { opacity: 0.4; }
     }
+}
    /* =========================================
    9. MOBILE DROPDOWN VOID EXTERMINATOR
    ========================================= */
