@@ -1,5 +1,5 @@
 /* =========================================
-   RAVIE.IN - MASTER STYLESHEET (v2.0 SANITIZED)
+   RAVIE.IN - MASTER STYLESHEET (v2.1 BRANDS FIX)
    ========================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Sen:wght@400;500;600;700&display=swap');
@@ -38,7 +38,7 @@ body {
     z-index: 1;
 }
 
-/* Typography Assignments (No !important needed) */
+/* Typography Assignments */
 .text-logo, .gateway-menu-toggle, .split-text,
 .glass-nav-links span, .mobile-nav-links span,
 .page-title, .raw-text-block h2, .step-name,
@@ -65,17 +65,18 @@ a, button, span, .split-option, .hamburger, .social-card {
 }
 
 #webgl-canvas.depth-surface {
-    filter: blur(26px) brightness(0.44) hue-rotate(6deg);
+    filter: blur(26px) brightness(0.55) hue-rotate(6deg);
     transform: scale(1.05) translateY(0);
 }
 
+/* RESTORED: Lifted brightness to prevent black-out */
 #webgl-canvas.depth-deep {
-    filter: blur(38px) brightness(0.52) saturate(1.8) hue-rotate(3deg);
-    transform: scale(1.18) translateY(-8vh);
+    filter: blur(34px) brightness(0.50) saturate(1.4) hue-rotate(3deg);
+    transform: scale(1.15) translateY(-4vh);
 }
 
 #webgl-canvas.frozen-blur {
-    filter: blur(65px) brightness(0.10) hue-rotate(6deg);
+    filter: blur(65px) brightness(0.15) hue-rotate(6deg);
 }
 
 .grain {
@@ -425,7 +426,10 @@ a, button, span, .split-option, .hamburger, .social-card {
     }
 
     #webgl-canvas.depth-surface { filter: blur(32px) brightness(0.55) contrast(1.15) saturate(1.3); }
-    #webgl-canvas.depth-deep { filter: blur(32px) brightness(0.35) contrast(1.15) saturate(1.3); }
+    
+    /* RESTORED DESKTOP: Lifted brightness to 0.55 to match homescreen */
+    #webgl-canvas.depth-deep { filter: blur(32px) brightness(0.55) contrast(1.15) saturate(1.3); }
+    
     #webgl-canvas.frozen-blur { filter: blur(75px) brightness(0.4); }
     .liquid-glass-overlay { background: rgba(8, 15, 26, 0.3); }
 
