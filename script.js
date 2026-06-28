@@ -1,5 +1,5 @@
 // ==========================================
-// RAVIE.IN - UNIVERSAL CORE ENGINE (v2.0 SANITIZED)
+// RAVIE.IN - UNIVERSAL CORE ENGINE (v2.1 BRANDS FIX)
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -105,7 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (target === 'brands') {
             if (sideBrands) sideBrands.classList.add('active-sidebar');
             if (streamBrands) streamBrands.classList.add('active-stream');
-            targetDepth = 1; 
+            
+            // CALIBRATED: Only shift 35% into deep palette instead of 100%
+            targetDepth = 0.35; 
+            
             if (canvas) canvas.className = 'depth-deep';
         }
     }
@@ -119,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Deep link check on direct load (e.g., user refreshes ravie.in/?view=brands)
+    // Deep link check on direct load
     const urlParams = new URLSearchParams(window.location.search);
     const requestedView = urlParams.get('view');
     if (requestedView === 'talents' || requestedView === 'brands') {
@@ -147,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================
-    // 3. WEBGL ENGINE (THROTTLED & DEBOUNCED)
+    // 3. WEBGL ENGINE
     // ==========================================
     if (canvas) {
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
@@ -216,7 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         resize(); 
 
-        // Debounced mobile scroll protector
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
