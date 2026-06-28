@@ -460,36 +460,31 @@ a, button, span, .split-option, .hamburger, .social-card {
     }
 }
 /* =========================================
-   LEGAL BOTTOM DOCK & SLIDE-UP ANIMATION
+   LEGAL LEFT-SIDEBAR NESTED SUB-MENU
    ========================================= */
-
-/* 1. Desktop & Global: Centered Bottom Dock */
-.sidebar-compass {
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    z-index: 100;
-    background: rgba(8, 15, 26, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    border: 1px solid rgba(238, 244, 250, 0.08);
-}
-
-/* 2. Horizontal Sub-menu (Slide-Up Animation) */
 .compass-secondary {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-    margin-left: 0.5rem;
-    padding-left: 0.8rem;
-    border-left: 1px solid rgba(195, 211, 226, 0.2);
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+    margin-left: 1.5rem; /* Indents it slightly under TERMS */
+    padding-left: 1rem;
+    border-left: 1px solid rgba(195, 211, 226, 0.15); 
+}
+
+.sidebar-sub-option span {
+    font-size: 0.5rem; 
+    letter-spacing: 4px;
+    color: rgba(195, 211, 226, 0.4); 
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.sidebar-sub-option:hover span {
+    color: rgba(238, 244, 250, 0.85); 
 }
 
 .submenu-closed {
@@ -498,39 +493,5 @@ a, button, span, .split-option, .hamburger, .social-card {
 
 .submenu-open {
     display: flex !important;
-    animation: slideUpTaskbar 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideUpTaskbar {
-    0% {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 3. Mobile Optimization (< 768px) */
-@media (max-width: 768px) {
-    .sidebar-compass {
-        bottom: 20px;
-        width: 90%;
-        left: 5%;
-        transform: none;
-        justify-content: center;
-        flex-wrap: wrap;
-        padding: 0.8rem 1rem;
-    }
-    
-    .compass-secondary {
-        width: 100%;
-        justify-content: center;
-        margin-left: 0;
-        padding-left: 0;
-        padding-top: 0.5rem;
-        border-left: none;
-        border-top: 1px solid rgba(195, 211, 226, 0.15);
-    }
+    animation: textFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
