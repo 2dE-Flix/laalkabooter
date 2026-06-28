@@ -1,20 +1,12 @@
 // ==========================================
-// RAVIE.IN - UNIVERSAL CORE ENGINE (v1.28)
+// RAVIE.IN - UNIVERSAL CORE ENGINE (v2.0 SANITIZED)
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // ==========================================
-    // 1. GLOBAL STATE & DOM ELEMENTS
-    // ==========================================
     let targetDepth = 0;   
     let currentDepth = 0;  
-    let isBackgroundFrozen = false; 
-
-    /* LEGAL FREEZE HOOK: Detects <body class="legal-page"> and freezes fluid motion */
-    if (document.body.classList.contains('legal-page')) {
-        isBackgroundFrozen = true;
-    }
+    let isBackgroundFrozen = document.body.classList.contains('legal-page'); 
 
     const canvas = document.getElementById('webgl-canvas');
     const hamburger = document.getElementById('hamburger-menu');
@@ -33,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const streamBrands = document.getElementById("ledger-brands");
 
     // ==========================================
-    // 2. UI NAVIGATION ENGINE
+    // 1. UI NAVIGATION ENGINE
     // ==========================================
     if (hamburger && mobileDropdown) {
         hamburger.addEventListener('click', () => {
@@ -50,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (isActive) {
                 liquidGlassOverlay.classList.remove('active-glass');
                 gatewayMenuBtn.textContent = 'MENU';
-                isBackgroundFrozen = document.body.classList.contains('legal-page'); /* Resumes freeze if on legal */
+                isBackgroundFrozen = document.body.classList.contains('legal-page');
                 if (canvas) canvas.classList.remove('frozen-blur');
             } else {
                 liquidGlassOverlay.classList.add('active-glass');
@@ -62,22 +54,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 3. PLATFORM ROUTING ENGINE (TALENTS / BRANDS)
+    // 2. ROUTING ENGINE WITH NATIVE HISTORY HOOKS
     // ==========================================
-    function transitionToPlatform(targetStream) {
-        if (gatewayView && platformView) {
-            gatewayView.style.opacity = '0';
-            gatewayView.style.pointerEvents = 'none';
-            setTimeout(() => {
-                gatewayView.classList.remove('active-view');
-                gatewayView.style.display = 'none';
-                platformView.style.display = 'block';
-                setTimeout(() => {
-                    platformView.classList.add('active-platform');
-                    switchStream(targetStream);
-                }, 50); 
-            }, 600); 
+    function transitionToPlatform(targetStream, pushToHistory = true) {
+        if (!gatewayView || !platformView) return;
+
+        if (pushToHistory) {
+            history.pushState({ view: targetStream }, '', `?view=${targetStream}`);
         }
+
+        gatewayView.style.opacity = '0';
+        gatewayView.style.pointerEvents = 'none';
+        
+        setTimeout(() => {
+            gatewayView.classList.remove('active-view');
+            gatewayView.style.display = 'none';
+            platformView.style.display = 'block';
+            setTimeout(() => {
+                platformView.classList.add('active-platform');
+                switchStream(targetStream);
+            }, 50); 
+        }, 600); 
+    }
+
+    function returnToGateway() {
+        if (!gatewayView || !platformView) return;
+        platformView.classList.remove('active-platform');
+        platformView.style.display = 'none';
+        gatewayView.style.display = 'flex';
+        setTimeout(() => {
+            gatewayView.classList.add('active-view');
+            gatewayView.style.opacity = '1';
+            gatewayView.style.pointerEvents = 'auto';
+            targetDepth = 0;
+            if (canvas) canvas.className = 'depth-surface';
+        }, 50);
     }
 
     function switchStream(target) {
@@ -90,42 +101,53 @@ document.addEventListener("DOMContentLoaded", () => {
             if (sideTalents) sideTalents.classList.add('active-sidebar');
             if (streamTalents) streamTalents.classList.add('active-stream');
             targetDepth = 0;
-            if (canvas) {
-                canvas.classList.remove('depth-deep');
-                canvas.classList.add('depth-surface');
-            }
+            if (canvas) canvas.className = 'depth-surface';
         } else if (target === 'brands') {
             if (sideBrands) sideBrands.classList.add('active-sidebar');
             if (streamBrands) streamBrands.classList.add('active-stream');
-            targetDepth = 0;
-            if (canvas) {
-                canvas.classList.remove('depth-surface');
-                canvas.classList.add('depth-deep');
-            }
+            targetDepth = 1; 
+            if (canvas) canvas.className = 'depth-deep';
         }
+    }
+
+    // Browser Back Button Listener
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.view) {
+            transitionToPlatform(event.state.view, false);
+        } else {
+            returnToGateway();
+        }
+    });
+
+    // Deep link check on direct load (e.g., user refreshes ravie.in/?view=brands)
+    const urlParams = new URLSearchParams(window.location.search);
+    const requestedView = urlParams.get('view');
+    if (requestedView === 'talents' || requestedView === 'brands') {
+        transitionToPlatform(requestedView, false);
     }
 
     if (btnCreators) btnCreators.addEventListener("click", () => transitionToPlatform("talents"));
     if (btnBrands) btnBrands.addEventListener("click", () => transitionToPlatform("brands"));
-    if (sideTalents) sideTalents.addEventListener("click", () => switchStream("talents"));
-    if (sideBrands) sideBrands.addEventListener("click", () => switchStream("brands"));
+    if (sideTalents) sideTalents.addEventListener("click", () => {
+        history.replaceState({ view: 'talents' }, '', '?view=talents');
+        switchStream("talents");
+    });
+    if (sideBrands) sideBrands.addEventListener("click", () => {
+        history.replaceState({ view: 'brands' }, '', '?view=brands');
+        switchStream("brands");
+    });
 
-    // ==========================================
-    // 3.5 LEGAL SIDEBAR ROUTER (MULTI-PAGE DIRECT DEEP-LINKING)
-    // ==========================================
     const legalNavLinks = document.querySelectorAll('.sidebar-option, .sidebar-sub-option');
-    if (legalNavLinks.length > 0) {
-        legalNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if(link.id === 'side-privacy') window.location.href = 'policy.html';
-                if(link.id === 'side-terms-talents') window.location.href = 'tterms.html';
-                if(link.id === 'side-terms-brands') window.location.href = 'bterms.html';
-            });
+    legalNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if(link.id === 'side-privacy') window.location.href = 'policy.html';
+            if(link.id === 'side-terms-talents') window.location.href = 'tterms.html';
+            if(link.id === 'side-terms-brands') window.location.href = 'bterms.html';
         });
-    }
+    });
 
     // ==========================================
-    // 4. WEBGL ENGINE (ULTRA-LIGHTWEIGHT BUILD)
+    // 3. WEBGL ENGINE (THROTTLED & DEBOUNCED)
     // ==========================================
     if (canvas) {
         const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
@@ -192,7 +214,14 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.height = window.innerHeight * DOWNSCALE;
             gl.viewport(0, 0, canvas.width, canvas.height);
         }
-        resize(); window.addEventListener('resize',resize);
+        resize(); 
+
+        // Debounced mobile scroll protector
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(resize, 150);
+        });
         
         let lastTime = 0;
         let shaderTime = 0;
@@ -218,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 5. REAL-TIME CONSOLE CLOCK ENGINE
+    // 4. REAL-TIME CLOCK
     // ==========================================
     function startConsoleClock() {
         const clockElement = document.getElementById('console-clock');
@@ -226,14 +255,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setInterval(() => {
             const now = new Date();
-            const options = {
+            clockElement.textContent = now.toLocaleTimeString('en-US', {
                 timeZone: 'Asia/Kolkata',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
                 hour12: false
-            };
-            clockElement.textContent = now.toLocaleTimeString('en-US', options);
+            });
         }, 1000);
     }
 
